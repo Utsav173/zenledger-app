@@ -11,10 +11,7 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content="https://utsav173.github.io/zenledger-app/"
-    />
+    <meta property="og:url" content="https://zenledger.khatriutsav.com/" />
     <meta property="og:title" content="ZenLedger — Financial Purity" />
     <meta
       property="og:description"
@@ -22,15 +19,12 @@
     />
     <meta
       property="og:image"
-      content="https://utsav173.github.io/zenledger-app/assets/og-image.png"
+      content="https://zenledger.khatriutsav.com/assets/og-image.png"
     />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta
-      property="twitter:url"
-      content="https://utsav173.github.io/zenledger-app/"
-    />
+    <meta property="twitter:url" content="https://zenledger.khatriutsav.com/" />
     <meta property="twitter:title" content="ZenLedger — Financial Purity" />
     <meta
       property="twitter:description"
@@ -38,8 +32,9 @@
     />
     <meta
       property="twitter:image"
-      content="https://utsav173.github.io/zenledger-app/assets/og-image.png"
+      content="https://zenledger.khatriutsav.com/assets/og-image.png"
     />
+    <link rel="canonical" href="https://zenledger.khatriutsav.com/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -1196,31 +1191,32 @@
       })();
     </script>
     <!-- ============================================================
-       ALGORITHMIC ART — "Constellation Ledger"
+       ALGORITHMIC ART — "Ledger Horizon"
        ============================================================ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
     <script>
       /**
-       * ALGORITHMIC PHILOSOPHY: CONSTELLATION LEDGER
+       * ALGORITHMIC PHILOSOPHY: LEDGER HORIZON
        *
-       * A network of nodes (accounts/wallets) connected by transactions.
-       * Represents the interconnected nature of finance.
-       * Minimalist, interconnected, breathing.
+       * A generative ridge plot landscape representing the continuity of financial history.
+       * Stacked lines flow like time, creating a calm, data-rich terrain.
+       * Minimalist, Zen, structured.
        */
 
       const CONFIG = {
-        nodeCount: 120, // Reduced for mobile performance
-        connectionDistance: 120,
-        mouseDistance: 200,
+        lineCount: 40,
+        yStep: 30, // Distance between lines
+        noiseScale: 0.005, // Smoothness of terrain
+        speed: 0.001, // Flow speed
+        amplitude: 150, // Height of peaks
         colors: {
           bg: "#000000",
-          node: [255, 255, 255], // White nodes
-          line: [80, 80, 80], // Grey lines
-          accent: [16, 185, 129], // Green accent for active connections
+          stroke: [255, 255, 255], // White lines
+          fill: [0, 0, 0], // Black fill for occlusion
         },
       };
 
-      let nodes = [];
+      let zOff = 0;
 
       function setup() {
         let canvas = createCanvas(windowWidth, windowHeight);
@@ -1229,85 +1225,56 @@
         canvas.style("position", "fixed");
         canvas.style("pointer-events", "none");
 
-        // Responsive node count
-        let count = windowWidth < 768 ? 60 : CONFIG.nodeCount;
-
-        for (let i = 0; i < count; i++) {
-          nodes.push(new Node());
-        }
+        frameRate(30); // Cap frame rate for smoothness/performance
       }
 
       function draw() {
         background(0); // Deep void
 
-        // Update and draw nodes
-        for (let i = 0; i < nodes.length; i++) {
-          nodes[i].update();
-          nodes[i].show();
-          nodes[i].connect(nodes.slice(i + 1)); // Connect to subsequent nodes
+        // Mouse interaction for subtle tilt/shift
+        let yMouseValues = map(mouseY, 0, height, 0.5, 1.5);
+        let xMouseValues = map(mouseX, 0, width, -100, 100);
+
+        noFill();
+        strokeWeight(1);
+
+        // Draw ridges from back to front
+        for (let i = 0; i < CONFIG.lineCount; i++) {
+          let yBase = map(i, 0, CONFIG.lineCount, height * 0.2, height * 1.2);
+
+          // Occlusion logic: Fill with black to hide lines behind
+          fill(CONFIG.colors.fill);
+          stroke(
+            CONFIG.colors.stroke[0],
+            CONFIG.colors.stroke[1],
+            CONFIG.colors.stroke[2],
+            map(i, 0, CONFIG.lineCount, 5, 80)
+          ); // Fade in opacity closer to front
+
+          beginShape();
+          vertex(0, height); // Anchor bottom left
+          vertex(0, yBase); // Start left
+
+          for (let x = 0; x <= width; x += 20) {
+            // Step 10px for resolution
+            // Noise calculation
+            let n = noise(x * CONFIG.noiseScale, i * 0.1 + zOff);
+            let y = yBase - n * CONFIG.amplitude * yMouseValues;
+
+            // Subtle curve based on mouse
+            vertex(x, y);
+          }
+
+          vertex(width, yBase); // End right
+          vertex(width, height); // Anchor bottom right
+          endShape(CLOSE);
         }
+
+        zOff -= CONFIG.speed; // Flow forward
       }
 
       function windowResized() {
         resizeCanvas(windowWidth, windowHeight);
-      }
-
-      class Node {
-        constructor() {
-          this.pos = createVector(random(width), random(height));
-          this.vel = p5.Vector.random2D().mult(random(0.2, 0.8)); // Slow drift
-          this.size = random(1.5, 3);
-        }
-
-        update() {
-          // Mouse interaction: slight repulsion or attraction
-          let mouse = createVector(mouseX, mouseY);
-          let d = dist(this.pos.x, this.pos.y, mouse.x, mouse.y);
-
-          if (d < CONFIG.mouseDistance) {
-            // Subtle drift away from mouse
-            let force = p5.Vector.sub(this.pos, mouse);
-            force.setMag(0.5); // Very gentle
-            this.pos.add(force);
-          }
-
-          this.pos.add(this.vel);
-
-          // Bounce off edges
-          if (this.pos.x < 0 || this.pos.x > width) this.vel.x *= -1;
-          if (this.pos.y < 0 || this.pos.y > height) this.vel.y *= -1;
-        }
-
-        show() {
-          noStroke();
-          fill(
-            CONFIG.colors.node[0],
-            CONFIG.colors.node[1],
-            CONFIG.colors.node[2],
-            150
-          );
-          ellipse(this.pos.x, this.pos.y, this.size);
-        }
-
-        connect(others) {
-          for (let other of others) {
-            let d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
-
-            if (d < CONFIG.connectionDistance) {
-              // Alpha based on distance (closer = brighter)
-              let alpha = map(d, 0, CONFIG.connectionDistance, 100, 0);
-
-              stroke(
-                CONFIG.colors.line[0],
-                CONFIG.colors.line[1],
-                CONFIG.colors.line[2],
-                alpha
-              );
-              strokeWeight(0.5); // Thin minimalist lines
-              line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
-            }
-          }
-        }
       }
     </script>
   </body>

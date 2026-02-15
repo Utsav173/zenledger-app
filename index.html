@@ -1,0 +1,1305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZenLedger — Financial Purity</title>
+    <meta
+      name="description"
+      content="A minimalist, high-performance personal finance tracker. Utilitarian design. Zero distractions. Pure data."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ================================================================
+       RESET & BASE — OLED Black Canvas
+       ================================================================ */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        /* Core Palette — directly from tokens.ts */
+        --canvas: #000000;
+        --surface: #0a0a0a;
+        --surface-pressed: #141414;
+        --border: #333333;
+        --text: #eaeaea;
+        --text-meta: #888888;
+        --primary: #00b2ff;
+        --primary-muted: #00587a;
+        --success: #10b981;
+        --success-text: #6ee7b7;
+        --error: #f43f5e;
+        --error-text: #fda4af;
+        --white: #ffffff;
+        --black: #000000;
+
+        /* Typography */
+        --font-mono: "JetBrains Mono", monospace;
+        --font-serif: "Newsreader", Georgia, serif;
+        --font-display: "Inter", system-ui, sans-serif;
+
+        /* Spacing */
+        --sp-1: 4px;
+        --sp-2: 8px;
+        --sp-3: 12px;
+        --sp-4: 16px;
+        --sp-6: 24px;
+        --sp-8: 32px;
+        --sp-10: 40px;
+        --sp-12: 48px;
+        --sp-16: 64px;
+        --sp-20: 80px;
+      }
+
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--canvas);
+        color: var(--text);
+        font-family: var(--font-display);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      ::selection {
+        background: var(--primary);
+        color: var(--black);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      /* ================================================================
+       UTILITY CLASSES
+       ================================================================ */
+      .mono {
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+      }
+
+      .serif {
+        font-family: var(--font-serif);
+      }
+
+      .meta {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-meta);
+      }
+
+      .border-b {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .border-t {
+        border-top: 1px solid var(--border);
+      }
+
+      .scan-line {
+        height: 2px;
+        width: 100%;
+        background: var(--border);
+        opacity: 0.5;
+      }
+
+      /* ================================================================
+       LAYOUT
+       ================================================================ */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--sp-4);
+      }
+
+      @media (min-width: 768px) {
+        .container {
+          padding: 0 var(--sp-8);
+        }
+      }
+
+      /* ================================================================
+       NAVIGATION — Structural, flat, monospace
+       ================================================================ */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 56px;
+      }
+
+      .nav-logo {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        color: var(--text);
+      }
+
+      .nav-links {
+        display: none;
+        gap: var(--sp-8);
+        list-style: none;
+      }
+
+      @media (min-width: 768px) {
+        .nav-links {
+          display: flex;
+        }
+      }
+
+      .nav-links a {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        color: var(--text-meta);
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      .nav-cta {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        background: var(--white);
+        color: var(--black);
+        border: 1px solid var(--white);
+        padding: var(--sp-2) var(--sp-6);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .nav-cta:hover {
+        background: transparent;
+        color: var(--white);
+      }
+
+      /* ================================================================
+       HERO SECTION — Maximum impact, minimal elements
+       ================================================================ */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--sp-20) 0;
+        position: relative;
+      }
+
+      .hero-meta-row {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+        margin-bottom: var(--sp-8);
+      }
+
+      .hero-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--success);
+      }
+
+      .hero-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        color: var(--success-text);
+      }
+
+      .hero-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2.5rem, 8vw, 7rem);
+        font-weight: 400;
+        font-style: italic;
+        line-height: 1.05;
+        color: var(--text);
+        margin-bottom: var(--sp-8);
+      }
+
+      .hero-title span {
+        color: var(--text-meta);
+      }
+
+      .hero-subtitle {
+        font-family: var(--font-mono);
+        font-size: clamp(10px, 1.2vw, 12px);
+        letter-spacing: 0.15em;
+        color: var(--text-meta);
+        max-width: 480px;
+        line-height: 2;
+        margin-bottom: var(--sp-12);
+      }
+
+      .hero-cta-row {
+        display: flex;
+        gap: var(--sp-4);
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        background: var(--white);
+        color: var(--black);
+        border: 1px solid var(--white);
+        padding: var(--sp-4) var(--sp-8);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+
+      .btn-outline {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+        padding: var(--sp-4) var(--sp-8);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-outline:hover {
+        border-color: var(--text);
+      }
+
+      /* Grid decoration */
+      .hero-grid-bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 40%;
+        opacity: 0.03;
+        background-image:
+          linear-gradient(var(--text-meta) 1px, transparent 1px),
+          linear-gradient(90deg, var(--text-meta) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+      }
+
+      @media (max-width: 767px) {
+        .hero-grid-bg {
+          display: none;
+        }
+      }
+
+      /* ================================================================
+       SECTION HEADER — Numbered, monospace, structural
+       ================================================================ */
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+        padding: var(--sp-3) 0;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: var(--sp-10);
+      }
+
+      .section-header .dot {
+        width: 6px;
+        height: 6px;
+        background: var(--text-meta);
+      }
+
+      .section-num {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        color: var(--text-meta);
+      }
+
+      .section-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+        opacity: 0.5;
+      }
+
+      /* ================================================================
+       FEATURES — The Grid
+       ================================================================ */
+      .features {
+        padding: var(--sp-20) 0;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+      }
+
+      @media (min-width: 768px) {
+        .features-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .feature-cell {
+        background: var(--canvas);
+        padding: var(--sp-8) var(--sp-6);
+        display: flex;
+        flex-direction: column;
+        gap: var(--sp-4);
+        transition: background 0.3s;
+      }
+
+      .feature-cell:hover {
+        background: var(--surface);
+      }
+
+      .feature-icon {
+        font-family: var(--font-mono);
+        font-size: 20px;
+        color: var(--primary);
+        line-height: 1;
+      }
+
+      .feature-title {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: var(--text);
+      }
+
+      .feature-desc {
+        font-family: var(--font-display);
+        font-size: 13px;
+        color: var(--text-meta);
+        line-height: 1.7;
+      }
+
+      .feature-tag {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        color: var(--primary);
+        border: 1px solid var(--primary-muted);
+        padding: 2px 8px;
+        align-self: flex-start;
+      }
+
+      /* ================================================================
+       SHOWCASE — Terminal Frame
+       ================================================================ */
+      .showcase {
+        padding: var(--sp-16) 0 var(--sp-20);
+      }
+
+      .terminal-frame {
+        border: 1px solid var(--border);
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .terminal-header {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-2);
+        padding: var(--sp-2) var(--sp-3);
+        border-bottom: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      .terminal-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--text-meta);
+      }
+
+      .terminal-title {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        color: var(--text-meta);
+      }
+
+      .terminal-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .terminal-body {
+        padding: var(--sp-6) var(--sp-4);
+        display: flex;
+        flex-direction: column;
+        gap: var(--sp-4);
+      }
+
+      @media (min-width: 768px) {
+        .terminal-body {
+          padding: var(--sp-8) var(--sp-6);
+        }
+      }
+
+      .terminal-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: var(--sp-3) 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .terminal-row:last-child {
+        border-bottom: none;
+      }
+
+      .terminal-key {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-meta);
+        letter-spacing: 0.1em;
+      }
+
+      .terminal-val {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+
+      .terminal-val.income {
+        color: var(--success-text);
+      }
+      .terminal-val.expense {
+        color: var(--error-text);
+      }
+      .terminal-val.balance {
+        color: var(--text);
+      }
+
+      .terminal-footer {
+        display: flex;
+        justify-content: center;
+        padding: var(--sp-2) 0;
+        border-top: 1px solid var(--border);
+      }
+
+      /* Sparkline bar representation */
+      .sparkline-row {
+        display: flex;
+        gap: 3px;
+        align-items: flex-end;
+        height: 48px;
+        padding: var(--sp-4) 0;
+      }
+
+      .spark-bar {
+        flex: 1;
+        background: var(--primary);
+        min-height: 4px;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+      }
+
+      .spark-bar:hover {
+        opacity: 1;
+      }
+
+      /* ================================================================
+       SECURITY SECTION
+       ================================================================ */
+      .security {
+        padding: var(--sp-20) 0;
+      }
+
+      .security-headline {
+        font-family: var(--font-serif);
+        font-size: clamp(1.8rem, 4vw, 3.5rem);
+        font-style: italic;
+        line-height: 1.15;
+        margin-bottom: var(--sp-12);
+        max-width: 600px;
+      }
+
+      .security-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--sp-8);
+      }
+
+      @media (min-width: 768px) {
+        .security-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: var(--sp-6);
+        }
+      }
+
+      .security-card {
+        border: 1px solid var(--border);
+        padding: var(--sp-6);
+        transition: border-color 0.3s;
+      }
+
+      .security-card:hover {
+        border-color: var(--text-meta);
+      }
+
+      .security-card-icon {
+        font-size: 18px;
+        margin-bottom: var(--sp-4);
+      }
+
+      .security-card-title {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: var(--text);
+        margin-bottom: var(--sp-2);
+      }
+
+      .security-card-desc {
+        font-size: 13px;
+        color: var(--text-meta);
+        line-height: 1.7;
+      }
+
+      /* ================================================================
+       PRO CTA — Terminal frame style
+       ================================================================ */
+      .pro-section {
+        padding: var(--sp-20) 0;
+      }
+
+      .pro-frame {
+        border: 1px solid var(--border);
+        max-width: 640px;
+        margin: 0 auto;
+      }
+
+      .pro-body {
+        padding: var(--sp-12) var(--sp-6);
+        text-align: center;
+      }
+
+      @media (min-width: 768px) {
+        .pro-body {
+          padding: var(--sp-16) var(--sp-12);
+        }
+      }
+
+      .pro-badge {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.4em;
+        color: var(--primary);
+        border: 1px solid var(--primary-muted);
+        padding: 4px 16px;
+        margin-bottom: var(--sp-8);
+      }
+
+      .pro-title {
+        font-family: var(--font-serif);
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        font-style: italic;
+        line-height: 1.15;
+        margin-bottom: var(--sp-6);
+      }
+
+      .pro-features {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--sp-3);
+        margin: var(--sp-8) 0;
+        text-align: left;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .pro-features li {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        color: var(--text-meta);
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+      }
+
+      .pro-features li::before {
+        content: "+";
+        color: var(--success-text);
+        font-weight: 700;
+      }
+
+      .pro-btn {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        background: var(--white);
+        color: var(--black);
+        border: 1px solid var(--white);
+        padding: var(--sp-4) var(--sp-12);
+        cursor: pointer;
+        transition: all 0.25s;
+        margin-top: var(--sp-6);
+      }
+
+      .pro-btn:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+
+      /* ================================================================
+       FOOTER
+       ================================================================ */
+      .site-footer {
+        border-top: 1px solid var(--border);
+        padding: var(--sp-8) 0;
+        text-align: center;
+      }
+
+      .footer-line {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.15em;
+        color: var(--text-meta);
+        opacity: 0.5;
+        line-height: 2;
+      }
+
+      /* ================================================================
+       ANIMATIONS — Subtle, purposeful
+       ================================================================ */
+      @media (prefers-reduced-motion: no-preference) {
+        .reveal {
+          opacity: 0;
+          transform: translateY(12px);
+          transition:
+            opacity 0.6s ease,
+            transform 0.6s ease;
+        }
+        .reveal.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .reveal-delay-1 {
+          transition-delay: 0.1s;
+        }
+        .reveal-delay-2 {
+          transition-delay: 0.2s;
+        }
+        .reveal-delay-3 {
+          transition-delay: 0.3s;
+        }
+        .reveal-delay-4 {
+          transition-delay: 0.4s;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+    <nav class="nav">
+      <div class="nav-inner container">
+        <div class="nav-logo">ZENLEDGER</div>
+        <ul class="nav-links">
+          <li><a href="#features">FEATURES</a></li>
+          <li><a href="#showcase">INTERFACE</a></li>
+          <li><a href="#security">SECURITY</a></li>
+          <li><a href="#pro">PRO</a></li>
+        </ul>
+        <button class="nav-cta">→ GET APP</button>
+      </div>
+    </nav>
+
+    <!-- ============================================================
+       HERO
+       ============================================================ -->
+    <section class="hero">
+      <div class="container" style="position: relative; z-index: 1">
+        <div class="hero-meta-row reveal">
+          <div class="hero-dot"></div>
+          <span class="hero-label">SYSTEM ACTIVE // V1.0</span>
+        </div>
+
+        <h1 class="hero-title reveal reveal-delay-1">
+          Financial<br />Purity<span>.</span>
+        </h1>
+
+        <p class="hero-subtitle reveal reveal-delay-2">
+          A MINIMALIST, HIGH-PERFORMANCE PERSONAL FINANCE TRACKER. UTILITARIAN
+          DESIGN. ZERO DISTRACTIONS. PURE DATA. BUILT FOR THOSE WHO VALUE
+          CLARITY OVER CLUTTER.
+        </p>
+
+        <div class="hero-cta-row reveal reveal-delay-3">
+          <button class="btn-primary">→ DOWNLOAD APK</button>
+          <button class="btn-outline">VIEW MANUAL</button>
+        </div>
+      </div>
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+    </section>
+
+    <div class="scan-line"></div>
+
+    <!-- ============================================================
+       FEATURES
+       ============================================================ -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="dot"></div>
+          <span class="section-num">01 // CORE_FEATURES</span>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-cell reveal">
+            <div class="feature-icon">⎔</div>
+            <div class="feature-title">SPARKLINE DASHBOARD</div>
+            <div class="feature-desc">
+              Real-time trend visualization with a minimalist sparkline graph.
+              Monthly navigation, income/expense breakdown, and savings rate —
+              all at a glance.
+            </div>
+          </div>
+
+          <div class="feature-cell reveal reveal-delay-1">
+            <div class="feature-icon">⌸</div>
+            <div class="feature-title">PRECISION ENTRY</div>
+            <div class="feature-desc">
+              Purpose-built numpad with zero input lag. Categorize transactions,
+              attach notes, and switch between income/expense with a single tap.
+            </div>
+          </div>
+
+          <div class="feature-cell reveal reveal-delay-2">
+            <div class="feature-icon">⊞</div>
+            <div class="feature-title">FINANCIAL INTELLIGENCE</div>
+            <div class="feature-desc">
+              Bar charts, spending breakdowns by category, top expense insights,
+              and temporal trends. Period selectors for month, quarter,
+              half-year, or YTD.
+            </div>
+            <div class="feature-tag">PRO</div>
+          </div>
+
+          <div class="feature-cell reveal reveal-delay-3">
+            <div class="feature-icon">↕</div>
+            <div class="feature-title">OFFLINE-FIRST SYNC</div>
+            <div class="feature-desc">
+              Works completely offline. Transactions queue locally and sync
+              automatically when connectivity returns. Zero data loss
+              guaranteed.
+            </div>
+          </div>
+
+          <div class="feature-cell reveal">
+            <div class="feature-icon">⊡</div>
+            <div class="feature-title">MULTI-CURRENCY</div>
+            <div class="feature-desc">
+              Switch display currency between INR, USD, EUR, GBP, JPY and more.
+              All amounts formatted with locale-aware precision.
+            </div>
+          </div>
+
+          <div class="feature-cell reveal reveal-delay-1">
+            <div class="feature-icon">⤓</div>
+            <div class="feature-title">DATA EXPORT</div>
+            <div class="feature-desc">
+              Export your complete ledger as CSV or generate formatted PDF
+              reports for external analysis, tax filing, or personal archival.
+            </div>
+            <div class="feature-tag">PRO</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="scan-line"></div>
+
+    <!-- ============================================================
+       SHOWCASE — Terminal-style data display
+       ============================================================ -->
+    <section id="showcase" class="showcase">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="dot"></div>
+          <span class="section-num">02 // INTERFACE_PREVIEW</span>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="terminal-frame reveal reveal-delay-1">
+          <div class="terminal-header">
+            <div class="terminal-dot"></div>
+            <span class="terminal-title">DASHBOARD_FEED</span>
+            <div class="terminal-line"></div>
+            <span class="terminal-title">LIVE</span>
+          </div>
+
+          <div class="terminal-body">
+            <!-- Sparkline -->
+            <div class="sparkline-row" aria-label="Monthly spending trend">
+              <div class="spark-bar" style="height: 30%"></div>
+              <div class="spark-bar" style="height: 50%"></div>
+              <div class="spark-bar" style="height: 45%"></div>
+              <div class="spark-bar" style="height: 70%"></div>
+              <div class="spark-bar" style="height: 55%"></div>
+              <div class="spark-bar" style="height: 40%"></div>
+              <div class="spark-bar" style="height: 65%"></div>
+              <div class="spark-bar" style="height: 80%"></div>
+              <div class="spark-bar" style="height: 60%"></div>
+              <div class="spark-bar" style="height: 75%"></div>
+              <div class="spark-bar" style="height: 50%"></div>
+              <div class="spark-bar" style="height: 90%"></div>
+              <div class="spark-bar" style="height: 85%"></div>
+              <div class="spark-bar" style="height: 70%"></div>
+              <div class="spark-bar" style="height: 100%"></div>
+            </div>
+
+            <div class="terminal-row">
+              <span class="terminal-key">PERIOD</span>
+              <span class="terminal-val balance">FEBRUARY 2026</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-key">INCOME</span>
+              <span class="terminal-val income">+ ₹85,200.00</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-key">EXPENSE</span>
+              <span class="terminal-val expense">- ₹42,650.00</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-key">BALANCE</span>
+              <span class="terminal-val balance">+ ₹42,550.00</span>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-key">SAVINGS RATE</span>
+              <span class="terminal-val income">49.9%</span>
+            </div>
+          </div>
+
+          <div class="terminal-footer">
+            <span class="meta">END_REPORT</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="scan-line"></div>
+
+    <!-- ============================================================
+       SECURITY
+       ============================================================ -->
+    <section id="security" class="security">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="dot"></div>
+          <span class="section-num">03 // SECURITY_PROTOCOL</span>
+          <div class="section-line"></div>
+        </div>
+
+        <h2 class="security-headline reveal reveal-delay-1">
+          Your data never leaves your control.
+        </h2>
+
+        <div class="security-grid">
+          <div class="security-card reveal reveal-delay-1">
+            <div class="security-card-icon">⊟</div>
+            <div class="security-card-title">BIOMETRIC LOCK</div>
+            <div class="security-card-desc">
+              FaceID and TouchID integration ensures only you can access your
+              financial data. Activate from Settings.
+            </div>
+          </div>
+
+          <div class="security-card reveal reveal-delay-2">
+            <div class="security-card-icon">⊞</div>
+            <div class="security-card-title">RECOVERY KIT</div>
+            <div class="security-card-desc">
+              Locally generated backup codes put recovery in your hands. No
+              dependency on third-party password services.
+            </div>
+          </div>
+
+          <div class="security-card reveal reveal-delay-3">
+            <div class="security-card-icon">⊠</div>
+            <div class="security-card-title">ENCRYPTED SYNC</div>
+            <div class="security-card-desc">
+              Secure cloud sync powered by Convex ensures your transactions are
+              never readable by unauthorized parties.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="scan-line"></div>
+
+    <!-- ============================================================
+       PRO — Upgrade CTA
+       ============================================================ -->
+    <section id="pro" class="pro-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="dot"></div>
+          <span class="section-num">04 // UPGRADE_PATH</span>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="pro-frame reveal reveal-delay-1">
+          <div class="terminal-header">
+            <div class="terminal-dot"></div>
+            <span class="terminal-title">SUBSCRIPTION_MODULE</span>
+            <div class="terminal-line"></div>
+          </div>
+
+          <div class="pro-body">
+            <div class="pro-badge">ZENLEDGER PRO</div>
+            <h2 class="pro-title">One Payment.<br />Lifetime Clarity.</h2>
+            <p class="meta" style="margin-bottom: var(--sp-4)">
+              NO SUBSCRIPTIONS. NO RECURRING FEES. EVER.
+            </p>
+
+            <ul class="pro-features">
+              <li>UNLIMITED TRANSACTION HISTORY</li>
+              <li>ADVANCED ANALYTICS &amp; REPORTS</li>
+              <li>CSV &amp; PDF DATA EXPORT</li>
+              <li>BIOMETRIC LOCK ACTIVATION</li>
+              <li>PRIORITY FEATURE ACCESS</li>
+            </ul>
+
+            <button class="pro-btn">→ UPGRADE NOW</button>
+          </div>
+
+          <div class="terminal-footer">
+            <span class="meta">END_MODULE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-line">
+          ZENLEDGER V1.0 // BUILD_2026<br />
+          SECURE_ENCLAVE: ACTIVE // CRAFTED WITH INTENT
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============================================================
+       SCROLL REVEAL SCRIPT
+       ============================================================ -->
+    <script>
+      (function () {
+        const prefersReduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+        if (prefersReduced) return;
+
+        const observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+        );
+
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          observer.observe(el);
+        });
+      })();
+    </script>
+    <!-- ============================================================
+       ALGORITHMIC ART — "Invisible Flows of Capital"
+       ============================================================ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script>
+      /**
+       * ALGORITHMIC PHILOSOPHY: FINANCIAL PURITY
+       *
+       * A discretized flow field representing the invisible plumbing of capital.
+       * Particles snap to a grid (the ledger) while flowing through noise (the market).
+       *
+       * Color Palette:
+       * - Base: OLED Black (#000000)
+       * - Flow: Text Meta (#888888) with low alpha
+       * - Income: Success (#10b981)
+       * - Expense: Error (#f43f5e)
+       */
+
+      // Configuration
+      const CONFIG = {
+        particleCount: 800,
+        noiseScale: 0.003, // Low frequency = large market trends
+        gridSize: 20, // Discretization grid
+        flowStrength: 2,
+        colors: {
+          bg: "#000000",
+          neutral: [136, 136, 136], // #888888
+          income: [16, 185, 129], // #10b981
+          expense: [244, 63, 94], // #f43f5e
+        },
+      };
+
+      let particles = [];
+      let flowField;
+      let rows, cols;
+      let zOff = 0; // Time dimension
+
+      function setup() {
+        // Create canvas that fills the hero section
+        // We look for the .hero element to size correctly, or fullscreen
+        let canvas = createCanvas(windowWidth, windowHeight);
+        canvas.position(0, 0);
+        canvas.style("z-index", "0");
+        canvas.style("position", "fixed"); // Fixed background for parallax effect
+        canvas.style("pointer-events", "none"); // Let clicks pass through
+
+        // Initialize grid
+        cols = floor(width / CONFIG.gridSize);
+        rows = floor(height / CONFIG.gridSize);
+        flowField = new Array(cols * rows);
+
+        // Spawn particles
+        for (let i = 0; i < CONFIG.particleCount; i++) {
+          particles.push(new Particle());
+        }
+
+        background(0);
+      }
+
+      function draw() {
+        // Fade background for trail effect (OLED Black)
+        // High alpha = short trails (brutalist precision)
+        // Low alpha = long trails (ethereal flow)
+        background(0, 20);
+
+        // Calculate Flow Field
+        let yoff = 0;
+        for (let y = 0; y < rows; y++) {
+          let xoff = 0;
+          for (let x = 0; x < cols; x++) {
+            let index = x + y * cols;
+            // 4D noise for evolving fields (x, y, time)
+            let angle = noise(xoff, yoff, zOff) * TWO_PI * 2;
+
+            // DISCRETIZATION: Snap to cardinal directions (The Ledger is rigid)
+            // 0 (right), PI/2 (down), PI (left), 3PI/2 (up)
+            // We allow 8 directions for slightly more organic movement but still structured
+            let snapAngle = floor(angle / (PI / 4)) * (PI / 4);
+
+            let v = p5.Vector.fromAngle(snapAngle);
+            v.setMag(CONFIG.flowStrength);
+            flowField[index] = v;
+            xoff += CONFIG.noiseScale * CONFIG.gridSize; // Adjust scale for grid
+          }
+          yoff += CONFIG.noiseScale * CONFIG.gridSize;
+        }
+        zOff += 0.002; // Time evolution speed
+
+        // Update and Draw Particles
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].follow(flowField);
+          particles[i].update();
+          particles[i].edges();
+          particles[i].show();
+        }
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+        cols = floor(width / CONFIG.gridSize);
+        rows = floor(height / CONFIG.gridSize);
+        flowField = new Array(cols * rows);
+      }
+
+      class Particle {
+        constructor() {
+          this.pos = createVector(random(width), random(height));
+          this.vel = createVector(0, 0);
+          this.acc = createVector(0, 0);
+          this.maxSpeed = random(1.5, 3.5); // Variable transaction speeds
+          this.prevPos = this.pos.copy();
+
+          // Assign Type (Identity)
+          let r = random(1);
+          if (r < 0.05)
+            this.type = "expense"; // 5% large expenses
+          else if (r < 0.15)
+            this.type = "income"; // 10% income events
+          else this.type = "neutral"; // 85% standard volume
+
+          this.lifespan = random(100, 300);
+        }
+
+        follow(vectors) {
+          let x = floor(this.pos.x / CONFIG.gridSize);
+          let y = floor(this.pos.y / CONFIG.gridSize);
+          let index = x + y * cols;
+
+          // Add flow force
+          if (vectors[index]) {
+            let force = vectors[index];
+            this.applyForce(force);
+          }
+
+          // INTERACTION: Mouse as Market Force
+          // Repel particles slightly when mouse is near
+          let mouse = createVector(mouseX, mouseY);
+          let d = dist(this.pos.x, this.pos.y, mouse.x, mouse.y);
+          if (d < 150) {
+            let repel = p5.Vector.sub(this.pos, mouse);
+            repel.setMag(1); // Force strength
+            this.applyForce(repel);
+          }
+        }
+
+        applyForce(force) {
+          this.acc.add(force);
+        }
+
+        update() {
+          this.vel.add(this.acc);
+          this.vel.limit(this.maxSpeed);
+          this.pos.add(this.vel);
+          this.acc.mult(0);
+          this.lifespan -= 1;
+
+          // Respawn if dead
+          if (this.lifespan <= 0) {
+            this.respawn();
+          }
+        }
+
+        show() {
+          // Color based on type
+          if (this.type === "expense") {
+            stroke(
+              CONFIG.colors.expense[0],
+              CONFIG.colors.expense[1],
+              CONFIG.colors.expense[2],
+              200
+            );
+            strokeWeight(2);
+          } else if (this.type === "income") {
+            stroke(
+              CONFIG.colors.income[0],
+              CONFIG.colors.income[1],
+              CONFIG.colors.income[2],
+              200
+            );
+            strokeWeight(2);
+          } else {
+            stroke(
+              CONFIG.colors.neutral[0],
+              CONFIG.colors.neutral[1],
+              CONFIG.colors.neutral[2],
+              40
+            ); // Faint neutral
+            strokeWeight(1);
+          }
+
+          // Draw line from prev position (trail)
+          line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
+          this.updatePrev();
+        }
+
+        updatePrev() {
+          this.prevPos.x = this.pos.x;
+          this.prevPos.y = this.pos.y;
+        }
+
+        edges() {
+          if (this.pos.x > width) {
+            this.pos.x = 0;
+            this.updatePrev();
+          }
+          if (this.pos.x < 0) {
+            this.pos.x = width;
+            this.updatePrev();
+          }
+          if (this.pos.y > height) {
+            this.pos.y = 0;
+            this.updatePrev();
+          }
+          if (this.pos.y < 0) {
+            this.pos.y = height;
+            this.updatePrev();
+          }
+        }
+
+        respawn() {
+          this.pos = createVector(random(width), random(height));
+          this.prevPos = this.pos.copy();
+          this.lifespan = random(100, 300);
+        }
+      }
+    </script>
+  </body>
+</html>

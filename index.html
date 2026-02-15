@@ -8,6 +8,38 @@
       name="description"
       content="A minimalist, high-performance personal finance tracker. Utilitarian design. Zero distractions. Pure data."
     />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://utsav173.github.io/zenledger-app/"
+    />
+    <meta property="og:title" content="ZenLedger — Financial Purity" />
+    <meta
+      property="og:description"
+      content="A minimalist, high-performance personal finance tracker. Utilitarian design. Zero distractions. Pure data."
+    />
+    <meta
+      property="og:image"
+      content="https://utsav173.github.io/zenledger-app/assets/og-image.png"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://utsav173.github.io/zenledger-app/"
+    />
+    <meta property="twitter:title" content="ZenLedger — Financial Purity" />
+    <meta
+      property="twitter:description"
+      content="A minimalist, high-performance personal finance tracker. Utilitarian design. Zero distractions. Pure data."
+    />
+    <meta
+      property="twitter:image"
+      content="https://utsav173.github.io/zenledger-app/assets/og-image.png"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -126,8 +158,15 @@
       }
 
       /* ================================================================
-       LAYOUT
+       LAYOUT & LAYERING — Fix rendering issues
        ================================================================ */
+      section,
+      footer,
+      .nav {
+        position: relative;
+        z-index: 1;
+      }
+
       .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -209,6 +248,45 @@
       .nav-cta:hover {
         background: transparent;
         color: var(--white);
+      }
+
+      /* Mobile hamburger */
+      .nav-hamburger {
+        display: none;
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-size: 18px;
+        padding: 4px 10px;
+        cursor: pointer;
+        font-family: var(--font-mono);
+      }
+
+      @media (max-width: 767px) {
+        .nav-hamburger {
+          display: block;
+        }
+        .nav-cta {
+          display: none;
+        }
+        .nav-links.nav-open {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 56px;
+          left: 0;
+          right: 0;
+          background: rgba(0, 0, 0, 0.95);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          padding: var(--sp-6) var(--sp-4);
+          gap: var(--sp-6);
+          border-bottom: 1px solid var(--border);
+          z-index: 100;
+        }
+        .nav-links.nav-open a {
+          font-size: 12px;
+        }
       }
 
       /* ================================================================
@@ -308,6 +386,13 @@
 
       .btn-outline:hover {
         border-color: var(--text);
+      }
+
+      /* Make anchor-based CTAs look identical to buttons */
+      a.btn-primary,
+      a.btn-outline {
+        display: inline-block;
+        text-align: center;
       }
 
       /* Grid decoration */
@@ -750,6 +835,10 @@
           opacity: 1;
           transform: none;
         }
+        /* Disable p5.js canvas for reduced-motion users */
+        canvas {
+          display: none !important;
+        }
       }
     </style>
   </head>
@@ -766,7 +855,28 @@
           <li><a href="#security">SECURITY</a></li>
           <li><a href="#pro">PRO</a></li>
         </ul>
-        <button class="nav-cta">→ GET APP</button>
+        <button
+          class="nav-cta"
+          onclick="
+            window.open(
+              'https://github.com/Utsav173/zenledger-app/raw/main/download/app-release.apk',
+              '_blank'
+            )
+          "
+        >
+          → GET APP
+        </button>
+        <button
+          class="nav-hamburger"
+          onclick="
+            this.parentElement
+              .querySelector('.nav-links')
+              .classList.toggle('nav-open')
+          "
+          aria-label="Menu"
+        >
+          ☰
+        </button>
       </div>
     </nav>
 
@@ -791,8 +901,18 @@
         </p>
 
         <div class="hero-cta-row reveal reveal-delay-3">
-          <button class="btn-primary">→ DOWNLOAD APK</button>
-          <button class="btn-outline">VIEW MANUAL</button>
+          <a
+            href="https://github.com/Utsav173/zenledger-app/raw/main/download/app-release.apk"
+            class="btn-primary"
+            download
+            >→ DOWNLOAD APK</a
+          >
+          <a
+            href="https://github.com/Utsav173/zenledger-app/blob/main/manual/USER_MANUAL.md"
+            class="btn-outline"
+            target="_blank"
+            >VIEW MANUAL</a
+          >
         </div>
       </div>
       <div class="hero-grid-bg" aria-hidden="true"></div>
@@ -1076,228 +1196,117 @@
       })();
     </script>
     <!-- ============================================================
-       ALGORITHMIC ART — "Invisible Flows of Capital"
+       ALGORITHMIC ART — "Constellation Ledger"
        ============================================================ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
     <script>
       /**
-       * ALGORITHMIC PHILOSOPHY: FINANCIAL PURITY
+       * ALGORITHMIC PHILOSOPHY: CONSTELLATION LEDGER
        *
-       * A discretized flow field representing the invisible plumbing of capital.
-       * Particles snap to a grid (the ledger) while flowing through noise (the market).
-       *
-       * Color Palette:
-       * - Base: OLED Black (#000000)
-       * - Flow: Text Meta (#888888) with low alpha
-       * - Income: Success (#10b981)
-       * - Expense: Error (#f43f5e)
+       * A network of nodes (accounts/wallets) connected by transactions.
+       * Represents the interconnected nature of finance.
+       * Minimalist, interconnected, breathing.
        */
 
-      // Configuration
       const CONFIG = {
-        particleCount: 800,
-        noiseScale: 0.003, // Low frequency = large market trends
-        gridSize: 20, // Discretization grid
-        flowStrength: 2,
+        nodeCount: 120, // Reduced for mobile performance
+        connectionDistance: 120,
+        mouseDistance: 200,
         colors: {
           bg: "#000000",
-          neutral: [136, 136, 136], // #888888
-          income: [16, 185, 129], // #10b981
-          expense: [244, 63, 94], // #f43f5e
+          node: [255, 255, 255], // White nodes
+          line: [80, 80, 80], // Grey lines
+          accent: [16, 185, 129], // Green accent for active connections
         },
       };
 
-      let particles = [];
-      let flowField;
-      let rows, cols;
-      let zOff = 0; // Time dimension
+      let nodes = [];
 
       function setup() {
-        // Create canvas that fills the hero section
-        // We look for the .hero element to size correctly, or fullscreen
         let canvas = createCanvas(windowWidth, windowHeight);
         canvas.position(0, 0);
         canvas.style("z-index", "0");
-        canvas.style("position", "fixed"); // Fixed background for parallax effect
-        canvas.style("pointer-events", "none"); // Let clicks pass through
+        canvas.style("position", "fixed");
+        canvas.style("pointer-events", "none");
 
-        // Initialize grid
-        cols = floor(width / CONFIG.gridSize);
-        rows = floor(height / CONFIG.gridSize);
-        flowField = new Array(cols * rows);
+        // Responsive node count
+        let count = windowWidth < 768 ? 60 : CONFIG.nodeCount;
 
-        // Spawn particles
-        for (let i = 0; i < CONFIG.particleCount; i++) {
-          particles.push(new Particle());
+        for (let i = 0; i < count; i++) {
+          nodes.push(new Node());
         }
-
-        background(0);
       }
 
       function draw() {
-        // Fade background for trail effect (OLED Black)
-        // High alpha = short trails (brutalist precision)
-        // Low alpha = long trails (ethereal flow)
-        background(0, 20);
+        background(0); // Deep void
 
-        // Calculate Flow Field
-        let yoff = 0;
-        for (let y = 0; y < rows; y++) {
-          let xoff = 0;
-          for (let x = 0; x < cols; x++) {
-            let index = x + y * cols;
-            // 4D noise for evolving fields (x, y, time)
-            let angle = noise(xoff, yoff, zOff) * TWO_PI * 2;
-
-            // DISCRETIZATION: Snap to cardinal directions (The Ledger is rigid)
-            // 0 (right), PI/2 (down), PI (left), 3PI/2 (up)
-            // We allow 8 directions for slightly more organic movement but still structured
-            let snapAngle = floor(angle / (PI / 4)) * (PI / 4);
-
-            let v = p5.Vector.fromAngle(snapAngle);
-            v.setMag(CONFIG.flowStrength);
-            flowField[index] = v;
-            xoff += CONFIG.noiseScale * CONFIG.gridSize; // Adjust scale for grid
-          }
-          yoff += CONFIG.noiseScale * CONFIG.gridSize;
-        }
-        zOff += 0.002; // Time evolution speed
-
-        // Update and Draw Particles
-        for (let i = 0; i < particles.length; i++) {
-          particles[i].follow(flowField);
-          particles[i].update();
-          particles[i].edges();
-          particles[i].show();
+        // Update and draw nodes
+        for (let i = 0; i < nodes.length; i++) {
+          nodes[i].update();
+          nodes[i].show();
+          nodes[i].connect(nodes.slice(i + 1)); // Connect to subsequent nodes
         }
       }
 
       function windowResized() {
         resizeCanvas(windowWidth, windowHeight);
-        cols = floor(width / CONFIG.gridSize);
-        rows = floor(height / CONFIG.gridSize);
-        flowField = new Array(cols * rows);
       }
 
-      class Particle {
+      class Node {
         constructor() {
           this.pos = createVector(random(width), random(height));
-          this.vel = createVector(0, 0);
-          this.acc = createVector(0, 0);
-          this.maxSpeed = random(1.5, 3.5); // Variable transaction speeds
-          this.prevPos = this.pos.copy();
-
-          // Assign Type (Identity)
-          let r = random(1);
-          if (r < 0.05)
-            this.type = "expense"; // 5% large expenses
-          else if (r < 0.15)
-            this.type = "income"; // 10% income events
-          else this.type = "neutral"; // 85% standard volume
-
-          this.lifespan = random(100, 300);
-        }
-
-        follow(vectors) {
-          let x = floor(this.pos.x / CONFIG.gridSize);
-          let y = floor(this.pos.y / CONFIG.gridSize);
-          let index = x + y * cols;
-
-          // Add flow force
-          if (vectors[index]) {
-            let force = vectors[index];
-            this.applyForce(force);
-          }
-
-          // INTERACTION: Mouse as Market Force
-          // Repel particles slightly when mouse is near
-          let mouse = createVector(mouseX, mouseY);
-          let d = dist(this.pos.x, this.pos.y, mouse.x, mouse.y);
-          if (d < 150) {
-            let repel = p5.Vector.sub(this.pos, mouse);
-            repel.setMag(1); // Force strength
-            this.applyForce(repel);
-          }
-        }
-
-        applyForce(force) {
-          this.acc.add(force);
+          this.vel = p5.Vector.random2D().mult(random(0.2, 0.8)); // Slow drift
+          this.size = random(1.5, 3);
         }
 
         update() {
-          this.vel.add(this.acc);
-          this.vel.limit(this.maxSpeed);
-          this.pos.add(this.vel);
-          this.acc.mult(0);
-          this.lifespan -= 1;
+          // Mouse interaction: slight repulsion or attraction
+          let mouse = createVector(mouseX, mouseY);
+          let d = dist(this.pos.x, this.pos.y, mouse.x, mouse.y);
 
-          // Respawn if dead
-          if (this.lifespan <= 0) {
-            this.respawn();
+          if (d < CONFIG.mouseDistance) {
+            // Subtle drift away from mouse
+            let force = p5.Vector.sub(this.pos, mouse);
+            force.setMag(0.5); // Very gentle
+            this.pos.add(force);
           }
+
+          this.pos.add(this.vel);
+
+          // Bounce off edges
+          if (this.pos.x < 0 || this.pos.x > width) this.vel.x *= -1;
+          if (this.pos.y < 0 || this.pos.y > height) this.vel.y *= -1;
         }
 
         show() {
-          // Color based on type
-          if (this.type === "expense") {
-            stroke(
-              CONFIG.colors.expense[0],
-              CONFIG.colors.expense[1],
-              CONFIG.colors.expense[2],
-              200
-            );
-            strokeWeight(2);
-          } else if (this.type === "income") {
-            stroke(
-              CONFIG.colors.income[0],
-              CONFIG.colors.income[1],
-              CONFIG.colors.income[2],
-              200
-            );
-            strokeWeight(2);
-          } else {
-            stroke(
-              CONFIG.colors.neutral[0],
-              CONFIG.colors.neutral[1],
-              CONFIG.colors.neutral[2],
-              40
-            ); // Faint neutral
-            strokeWeight(1);
-          }
-
-          // Draw line from prev position (trail)
-          line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
-          this.updatePrev();
+          noStroke();
+          fill(
+            CONFIG.colors.node[0],
+            CONFIG.colors.node[1],
+            CONFIG.colors.node[2],
+            150
+          );
+          ellipse(this.pos.x, this.pos.y, this.size);
         }
 
-        updatePrev() {
-          this.prevPos.x = this.pos.x;
-          this.prevPos.y = this.pos.y;
-        }
+        connect(others) {
+          for (let other of others) {
+            let d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
 
-        edges() {
-          if (this.pos.x > width) {
-            this.pos.x = 0;
-            this.updatePrev();
-          }
-          if (this.pos.x < 0) {
-            this.pos.x = width;
-            this.updatePrev();
-          }
-          if (this.pos.y > height) {
-            this.pos.y = 0;
-            this.updatePrev();
-          }
-          if (this.pos.y < 0) {
-            this.pos.y = height;
-            this.updatePrev();
-          }
-        }
+            if (d < CONFIG.connectionDistance) {
+              // Alpha based on distance (closer = brighter)
+              let alpha = map(d, 0, CONFIG.connectionDistance, 100, 0);
 
-        respawn() {
-          this.pos = createVector(random(width), random(height));
-          this.prevPos = this.pos.copy();
-          this.lifespan = random(100, 300);
+              stroke(
+                CONFIG.colors.line[0],
+                CONFIG.colors.line[1],
+                CONFIG.colors.line[2],
+                alpha
+              );
+              strokeWeight(0.5); // Thin minimalist lines
+              line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+            }
+          }
         }
       }
     </script>

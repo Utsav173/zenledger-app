@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/icon-192.png" />
     <title>ZenLedger — Financial Purity</title>
     <meta
       name="description"
@@ -42,10 +43,19 @@
     <link rel="canonical" href="https://zenledger.khatriutsav.com/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Async Google Fonts Loading Pattern -->
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media = 'all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <style>
       /* ================================================================
        RESET & BASE — OLED Black Canvas
@@ -65,7 +75,7 @@
         --surface-pressed: #141414;
         --border: #333333;
         --text: #eaeaea;
-        --text-meta: #888888;
+        --text-meta: #a0a0a0; /* Increased from #888888 for better contrast */
         --primary: #00b2ff;
         --primary-muted: #00587a;
         --success: #10b981;
@@ -990,7 +1000,6 @@
         font-size: 10px;
         letter-spacing: 0.15em;
         color: var(--text-meta);
-        opacity: 0.5;
         line-height: 2;
       }
 
@@ -1062,7 +1071,7 @@
         "@type": "Organization",
         "name": "ZenLedger",
         "url": "https://zenledger.khatriutsav.com",
-        "logo": "https://zenledger.khatriutsav.com/assets/icon.png",
+        "logo": "https://zenledger.khatriutsav.com/assets/icon-192.png",
         "sameAs": ["https://github.com/Utsav173/zenledger-app"]
       }
     </script>
@@ -1152,7 +1161,7 @@
       <div class="container">
         <div class="section-header reveal">
           <div class="dot"></div>
-          <span class="section-num">01 // CORE_FEATURES</span>
+          <h2 class="section-num">01 // CORE_FEATURES</h2>
           <div class="section-line"></div>
         </div>
 
@@ -1228,7 +1237,7 @@
       <div class="container">
         <div class="section-header reveal">
           <div class="dot"></div>
-          <span class="section-num">02 // INTERFACE_PREVIEW</span>
+          <h2 class="section-num">02 // INTERFACE_PREVIEW</h2>
           <div class="section-line"></div>
         </div>
 
@@ -1398,7 +1407,7 @@
       <div class="container">
         <div class="section-header reveal">
           <div class="dot"></div>
-          <span class="section-num">03 // SECURITY_PROTOCOL</span>
+          <h2 class="section-num">03 // SECURITY_PROTOCOL</h2>
           <div class="section-line"></div>
         </div>
 
@@ -1446,7 +1455,7 @@
       <div class="container">
         <div class="section-header reveal">
           <div class="dot"></div>
-          <span class="section-num">04 // UPGRADE_PATH</span>
+          <h2 class="section-num">04 // UPGRADE_PATH</h2>
           <div class="section-line"></div>
         </div>
 
@@ -1586,10 +1595,6 @@
     <!-- ============================================================
        ALGORITHMIC ART — "Digital Dust" (Data Motes)
        ============================================================ -->
-    <script
-      defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"
-    ></script>
     <script>
       /**
        * ALGORITHMIC PHILOSOPHY: DIGITAL DUST
@@ -1601,100 +1606,163 @@
        * - Subtle, non-intrusive, atmospheric.
        */
 
-      const CONFIG = {
-        particleCount: 80,
-        mouseDistance: 150,
-        colors: {
-          bg: "#000000",
-          dots: [150, 150, 150], // Brighter grey for visibility without lines
-        },
-      };
+      // Dynamic Loader using window.onload to ensure LCP isn't blocked
+      window.addEventListener("load", () => {
+        // Double RAF to ensure paint has happened
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            const script = document.createElement("script");
+            script.src =
+              "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js";
+            script.async = true;
+            script.onload = initP5;
+            document.body.appendChild(script);
+          });
+        });
+      });
 
-      let particles = [];
-      let zOff = 0;
+      function initP5() {
+        const CONFIG = {
+          particleCount: 100,
+          connectionDistance: 120,
+          mouseDistance: 150,
+          colors: {
+            dot: [180, 180, 180],
+            accent: [0, 178, 255], // #00b2ff
+            line: [60, 60, 60],
+          },
+        };
 
-      class Particle {
-        constructor() {
-          this.pos = createVector(random(width), random(height));
-          this.vel = createVector(0, 0);
-          this.acc = createVector(0, 0);
-          this.size = random(1.5, 3.5);
-          this.maxSpeed = random(0.2, 0.6);
-        }
+        let particles = [];
+        let zOff = 0;
 
-        update() {
-          // Flow field force
-          let angle =
-            noise(this.pos.x * 0.002, this.pos.y * 0.002, zOff) * TWO_PI * 2;
-          this.acc.x = cos(angle) * 0.02;
-          this.acc.y = sin(angle) * 0.02;
+        window.setup = function () {
+          let canvas = createCanvas(windowWidth, windowHeight);
+          canvas.position(0, 0);
+          canvas.style("z-index", "0");
+          canvas.style("position", "fixed");
+          canvas.style("pointer-events", "none");
+          canvas.style("opacity", "0");
+          canvas.style("transition", "opacity 1.5s ease-in");
 
-          this.vel.add(this.acc);
-          this.vel.limit(this.maxSpeed);
-          this.pos.add(this.vel);
-          this.acc.mult(0); // Reset acceleration
+          setTimeout(() => {
+            canvas.style("opacity", "1");
+          }, 100);
 
-          // Wrap edges
-          if (this.pos.x < 0) this.pos.x = width;
-          if (this.pos.x > width) this.pos.x = 0;
-          if (this.pos.y < 0) this.pos.y = height;
-          if (this.pos.y > height) this.pos.y = 0;
+          let count = windowWidth < 768 ? 50 : CONFIG.particleCount;
+          for (let i = 0; i < count; i++) {
+            particles.push(new Particle());
+          }
+        };
 
-          // Mouse influence (Repel)
-          let mouse = createVector(mouseX, mouseY);
-          let d = p5.Vector.dist(mouse, this.pos);
-          if (d < CONFIG.mouseDistance) {
-            let force = p5.Vector.sub(this.pos, mouse);
-            force.setMag(map(d, 0, CONFIG.mouseDistance, 0.5, 0));
-            this.pos.add(force);
+        window.draw = function () {
+          background(0);
+          zOff += 0.0005;
+
+          // Draw connections first
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              let d = p5.Vector.dist(particles[i].pos, particles[j].pos);
+              if (d < CONFIG.connectionDistance) {
+                let alpha = map(d, 0, CONFIG.connectionDistance, 100, 0);
+                stroke(
+                  CONFIG.colors.line[0],
+                  CONFIG.colors.line[1],
+                  CONFIG.colors.line[2],
+                  alpha
+                );
+                strokeWeight(0.5);
+                line(
+                  particles[i].pos.x,
+                  particles[i].pos.y,
+                  particles[j].pos.x,
+                  particles[j].pos.y
+                );
+              }
+            }
+          }
+
+          // Update and draw particles
+          particles.forEach((p) => {
+            p.update();
+            p.draw();
+          });
+        };
+
+        window.windowResized = function () {
+          resizeCanvas(windowWidth, windowHeight);
+        };
+
+        class Particle {
+          constructor() {
+            this.pos = createVector(random(width), random(height));
+            this.vel = createVector(random(-0.5, 0.5), random(-0.5, 0.5));
+            this.acc = createVector(0, 0);
+            this.size = random(1, 4);
+            this.isAccent = random() > 0.8;
+            this.maxSpeed = this.isAccent ? random(0.4, 0.8) : random(0.2, 0.5);
+          }
+
+          update() {
+            let angle =
+              noise(this.pos.x * 0.002, this.pos.y * 0.002, zOff) * TWO_PI * 4;
+            let noiseForce = p5.Vector.fromAngle(angle);
+            noiseForce.mult(0.01);
+            this.acc.add(noiseForce);
+
+            this.vel.add(this.acc);
+            this.vel.limit(this.maxSpeed);
+            this.pos.add(this.vel);
+            this.acc.mult(0);
+
+            if (this.pos.x < 0) this.pos.x = width;
+            if (this.pos.x > width) this.pos.x = 0;
+            if (this.pos.y < 0) this.pos.y = height;
+            if (this.pos.y > height) this.pos.y = 0;
+
+            let mouse = createVector(mouseX, mouseY);
+            let d = p5.Vector.dist(mouse, this.pos);
+            if (d < CONFIG.mouseDistance) {
+              let force = p5.Vector.sub(this.pos, mouse);
+              force.setMag(map(d, 0, CONFIG.mouseDistance, 0.8, 0));
+              this.pos.add(force);
+            }
+          }
+
+          draw() {
+            noStroke();
+            let baseAlpha = map(
+              sin(frameCount * 0.02 + this.size * 10),
+              -1,
+              1,
+              40,
+              150
+            );
+
+            if (this.isAccent) {
+              fill(
+                CONFIG.colors.accent[0],
+                CONFIG.colors.accent[1],
+                CONFIG.colors.accent[2],
+                baseAlpha + 50
+              );
+              circle(this.pos.x, this.pos.y, this.size * 1.2);
+            } else {
+              fill(
+                CONFIG.colors.dot[0],
+                CONFIG.colors.dot[1],
+                CONFIG.colors.dot[2],
+                baseAlpha
+              );
+              circle(this.pos.x, this.pos.y, this.size);
+            }
           }
         }
 
-        draw() {
-          noStroke();
-          // Breathe opacity
-          let alpha = map(
-            sin(frameCount * 0.02 + this.size * 10),
-            -1,
-            1,
-            30,
-            100
-          );
-          fill(
-            CONFIG.colors.dots[0],
-            CONFIG.colors.dots[1],
-            CONFIG.colors.dots[2],
-            alpha
-          );
-          circle(this.pos.x, this.pos.y, this.size);
-        }
-      }
-
-      function setup() {
-        let canvas = createCanvas(windowWidth, windowHeight);
-        canvas.position(0, 0);
-        canvas.style("z-index", "0");
-        canvas.style("position", "fixed");
-        canvas.style("pointer-events", "none");
-
-        let count = windowWidth < 768 ? 40 : CONFIG.particleCount;
-        for (let i = 0; i < count; i++) {
-          particles.push(new Particle());
-        }
-      }
-
-      function draw() {
-        background(0);
-        zOff += 0.0005; // Slow drift
-
-        particles.forEach((p) => {
-          p.update();
-          p.draw();
-        });
-      }
-
-      function windowResized() {
-        resizeCanvas(windowWidth, windowHeight);
+        // Use p5 instance mode to properly initialize if p5 global mode fails to fire setup automatically
+        // when loaded late. However, p5 usually auto-inits on load.
+        // If not, we can force it:
+        new p5();
       }
     </script>
   </body>

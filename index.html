@@ -7,7 +7,11 @@
     <title>ZenLedger — Financial Purity</title>
     <meta
       name="description"
-      content="A minimalist, high-performance personal finance tracker. Utilitarian design. Zero distractions. Pure data."
+      content="A minimalist, high-performance personal finance tracker. Utilitarian design. Offline-first expense manager with Biometric Security. Zero distractions. Pure data."
+    />
+    <meta
+      name="keywords"
+      content="personal finance tracker, offline finance app, utilitarian expense tracker, zenledger, budget app, expense manager, Convex, React Native, Expo, Local-first, Privacy-focused"
     />
 
     <!-- Open Graph / Facebook -->
@@ -1030,6 +1034,38 @@
         }
       }
     </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ZenLedger",
+        "operatingSystem": "Android, iOS",
+        "applicationCategory": "FinanceApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "A minimalist, high-performance personal finance tracker. Utilitarian design. Zero distractions. Pure data.",
+        "featureList": "Sparkline Dashboard, Precision Entry, Offline-First Sync, Multi-Currency, Data Export, Biometric Security",
+        "screenshot": "https://zenledger.khatriutsav.com/screenshots/dashboard-dark.webp",
+        "author": {
+          "@type": "Person",
+          "name": "Utsav Khatri",
+          "url": "https://khatriutsav.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ZenLedger",
+        "url": "https://zenledger.khatriutsav.com",
+        "logo": "https://zenledger.khatriutsav.com/assets/icon.png",
+        "sameAs": ["https://github.com/Utsav173/zenledger-app"]
+      }
+    </script>
   </head>
   <body>
     <!-- ============================================================
@@ -1123,7 +1159,7 @@
         <div class="features-grid">
           <div class="feature-cell reveal">
             <div class="feature-icon">⎔</div>
-            <div class="feature-title">SPARKLINE DASHBOARD</div>
+            <h3 class="feature-title">SPARKLINE DASHBOARD</h3>
             <div class="feature-desc">
               Real-time trend visualization with a minimalist sparkline graph.
               Monthly navigation, income/expense breakdown, and savings rate —
@@ -1133,7 +1169,7 @@
 
           <div class="feature-cell reveal reveal-delay-1">
             <div class="feature-icon">⌸</div>
-            <div class="feature-title">PRECISION ENTRY</div>
+            <h3 class="feature-title">PRECISION ENTRY</h3>
             <div class="feature-desc">
               Purpose-built numpad with zero input lag. Categorize transactions,
               attach notes, and switch between income/expense with a single tap.
@@ -1142,7 +1178,7 @@
 
           <div class="feature-cell reveal reveal-delay-2">
             <div class="feature-icon">⊞</div>
-            <div class="feature-title">FINANCIAL INTELLIGENCE</div>
+            <h3 class="feature-title">FINANCIAL INTELLIGENCE</h3>
             <div class="feature-desc">
               Bar charts, spending breakdowns by category, top expense insights,
               and temporal trends. Period selectors for month, quarter,
@@ -1153,7 +1189,7 @@
 
           <div class="feature-cell reveal reveal-delay-3">
             <div class="feature-icon">↕</div>
-            <div class="feature-title">OFFLINE-FIRST SYNC</div>
+            <h3 class="feature-title">OFFLINE-FIRST SYNC</h3>
             <div class="feature-desc">
               Works completely offline. Transactions queue locally and sync
               automatically when connectivity returns. Zero data loss
@@ -1163,7 +1199,7 @@
 
           <div class="feature-cell reveal">
             <div class="feature-icon">⊡</div>
-            <div class="feature-title">MULTI-CURRENCY</div>
+            <h3 class="feature-title">MULTI-CURRENCY</h3>
             <div class="feature-desc">
               Switch display currency between INR, USD, EUR, GBP, JPY and more.
               All amounts formatted with locale-aware precision.
@@ -1172,7 +1208,7 @@
 
           <div class="feature-cell reveal reveal-delay-1">
             <div class="feature-icon">⤓</div>
-            <div class="feature-title">DATA EXPORT</div>
+            <h3 class="feature-title">DATA EXPORT</h3>
             <div class="feature-desc">
               Export your complete ledger as CSV or generate formatted PDF
               reports for external analysis, tax filing, or personal archival.
@@ -1218,6 +1254,8 @@
                   src="screenshots/dashboard-light.webp"
                   alt="ZenLedger Dashboard - February surplus view in light mode"
                   loading="lazy"
+                  width="280"
+                  height="607"
                 />
               </div>
             </div>
@@ -1234,6 +1272,8 @@
                   src="screenshots/dashboard-dark.webp"
                   alt="ZenLedger Dashboard - December deficit view in dark mode"
                   loading="lazy"
+                  width="280"
+                  height="607"
                 />
               </div>
             </div>
@@ -1250,6 +1290,8 @@
                   src="screenshots/reports-light.webp"
                   alt="ZenLedger Reports - Monthly financial summary"
                   loading="lazy"
+                  width="280"
+                  height="607"
                 />
               </div>
             </div>
@@ -1266,6 +1308,8 @@
                   src="screenshots/analytics-dark.webp"
                   alt="ZenLedger Analytics PRO - Financial intelligence dashboard"
                   loading="lazy"
+                  width="280"
+                  height="607"
                 />
               </div>
             </div>
@@ -1282,6 +1326,8 @@
                   src="screenshots/categories-dark.webp"
                   alt="ZenLedger Categories - Category management grid"
                   loading="lazy"
+                  width="280"
+                  height="607"
                 />
               </div>
             </div>
@@ -1298,6 +1344,8 @@
                   src="screenshots/export-light.webp"
                   alt="ZenLedger Export - Data export with CSV and PDF options"
                   loading="lazy"
+                  width="280"
+                  height="607"
                 />
               </div>
             </div>
@@ -1314,6 +1362,8 @@
                   src="screenshots/export-dark.webp"
                   alt="ZenLedger Export - Execute export in dark mode"
                   loading="lazy"
+                  width="280"
+                  height="607"
                 />
               </div>
             </div>
@@ -1359,7 +1409,7 @@
         <div class="security-grid">
           <div class="security-card reveal reveal-delay-1">
             <div class="security-card-icon">⊟</div>
-            <div class="security-card-title">BIOMETRIC LOCK</div>
+            <h3 class="security-card-title">BIOMETRIC LOCK</h3>
             <div class="security-card-desc">
               FaceID and TouchID integration ensures only you can access your
               financial data. Activate from Settings.
@@ -1368,7 +1418,7 @@
 
           <div class="security-card reveal reveal-delay-2">
             <div class="security-card-icon">⊞</div>
-            <div class="security-card-title">RECOVERY KIT</div>
+            <h3 class="security-card-title">RECOVERY KIT</h3>
             <div class="security-card-desc">
               Locally generated backup codes put recovery in your hands. No
               dependency on third-party password services.
@@ -1377,7 +1427,7 @@
 
           <div class="security-card reveal reveal-delay-3">
             <div class="security-card-icon">⊠</div>
-            <div class="security-card-title">ENCRYPTED SYNC</div>
+            <h3 class="security-card-title">ENCRYPTED SYNC</h3>
             <div class="security-card-desc">
               Secure cloud sync powered by Convex ensures your transactions are
               never readable by unauthorized parties.
@@ -1536,7 +1586,10 @@
     <!-- ============================================================
        ALGORITHMIC ART — "Digital Dust" (Data Motes)
        ============================================================ -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"
+    ></script>
     <script>
       /**
        * ALGORITHMIC PHILOSOPHY: DIGITAL DUST

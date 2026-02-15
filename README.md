@@ -21,7 +21,7 @@ This directory (`public-site/`) is a **generated artifact**. It contains the sta
 - `index.html`: The main landing page (generated from `docs/LANDING_PAGE.html`).
 - `manual/`: User documentation (synced from `docs/`).
 - `download/`: Contains the APK (for GitHub storage only, ignored by Cloudflare).
-- `robots.txt` / `sitemap.xml` / `_headers`: SEO and configuration files.
+- `robots.txt` / `sitemap.xml`: SEO files.
 
 ---
 

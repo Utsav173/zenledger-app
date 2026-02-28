@@ -1,40 +1,52 @@
-# Temporal — Financial Purity
+# Temporal // Public Site
 
-A minimalist, high-performance personal finance tracker designed for complete data sovereignty. No ads. No tracking. Just pure financial clarity.
+**Utilitarian Wealth Tracking.** This is the public-facing documentation and landing page for Temporal, a high-performance personal finance tracking application.
 
-![Temporal Preview](screenshots/dashboard-dark.webp)
+## Tech Stack
 
-## Core Philosophy
+- **Framework**: [Vinext](https://github.com/vinext/vinext) (Experimental Vite-based React framework)
+- **Styling**: Tailwind CSS v4 (Utilitarian Brutalism)
+- **Runtime**: [Bun](https://bun.sh)
+- **Infrastructure**: Cloudflare Workers / Pages
+- **Typography**: Newsreader (Serif), JetBrains Mono (Mono), Inter (Sans)
 
-Modern finance apps are cluttered with upsells, ads, and unnecessary "social" features. **Temporal** strips all that away.
+## Project Structure
 
-- **Offline-First**: Your data lives on your device.
-- **Privacy-Centric**: No cloud tracking. You own your financial history.
-- **Utilitarian Design**: Built for speed and clarity, not engagement metrics.
+- `app/`: React App Router tracks (`/`, `/manual`, `/ledger`, `/vault`, `/privacy`, `/terms`, `/refunds`)
+- `components/`: Reusable UI components (Header, Footer, SEO)
+- `public/`: Static assets, icons, and APK download binaries
 
-## Key Features
+## Local Development
 
-- **Instant Tracking**: Log expenses in seconds with a streamlined interface.
-- **Smart Analytics**: Visual breakdown of your spending habits without the noise.
-- **Data Freedom**: Import and export your data as CSV anytime. Move between platforms effortlessly.
-- **Dual Modes**: Beautifully crafted Light and Dark themes.
-- **Adaptive Formatting**: Smart currency display that respects your locale.
+Ensure you have [Bun](https://bun.sh) installed.
 
-## Download
+```bash
+# Install dependencies
+bun install
 
-Get the latest version for Android directly from our official site or GitHub releases.
+# Start development server
+bun run dev:vinext
+```
 
-- **[Official Website](https://temporal.khatriutsav.com)**
-- **[GitHub Releases](https://github.com/Utsav173/temporal-app/releases)**
+The dev server will be available at `http://localhost:3001`.
 
-## Privacy Policy
+## Deployment
 
-We believe in absolute privacy.
+Deployment is handled via the root-level scripts:
 
-1.  **No Data Collection**: We do not collect, store, or share your personal data.
-2.  **Local Storage**: All transaction data is stored locally on your device's secure storage.
-3.  **No Third-Party Analytics**: We don't track how you use the app.
+1. `scripts/sync-public-site.sh`: Syncs the latest Android APK build into the public download folder.
+2. `scripts/deploy-to-cloudflare.sh`: Compiles the Vinext bundle and deploys to Cloudflare Workers.
+
+## Aesthetic Guidelines
+
+Temporal follows a strict **Utilitarian Brutalist** philosophy:
+
+- 0px border radius on all elements.
+- Absolute monochrome palette (#000000 / #FFFFFF).
+- High-contrast, instantaneous hover states (no transitions).
+- Heavy structural borders (1px to 4px).
+- Monospace metadata metadata paired with elegant italic serifs.
 
 ---
 
-_Built with ❤️ for financial independence._
+© 2026 TEMPORAL SYSTEMS INC.

@@ -53,7 +53,7 @@ export default function Home() {
 
             <div className="flex flex-col gap-4 sm:flex-row md:ml-auto">
               <a
-                href="https://github.com/Utsav173/zenledger/raw/main/public-site/public/download/app-release.apk"
+                href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk"
                 className="btn btn-primary"
               >
                 → DOWNLOAD APK

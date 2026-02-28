@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && wrangler pages deploy out --project-name temporal-app"
+    "deploy": "next build && wrangler pages deploy out --project-name zenledger-app"
   },
   "dependencies": {
     "next": "16.1.6",

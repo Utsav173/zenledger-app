@@ -1,6 +1,6 @@
-# ZenLedger User Manual // v1.0
+# Temporal User Manual // v1.0
 
-**Financial Purity.** ZenLedger is a high-performance personal finance tracker designed for the modern stoic. This manual guides you through mastering its minimalist interface to gain complete clarity over your finances.
+**Financial Purity.** Temporal is a high-performance personal finance tracker designed for the modern stoic. This manual guides you through mastering its minimalist interface to gain complete clarity over your finances.
 
 ---
 
@@ -8,7 +8,7 @@
 
 ### Initial Setup
 
-Upon first launch, ZenLedger operates immediately. No lengthy onboarding.
+Upon first launch, Temporal operates immediately. No lengthy onboarding.
 
 1. **Account**: Secure your data by creating an account.
 2. **Sync**: Data synchronizes automatically across devices when online.
@@ -71,7 +71,7 @@ Use the period selector at the top of the Reports screen to switch views:
 
 ## 4. Settings & Configuration
 
-Tailor ZenLedger to your preferences in **Settings**.
+Tailor Temporal to your preferences in **Settings**.
 
 ### General
 
@@ -87,7 +87,7 @@ Tailor ZenLedger to your preferences in **Settings**.
 
 ## 5. Security (Pro)
 
-ZenLedger takes data privacy seriously.
+Temporal takes data privacy seriously.
 
 ### Biometric Lock
 
@@ -97,7 +97,7 @@ Enable **FaceID** or **TouchID** in Settings to require authentication every tim
 
 ## 6. Pro Features
 
-**ZenLedger Pro** is a one-time upgrade for lifetime access.
+**Temporal Pro** is a one-time upgrade for lifetime access.
 
 - **Unlimited History**: Access records older than 3 months.
 - **Biometric Security**: Advanced app locking.
@@ -106,4 +106,4 @@ Enable **FaceID** or **TouchID** in Settings to require authentication every tim
 
 ---
 
-_ZenLedger is crafted with intent. No distractions. Just pure financial data._
+_Temporal is crafted with intent. No distractions. Just pure financial data._

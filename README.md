@@ -1,12 +1,12 @@
-# ZenLedger — Financial Purity
+# Temporal — Financial Purity
 
 A minimalist, high-performance personal finance tracker designed for complete data sovereignty. No ads. No tracking. Just pure financial clarity.
 
-![ZenLedger Preview](screenshots/dashboard-dark.webp)
+![Temporal Preview](screenshots/dashboard-dark.webp)
 
 ## Core Philosophy
 
-Modern finance apps are cluttered with upsells, ads, and unnecessary "social" features. **ZenLedger** strips all that away.
+Modern finance apps are cluttered with upsells, ads, and unnecessary "social" features. **Temporal** strips all that away.
 
 - **Offline-First**: Your data lives on your device.
 - **Privacy-Centric**: No cloud tracking. You own your financial history.
@@ -24,8 +24,8 @@ Modern finance apps are cluttered with upsells, ads, and unnecessary "social" fe
 
 Get the latest version for Android directly from our official site or GitHub releases.
 
-- **[Official Website](https://zenledger.khatriutsav.com)**
-- **[GitHub Releases](https://github.com/Utsav173/zenledger-app/releases)**
+- **[Official Website](https://temporal.khatriutsav.com)**
+- **[GitHub Releases](https://github.com/Utsav173/temporal-app/releases)**
 
 ## Privacy Policy
 

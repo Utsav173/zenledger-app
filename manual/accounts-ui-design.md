@@ -2,7 +2,7 @@
 
 ## 1. Design Ideology
 
-The Accounts feature follows the **Swiss Brutalist** and **Future Financial** aesthetic of ZenLedger. It prioritizes raw data visibility, industrial typography (monospaced), and high-contrast layouts.
+The Accounts feature follows the **Swiss Brutalist** and **Future Financial** aesthetic of Temporal. It prioritizes raw data visibility, industrial typography (monospaced), and high-contrast layouts.
 
 ## 2. User Experience (UX) Pillars
 

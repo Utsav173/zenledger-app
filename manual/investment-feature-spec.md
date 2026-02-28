@@ -1,6 +1,6 @@
 # Finvest Module: Feature Specification
 
-> Investment & asset tracking module for ZenLedger. PRO-gated feature.
+> Investment & asset tracking module for Temporal. PRO-gated feature.
 > **Scope constraint:** No crypto. No paid APIs. No API keys. India-first userbase.
 
 ---

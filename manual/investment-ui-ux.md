@@ -7,7 +7,7 @@
 ## 1. Design Intent
 
 **Who is this human?**
-An Indian professional who track expenses in ZenLedger and wants one place to see their full financial picture — FDs, mutual funds, stocks, gold. They're not day-traders. They're long-term holders who check portfolio maybe weekly.
+An Indian professional who track expenses in Temporal and wants one place to see their full financial picture — FDs, mutual funds, stocks, gold. They're not day-traders. They're long-term holders who check portfolio maybe weekly.
 
 **What must they accomplish?**
 Answer: "Am I on track?" — see total returns, know which holdings are up/down, track FD maturity dates, record a new SIP installment.

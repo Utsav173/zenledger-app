@@ -66,6 +66,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        cursor: crosshair;
       }
 
       :root {
@@ -153,9 +154,12 @@
         color: var(--black);
       }
 
-      a {
+      a,
+      button,
+      .nav-hamburger {
         color: inherit;
         text-decoration: none;
+        cursor: pointer !important;
       }
       img {
         max-width: 100%;
@@ -265,7 +269,6 @@
         font-size: 10px;
         letter-spacing: 0.2em;
         color: var(--text-meta);
-        transition: color 0.2s;
       }
 
       .nav-links a:hover {
@@ -282,21 +285,18 @@
         color: var(--black);
         border: 1px solid var(--white);
         padding: var(--sp-2) var(--sp-6);
-        cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
         position: relative;
         overflow: hidden;
       }
 
       .nav-cta:hover {
-        background: transparent;
+        background: var(--black);
         color: var(--white);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        border-color: var(--white);
       }
 
       .nav-cta:active {
-        transform: translateY(0);
+        background: var(--text-meta);
       }
 
       /* Mobile hamburger */
@@ -410,19 +410,16 @@
         color: var(--black);
         border: 1px solid var(--white);
         padding: var(--sp-4) var(--sp-8);
-        cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
       }
 
       .btn-primary:hover {
-        background: var(--primary);
-        border-color: var(--primary);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 20px rgba(0, 178, 255, 0.3);
+        background: var(--black);
+        color: var(--white);
+        border-color: var(--white);
       }
 
       .btn-primary:active {
-        transform: translateY(0);
+        background: var(--text-meta);
       }
 
       .btn-outline {
@@ -435,18 +432,16 @@
         color: var(--text);
         border: 1px solid var(--border);
         padding: var(--sp-4) var(--sp-8);
-        cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
       }
 
       .btn-outline:hover {
-        border-color: var(--text);
-        background: rgba(255, 255, 255, 0.05);
-        transform: translateY(-2px);
+        background: var(--white);
+        color: var(--black);
+        border-color: var(--white);
       }
 
       .btn-outline:active {
-        transform: translateY(0);
+        background: var(--text-meta);
       }
 
       /* Make anchor-based CTAs look identical to buttons */
@@ -474,6 +469,40 @@
       @media (max-width: 767px) {
         .hero-grid-bg {
           display: none;
+        }
+      }
+
+      /* Infinite Marquee */
+      .marquee-container {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100vw;
+        transform: translateY(-50%) rotate(-3deg);
+        overflow: hidden;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.05;
+      }
+
+      .marquee-content {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: clamp(4rem, 10vw, 8rem);
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+        color: var(--white);
+        animation: scroll-marquee 40s linear infinite;
+      }
+
+      @keyframes scroll-marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
         }
       }
 
@@ -896,94 +925,114 @@
       }
 
       /* ================================================================
-       PRO CTA — Terminal frame style
+       PRO UPGRADE / PRICING — Stitch MCP Brutalist Revision
        ================================================================ */
-      .pro-section {
-        padding: var(--sp-20) 0;
-      }
-
-      .pro-frame {
-        border: 1px solid var(--border);
-        max-width: 640px;
-        margin: 0 auto;
-      }
-
-      .pro-body {
-        padding: var(--sp-12) var(--sp-6);
+      .pricing {
+        padding: var(--sp-24) 0;
         text-align: center;
       }
 
-      @media (min-width: 768px) {
-        .pro-body {
-          padding: var(--sp-16) var(--sp-12);
-        }
+      .pro-card {
+        border: 4px solid var(--white);
+        background: var(--black);
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .pro-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background: repeating-linear-gradient(
+          45deg,
+          var(--white),
+          var(--white) 2px,
+          transparent 2px,
+          transparent 8px
+        );
+      }
+
+      .pro-body {
+        padding: var(--sp-12);
       }
 
       .pro-badge {
         display: inline-block;
+        background: var(--white);
+        color: var(--black);
         font-family: var(--font-mono);
-        font-size: 9px;
-        letter-spacing: 0.4em;
-        color: var(--primary);
-        border: 1px solid var(--primary-muted);
-        padding: 4px 16px;
-        margin-bottom: var(--sp-8);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        padding: var(--sp-1) var(--sp-3);
+        margin-bottom: var(--sp-6);
+        text-transform: uppercase;
       }
 
       .pro-title {
         font-family: var(--font-serif);
-        font-size: clamp(1.8rem, 4vw, 3rem);
         font-style: italic;
-        line-height: 1.15;
-        margin-bottom: var(--sp-6);
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: var(--sp-4);
+      }
+
+      .pro-price {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 6vw, 4rem);
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        margin-bottom: var(--sp-2);
+        color: var(--white);
       }
 
       .pro-features {
         list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: var(--sp-3);
         margin: var(--sp-8) 0;
-        text-align: left;
-        max-width: 360px;
-        margin-left: auto;
-        margin-right: auto;
+        border-top: 1px solid var(--border);
+        padding-top: var(--sp-8);
       }
 
       .pro-features li {
-        font-family: var(--font-mono);
-        font-size: 11px;
-        letter-spacing: 0.1em;
+        font-size: 14px;
         color: var(--text-meta);
+        margin-bottom: var(--sp-3);
         display: flex;
         align-items: center;
         gap: var(--sp-3);
+        font-family: var(--font-mono);
       }
 
-      .pro-features li::before {
-        content: "+";
-        color: var(--success-text);
-        font-weight: 700;
-      }
-
-      .pro-btn {
+      .pro-cta {
+        width: 100%;
+        display: block;
+        text-align: center;
+        background: var(--white);
+        color: var(--black);
         font-family: var(--font-mono);
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.15em;
-        text-transform: uppercase;
-        background: var(--white);
-        color: var(--black);
-        border: 1px solid var(--white);
-        padding: var(--sp-4) var(--sp-12);
-        cursor: pointer;
-        transition: all 0.25s;
-        margin-top: var(--sp-6);
+        padding: var(--sp-4) 0;
+        border: 2px solid var(--white);
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
       }
 
-      .pro-btn:hover {
-        background: var(--primary);
-        border-color: var(--primary);
+      .pro-cta:hover {
+        background: var(--black);
+        color: var(--white);
+      }
+
+      .pro-cta:active {
+        background: var(--text-meta);
       }
 
       /* ================================================================
@@ -1072,7 +1121,7 @@
         "name": "Temporal",
         "url": "https://temporal.khatriutsav.com",
         "logo": "https://temporal.khatriutsav.com/assets/icon-192.png",
-        "sameAs": ["https://github.com/Utsav173/temporal-app"]
+        "sameAs": ["https://github.com/Utsav173/zenledger-app"]
       }
     </script>
   </head>
@@ -1094,7 +1143,7 @@
           class="nav-cta"
           onclick="
             window.open(
-              'https://github.com/Utsav173/temporal-app/raw/main/download/app-release.apk',
+              'https://github.com/Utsav173/zenledger-app/raw/main/download/app-release.apk',
               '_blank'
             )
           "
@@ -1130,24 +1179,31 @@
         </h1>
 
         <p class="hero-subtitle reveal reveal-delay-2">
-          A MINIMALIST, HIGH-PERFORMANCE PERSONAL FINANCE TRACKER. UTILITARIAN
-          DESIGN. ZERO DISTRACTIONS. PURE DATA. BUILT FOR THOSE WHO VALUE
-          CLARITY OVER CLUTTER.
+          TEMPORAL IS A COMPREHENSIVE PERSONAL FINANCE AND INVESTMENT TRACKING
+          APPLICATION. TRACK DAILY EXPENSES, MANAGE MUTUAL FUNDS AND STOCKS, AND
+          SYNCHRONIZE SECURE LEDGERS. UTILITARIAN DESIGN. PURE DATA.
         </p>
 
         <div class="hero-cta-row reveal reveal-delay-3">
           <a
-            href="https://github.com/Utsav173/temporal-app/raw/main/download/app-release.apk"
+            href="https://github.com/Utsav173/zenledger-app/raw/main/download/app-release.apk"
             class="btn-primary"
             download
             >→ DOWNLOAD APK</a
           >
           <a
-            href="https://github.com/Utsav173/temporal-app/blob/main/manual/USER_MANUAL.md"
+            href="https://github.com/Utsav173/zenledger-app/blob/main/manual/USER_MANUAL.md"
             class="btn-outline"
             target="_blank"
             >VIEW MANUAL</a
           >
+        </div>
+      </div>
+      <div class="marquee-container" aria-hidden="true">
+        <div class="marquee-content">
+          PURE DATA // ZERO DISTRACTIONS // OFFLINE LEDGER // HIGH PERFORMANCE
+          // PURE DATA // ZERO DISTRACTIONS // OFFLINE LEDGER // HIGH
+          PERFORMANCE //
         </div>
       </div>
       <div class="hero-grid-bg" aria-hidden="true"></div>
@@ -1530,7 +1586,7 @@
     <!-- ============================================================
        PRO — Upgrade CTA
        ============================================================ -->
-    <section id="pro" class="pro-section">
+    <section id="pro" class="pricing">
       <div class="container">
         <div class="section-header reveal">
           <div class="dot"></div>
@@ -1538,7 +1594,7 @@
           <div class="section-line"></div>
         </div>
 
-        <div class="pro-frame reveal reveal-delay-1">
+        <div class="pro-card reveal reveal-delay-1">
           <div class="terminal-header">
             <div class="terminal-dot"></div>
             <span class="terminal-title">SUBSCRIPTION_MODULE</span>
@@ -1547,21 +1603,39 @@
 
           <div class="pro-body">
             <div class="pro-badge">TEMPORAL PRO</div>
-            <h2 class="pro-title">One Payment.<br />Lifetime Clarity.</h2>
-            <p class="meta" style="margin-bottom: var(--sp-4)">
-              NO SUBSCRIPTIONS. NO RECURRING FEES. EVER.
+            <h2 class="pro-title">One Payment. Lifetime Clarity.</h2>
+            <div class="pro-price">₹49</div>
+            <p
+              class="meta"
+              style="
+                margin-bottom: var(--sp-4);
+                letter-spacing: 0.1em;
+                color: var(--text-meta);
+              "
+            >
+              LIFETIME UNLOCK. NO SUBSCRIPTIONS. NO RECURRING FEES.
             </p>
 
             <ul class="pro-features">
-              <li>UNLIMITED VAULTS</li>
-              <li>UNLIMITED TRANSACTION HISTORY</li>
-              <li>ADVANCED ANALYTICS &amp; REPORTS</li>
-              <li>CSV &amp; PDF DATA EXPORT</li>
-              <li>BIOMETRIC LOCK ACTIVATION</li>
-              <li>PRIORITY FEATURE ACCESS</li>
+              <li>
+                <span style="color: var(--white); font-weight: bold">+</span>
+                Unlimited Transaction History
+              </li>
+              <li>
+                <span style="color: var(--white); font-weight: bold">+</span>
+                Advanced Portfolio Analytics
+              </li>
+              <li>
+                <span style="color: var(--white); font-weight: bold">+</span>
+                Complete CSV/JSON Data Export
+              </li>
+              <li>
+                <span style="color: var(--white); font-weight: bold">+</span>
+                Local Biometric Vault Locks
+              </li>
             </ul>
 
-            <button class="pro-btn">→ UPGRADE NOW</button>
+            <a href="#" class="pro-cta">→ UPGRADE NOW</a>
           </div>
 
           <div class="terminal-footer">
@@ -1576,6 +1650,61 @@
        ============================================================ -->
     <footer class="site-footer">
       <div class="container">
+        <div
+          class="footer-links"
+          style="
+            display: flex;
+            justify-content: center;
+            gap: var(--sp-6);
+            margin-bottom: var(--sp-6);
+            flex-wrap: wrap;
+          "
+        >
+          <a
+            href="terms-and-conditions.html"
+            style="
+              font-family: var(--font-mono);
+              font-size: 10px;
+              letter-spacing: 0.15em;
+              color: var(--text);
+              text-decoration: none;
+            "
+            >TERMS & CONDITIONS</a
+          >
+          <a
+            href="privacy-policy.html"
+            style="
+              font-family: var(--font-mono);
+              font-size: 10px;
+              letter-spacing: 0.15em;
+              color: var(--text);
+              text-decoration: none;
+            "
+            >PRIVACY POLICY</a
+          >
+          <a
+            href="refund-policy.html"
+            style="
+              font-family: var(--font-mono);
+              font-size: 10px;
+              letter-spacing: 0.15em;
+              color: var(--text);
+              text-decoration: none;
+            "
+            >CANCELLATION & REFUNDS</a
+          >
+          <a
+            href="mailto:utsav@khatriutsav.com"
+            style="
+              font-family: var(--font-mono);
+              font-size: 10px;
+              letter-spacing: 0.15em;
+              color: var(--text);
+              text-decoration: none;
+            "
+            >CONTACT US</a
+          >
+        </div>
         <div class="footer-line">
           TEMPORAL V1.1 // BUILD_2026.02.21<br />
           SECURE_ENCLAVE: ACTIVE // CRAFTED WITH INTENT

@@ -161,9 +161,8 @@ export default function ManualPage() {
           </p>
           <div className="flex flex-col items-center gap-6">
             <a
-              href="/download/app-release.apk"
+              href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk"
               className="btn btn-primary"
-              download
             >
               DOWNLOAD_APK_V1.1
             </a>

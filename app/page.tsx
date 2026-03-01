@@ -74,12 +74,13 @@ export default function Home() {
               [+] FEATURE_01
             </div>
             <h3 className="mb-6 font-serif text-3xl italic">
-              Offline First Vault
+              Cloud-Synced Ledger
             </h3>
             <p className="font-sans text-sm leading-relaxed text-[#888888] group-hover:text-black">
-              Zero-trust architecture. Your complete financial ledger resides
-              strictly on your local device. No cloud synchronization required
-              for operation. Absolute data sovereignty.
+              Seamless cross-device availability. Your financial ledger is
+              automatically synchronized via Convex. High-speed, persistent data
+              access with robust offline queue support. Absolute financial
+              sovereignty.
             </p>
           </div>
 
@@ -102,12 +103,12 @@ export default function Home() {
               [+] FEATURE_03
             </div>
             <h3 className="mb-6 font-serif text-3xl italic">
-              Advanced Analytics
+              Precision Analytics
             </h3>
             <p className="font-sans text-sm leading-relaxed text-[#888888] group-hover:text-black">
-              Generate comprehensive CSV and JSON exports instantly. View raw
-              expense velocity and precise diversification spread without visual
-              noise.
+              Unlock deep financial intelligence. Track expense velocity,
+              savings rates, and diversification spreads. Generate comprehensive
+              CSV/JSON exports for external audit instantly.
             </p>
           </div>
         </div>
@@ -149,15 +150,19 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="text-lg font-bold text-white">+</span>{" "}
-                  Advanced Portfolio Analytics
+                  Advanced Reports Analytics
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="text-lg font-bold text-white">+</span>{" "}
                   Complete CSV/JSON Data Export
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="text-lg font-bold text-white">+</span> Local
-                  Biometric Vault Locks
+                  <span className="text-lg font-bold text-white">+</span>{" "}
+                  Investment Portfolios Tracking with XIRR and CAGR
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="text-lg font-bold text-white">+</span>{" "}
+                  Unlimited valuts support
                 </li>
               </ul>
 

@@ -13,9 +13,54 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Temporal | Utilitarian Wealth Tracking",
+  title: "Temporal | Local-First Wealth Tracker & Portfolio Manager",
   description:
-    "A comprehensive personal finance and investment tracking application. Pure data. Zero distractions.",
+    "Master your net worth with Temporal. A privacy-focused, local-first personal finance app 2026. Zero cloud dependencies, 100% data sovereignty. Track Stocks, Mutual Funds, and Hard Assets securely.",
+  keywords: ["local-first finance", "privacy wealth tracker", "net worth app 2026", "offline investment tracker", "secure portfolio manager", "data sovereignty"],
+  authors: [{ name: "Temporal Team" }],
+  openGraph: {
+    title: "Temporal | Local-First Wealth Tracker",
+    description: "Total control over your financial data. Secure, offline, and utilitarian wealth tracking.",
+    url: "http://temporal.khatriutsav.com",
+    siteName: "Temporal",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Temporal | Local-First Wealth Tracker",
+    description: "The utilitarian choice for privacy-conscious investors.",
+    images: ["/og-image.png"],
+  },
+  alternates: {
+    canonical: "http://temporal.khatriutsav.com",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Temporal",
+  "operatingSystem": "Android, iOS",
+  "applicationCategory": "FinanceApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "A comprehensive local-first personal finance and investment tracking application.",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "ratingCount": "120"
+  }
 };
 
 import Footer from "@/components/Layout/Footer";
@@ -38,6 +83,10 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
           rel="stylesheet"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body

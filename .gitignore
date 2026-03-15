@@ -40,3 +40,4 @@ next-env.d.ts
 .vite
 bun.lock
 bun.lockb
+package-lock.json

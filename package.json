@@ -3,26 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "deploy": "next build && wrangler pages deploy out --project-name zenledger-app"
+    "dev": "vinext dev",
+    "build": "vinext build",
+    "start": "vinext start",
+    "lint": "vinext lint",
+    "deploy": "vinext deploy"
   },
   "dependencies": {
-    "next": "16.1.6",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.28.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-rsc": "^0.5.21",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "react-server-dom-webpack": "^19.2.4",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "vinext": "^0.0.30",
+    "vite": "^7.3.1",
     "wrangler": "^4.69.0"
   },
   "type": "module"

@@ -41,7 +41,7 @@
     height: 100vh;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.03;
+    opacity: 0.025;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
@@ -50,7 +50,7 @@
     color: var(--selection-text);
   }
 
-  /* Brutalist Heading System */
+  /* Heading System */
   h1,
   h2,
   h3,
@@ -61,21 +61,20 @@
     font-weight: 400;
   }
 
-  /* Brutalist Hover Behavior: Instant Inversion, No Transitions */
+  /* Links & Buttons — Instant inversion for Brutalist feel */
   a,
   button {
     cursor: pointer;
     transition: none !important;
   }
 
-  /* Links */
   a:not(.btn) {
     text-decoration: none;
     background: transparent;
     color: var(--text-color);
   }
 
-  a:not(.btn):hover {
+  a:not(.btn):not(a):hover {
     background: var(--text-color);
     color: var(--bg-color);
   }
@@ -85,7 +84,7 @@
     color: var(--color-black);
   }
 
-  /* Animations */
+  /* Marquee */
   @keyframes marquee {
     0% {
       transform: translateX(0%);
@@ -96,18 +95,17 @@
   }
 
   .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 40s linear infinite;
     display: inline-block;
   }
 }
 
 @layer components {
-  /* Brutalist Container */
   .container-border {
     border: 1px solid var(--color-white);
   }
 
-  /* Shared Button Style */
+  /* Buttons */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -140,5 +138,69 @@
   .btn-outline:hover {
     background: var(--color-white);
     color: var(--color-black);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .glass-panel {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Documentation Typography */
+.docs-container p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.docs-container b,
+.docs-container strong {
+  color: #ffffff;
+}
+
+.docs-container h2 {
+  color: #ffffff;
+}
+
+.docs-container h3 {
+  color: #ffffff;
+  margin-top: 2rem;
+}
+
+.docs-container li {
+  margin-bottom: 0.75rem;
+}
+
+/* ───── Keyframes ───── */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

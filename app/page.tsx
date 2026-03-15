@@ -97,7 +97,7 @@ export default function Home() {
 
         {/* Scrolling marquee background texture */}
         <div className="pointer-events-none absolute top-1/2 left-0 z-[0] w-full -translate-y-1/2 overflow-hidden opacity-[0.04] select-none">
-          <div className="animate-marquee font-mono text-[12rem] font-black tracking-tighter whitespace-nowrap text-white">
+          <div className="animate-marquee font-mono text-[8rem] md:text-[12rem] font-black tracking-tighter whitespace-nowrap text-white">
             LOCAL-FIRST — ZERO DEPENDENCES — SECURE ENCLAVE — PURE DATA —
             LOCAL-FIRST — ZERO DEPENDENCES — SECURE ENCLAVE — PURE DATA —
           </div>
@@ -106,7 +106,7 @@ export default function Home() {
         <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-32 pb-24">
           {/* Overline */}
           <div
-            className="mb-8 animate-fade-in font-mono text-[10px] tracking-[0.3em] text-gray-500 uppercase"
+            className="mb-8 animate-fade-in font-mono text-[10px] tracking-[0.3em] text-gray-500 uppercase leading-relaxed md:leading-normal max-w-sm md:max-w-none"
             style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}
           >
             [ SYSTEM: TEMPORAL v2.0 ] — [ MODE: OFFLINE ] — [ ENCRYPTION:
@@ -115,13 +115,13 @@ export default function Home() {
 
           {/* Headline */}
           <h1
-            className="mb-8 max-w-5xl animate-slide-up font-serif text-6xl leading-[0.92] tracking-tight italic sm:text-7xl md:text-8xl lg:text-[9rem]"
+            className="mb-8 max-w-5xl animate-slide-up font-serif text-5xl leading-[0.95] tracking-tight italic sm:text-7xl md:text-8xl lg:text-[9rem]"
             style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}
           >
             Wealth is
             <br />
             predictable.
-            <span className="block text-gray-500">If you track it.</span>
+            <span className="block text-gray-500 mt-2 md:mt-0">If you track it.</span>
           </h1>
 
           {/* Subline */}
@@ -135,7 +135,7 @@ export default function Home() {
 
           {/* CTA Row */}
           <div
-            className="mb-20 flex animate-fade-in flex-wrap gap-4"
+            className="mb-20 flex animate-fade-in flex-col sm:flex-row gap-4"
             style={{ animationDelay: "0.7s", animationFillMode: "backwards" }}
           >
             <a

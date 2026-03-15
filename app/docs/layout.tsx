@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
+import { useState, useEffect } from "react";
 
 const DOCS_NAV = [
   {
@@ -41,9 +42,27 @@ const DOCS_NAV = [
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [pathname]);
+
+  // Prevent background scroll when sidebar is open on mobile
+  useEffect(() => {
+    if (isSidebarOpen && window.innerWidth < 768) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isSidebarOpen]);
 
   return (
-    <div className="flex min-h-screen border-t border-white/20">
+    <div className="min-h-screen border-t border-white/20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -59,8 +78,35 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           }),
         }}
       />
+      
+      {/* Mobile Sticky Docs Context Bar */}
+      <div className="sticky top-14 z-30 flex h-12 w-full items-center justify-between border-b border-white/10 bg-black/90 px-6 backdrop-blur-md md:hidden">
+        <span className="font-mono text-[10px] tracking-widest text-gray-500">
+          DOCS INDEX
+        </span>
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="font-mono text-[10px] font-bold tracking-widest text-white transition-colors hover:text-gray-400"
+        >
+          {isSidebarOpen ? "[ CLOSE ]" : "[ OPEN TOC ]"}
+        </button>
+      </div>
+
+      {/* Docs Sidebar Backdrop (Mobile Only) */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 z-30 bg-black/80 backdrop-blur-sm md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Docs Sidebar */}
-      <aside className="fixed top-20 left-0 bottom-0 w-64 overflow-y-auto border-r border-white/10 bg-black px-6 py-10 md:block hidden">
+      <aside 
+        className={clsx(
+          "fixed top-14 bottom-0 z-40 w-72 overflow-y-auto border-r border-white/10 bg-black px-6 py-10 transition-transform duration-300 md:w-64 md:top-20 md:translate-x-0",
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full md:block" // Hidden explicitly on mobile when false, but overridden by translate on open
+        )}
+      >
         <nav className="space-y-8">
           {DOCS_NAV.map((section) => (
             <div key={section.title}>
@@ -90,7 +136,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 px-6 py-20 pb-40">
+      <main className="w-full md:w-auto md:ml-64 px-6 py-10 pb-40 md:py-20">
         <div className="mx-auto max-w-3xl">
           <div className="docs-container animate-fade-in">{children}</div>
         </div>

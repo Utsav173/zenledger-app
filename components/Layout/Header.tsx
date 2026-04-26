@@ -27,7 +27,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-white/20 bg-black/90 backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b-2 border-white/20 bg-black/90 backdrop-blur-md">
         <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
           <div className="flex items-center gap-4">
             <div className="font-mono text-sm font-bold tracking-[0.2em] text-white">
@@ -57,7 +57,7 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <a
               href="https://github.com/Utsav173/zenledger-app/raw/main/download/app-release.apk"
-              className="border border-white bg-black px-3 py-1.5 font-mono text-[10px] font-bold tracking-widest text-white uppercase transition-none hover:bg-white hover:text-black"
+              className="border-2 border-white bg-black px-3 py-1.5 font-mono text-[10px] font-bold tracking-widest text-white uppercase transition-none hover:bg-white hover:text-black"
               download
             >
               <span className="hidden sm:inline">GET_SYSTEM.APK</span>

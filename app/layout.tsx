@@ -13,15 +13,15 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Temporal | Local-First Wealth Tracker & Portfolio Manager",
+  title: "Temporal | AI-Powered Financial Intelligence Ecosystem",
   description:
-    "Master your net worth with Temporal. A privacy-focused, local-first personal finance app 2026. Zero cloud dependencies, 100% data sovereignty. Track Stocks, Mutual Funds, and Hard Assets securely.",
-  keywords: ["local-first finance", "privacy wealth tracker", "net worth app 2026", "offline investment tracker", "secure portfolio manager", "data sovereignty"],
+    "Master your net worth with Temporal. A privacy-focused, local-first personal finance app powered by on-device AI (Gemma LLM). Zero cloud dependencies, 100% data sovereignty.",
+  keywords: ["local-first finance", "privacy wealth tracker", "on-device AI", "Gemma LLM finance", "offline investment tracker", "secure portfolio manager", "data sovereignty"],
   authors: [{ name: "Temporal Team" }],
   openGraph: {
-    title: "Temporal | Local-First Wealth Tracker",
-    description: "Total control over your financial data. Secure, offline, and utilitarian wealth tracking.",
-    url: "http://temporal.khatriutsav.com",
+    title: "Temporal | AI-Powered Financial Intelligence",
+    description: "Total control over your financial data. Secure, offline, and AI-driven wealth tracking.",
+    url: "https://temporal.khatriutsav.com",
     siteName: "Temporal",
     images: [
       {
@@ -35,12 +35,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Temporal | Local-First Wealth Tracker",
-    description: "The utilitarian choice for privacy-conscious investors.",
+    title: "Temporal | AI-Powered Financial Intelligence",
+    description: "The utilitarian choice for privacy-conscious investors with on-device LLMs.",
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "http://temporal.khatriutsav.com",
+    canonical: "https://temporal.khatriutsav.com",
   },
 };
 
@@ -48,14 +48,14 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Temporal",
-  "operatingSystem": "Android, iOS",
+  "operatingSystem": "Android",
   "applicationCategory": "FinanceApplication",
   "offers": {
     "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
+    "price": "49.00",
+    "priceCurrency": "INR"
   },
-  "description": "A comprehensive local-first personal finance and investment tracking application.",
+  "description": "A high-performance offline ledger and investment portfolio tracker with on-device AI intelligence.",
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",

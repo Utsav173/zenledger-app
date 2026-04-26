@@ -56,7 +56,7 @@ export default function Header() {
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com/Utsav173/zenledger-app/raw/main/download/app-release.apk"
+              href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk"
               className="border-2 border-white bg-black px-3 py-1.5 font-mono text-[10px] font-bold tracking-widest text-white uppercase transition-none hover:bg-white hover:text-black"
               download
             >
@@ -85,7 +85,7 @@ export default function Header() {
             >
               DOCUMENTATION
             </Link>
-            
+
             <div className="mt-8 flex flex-col gap-4 text-xs tracking-[0.15em] text-gray-500">
               <span>[ ENCRYPTION: AES-256 ]</span>
               <span>[ MODE: OFFLINE ]</span>

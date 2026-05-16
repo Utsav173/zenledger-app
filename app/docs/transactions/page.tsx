@@ -38,25 +38,27 @@ export default function TransactionDocs() {
 
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Adding Notes & Merchant Context
+              AI-Powered Extraction
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Every transaction supports optional notes and merchant names. This
-              helps you remember <em className="text-gray-300 italic">why</em> a
-              particular expense happened—essential for auditing your spending
-              during monthly reviews.
+              Manual entry is the bottleneck of financial clarity. Temporal
+              solves this with an{" "}
+              <strong className="font-semibold text-gray-200">AI-First</strong>{" "}
+              discovery engine. Simply upload a PDF of your bank statement, and
+              the system automatically identifies transactions, normalizes
+              merchant names, and suggests categories.
             </p>
           </div>
 
           <div className="border-l-2 border-white bg-white/3 p-8">
             <h4 className="mb-4 font-mono text-xs font-bold tracking-widest text-white uppercase">
-              Use Case: Subscription Tracking
+              Use Case: The Monthly Bulk Sync
             </h4>
             <p className="text-sm leading-relaxed text-gray-400 italic">
-              "I have a lot of recurring SaaS subscriptions." By tagging these
-              with a specific category and adding the merchant name (e.g.,
-              'Netflix'), you can easily search and see exactly how much your
-              digital lifestyle costs you annually.
+              "I have 200 transactions this month from three different banks."
+              Instead of typing them one-by-one, you can drop your PDFs into the
+              Discovery Pass. The AI will refine the "shattered" rows of the PDF
+              into a clean ledger, saving you hours of manual work.
             </p>
           </div>
         </div>
@@ -68,17 +70,30 @@ export default function TransactionDocs() {
             Technical Specs (25%)
           </div>
           <h2 className="mb-6 font-serif text-2xl text-white/90 italic">
-            Transaction Indexing
+            Extraction Intelligence
           </h2>
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Query Optimization
+                Discovery & Refinement Model
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Transactions are indexed by `userId` and `date`. This allows the
-                UI to fetch thousands of records and calculate running balances
-                in milliseconds, even on mid-range Android devices.
+                Temporal employs a two-stage extraction process. First, a
+                programmatic parser identifies potential transaction blocks in
+                the PDF. Second, Gemini 3 Flash performs a "Refinement Pass" to
+                heal OCR errors and normalize chaotic merchant strings into
+                human-readable entities.
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                Privacy-Preserving Inference
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                While AI inference happens in the cloud, Temporal does not store
+                your PDF or the extracted data on any server. The model only
+                sees the raw text chunks required for extraction, and the final
+                structured result is returned directly to your local device.
               </p>
             </div>
             <div>
@@ -87,9 +102,8 @@ export default function TransactionDocs() {
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
                 To prevent collisions and ensure offline reliability, every
-                transaction is assigned a Version 4 UUID upon creation. This
-                allows the system to remain consistent if we ever implement
-                optional multi-device sync in the future.
+                transaction—whether manual or AI-generated—is assigned a Version
+                4 UUID upon creation.
               </p>
             </div>
           </div>

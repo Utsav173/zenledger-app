@@ -58,7 +58,12 @@ export default function InvestmentsDocs() {
               "I invest ₹10,000 every month into an ELSS fund. How do I know if
               I'm actually beating inflation?" By logging each 'Lot' in
               Temporal, the system automatically calculates the compound annual
-              growth rate of your systematic contributions.
+              growth rate of your systematic contributions. Combined with our{" "}
+              <strong className="font-semibold text-gray-200">
+                Watchlist
+              </strong>{" "}
+              feature, you can benchmark your SIPs against potential alternatives
+              in real-time.
             </p>
           </div>
         </div>

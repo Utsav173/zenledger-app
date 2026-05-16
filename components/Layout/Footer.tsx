@@ -19,7 +19,38 @@ export default function Footer() {
           {/* Navigation */}
           <div className="space-y-4 font-mono text-[10px] tracking-widest uppercase">
             <div className="border-b border-white/10 pb-2 text-gray-500">
-              Navigate
+              System
+            </div>
+            <Link
+              href="/ledger"
+              className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
+            >
+              /Ledger_Engine
+            </Link>
+            <Link
+              href="/vault"
+              className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
+            >
+              /Secure_Vault
+            </Link>
+            <Link
+              href="/manual"
+              className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
+            >
+              /Handbook
+            </Link>
+            <Link
+              href="/manifesto"
+              className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
+            >
+              /Manifesto
+            </Link>
+          </div>
+
+          {/* Documentation */}
+          <div className="space-y-4 font-mono text-[10px] tracking-widest uppercase">
+            <div className="border-b border-white/10 pb-2 text-gray-500">
+              Information
             </div>
             <Link
               href="/docs"
@@ -28,47 +59,22 @@ export default function Footer() {
               /Documentation
             </Link>
             <Link
-              href="/docs/ledger"
-              className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
-            >
-              /Ledger
-            </Link>
-            <Link
-              href="/docs/investments"
-              className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
-            >
-              /Investments
-            </Link>
-            <Link
-              href="/docs/security"
-              className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
-            >
-              /Security
-            </Link>
-          </div>
-
-          {/* Legal */}
-          <div className="space-y-4 font-mono text-[10px] tracking-widest uppercase">
-            <div className="border-b border-white/10 pb-2 text-gray-500">
-              Legal
-            </div>
-            <Link
               href="/privacy"
               className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
             >
-              /Privacy
+              /Privacy_Policy
             </Link>
             <Link
               href="/terms"
               className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
             >
-              /Terms
+              /Terms_Of_Service
             </Link>
             <Link
               href="/refunds"
               className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
             >
-              /Refunds
+              /Refunds_Policy
             </Link>
           </div>
         </div>

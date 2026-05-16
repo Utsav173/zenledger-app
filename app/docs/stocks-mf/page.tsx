@@ -33,28 +33,26 @@ export default function StocksMfDocs() {
 
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Understanding Lot-Wise Performance
+              Market Watchlists
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Every time you buy more shares of a stock or units of a fund, you
-              create a new 'Lot'. Temporal tracks these individually, showing
-              you which specific purchase is performing best. This is crucial
-              for tax harvesting strategies.
+              Beyond tracking what you own, Temporal provides a high-density{" "}
+              <strong className="font-semibold text-gray-200">Watchlist</strong>{" "}
+              engine. Designed with "Financial Brutalism" in mind, it allows you
+              to monitor Indian Equities (NIFTY 50) and Mutual Funds with
+              zero-latency price updates and sparkline visualizations.
             </p>
           </div>
 
           <div className="border border-white bg-white/5 p-8">
             <h4 className="mb-4 font-mono text-xs font-bold tracking-widest text-white uppercase">
-              Use Case: Rebalancing
+              Use Case: Market Sentiment
             </h4>
             <p className="text-sm leading-relaxed text-gray-400 italic">
-              "My portfolio is 80% small-cap stocks, and the market is
-              volatile." By viewing your{" "}
-              <strong className="font-semibold text-gray-200">
-                Asset Allocation
-              </strong>{" "}
-              chart, you can quickly identify where you need to trim positions
-              or add to more stable fund classes.
+              "I want to track the NIFTY Next 50 but I'm not ready to buy yet."
+              By adding symbols like `HDFCBANK.NS` to your watchlist, you can
+              keep a pulse on the market without cluttering your actual
+              portfolio.
             </p>
           </div>
         </div>
@@ -71,13 +69,24 @@ export default function StocksMfDocs() {
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                Yahoo Finance Proxy
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                To bypass restricted access to standard quote endpoints,
+                Temporal utilizes the `query2` chart endpoint via a specialized
+                proxy. This ensures reliable 1-minute to 1-day interval data for
+                NSE/BSE symbols without requiring user-side authentication.
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
                 NAV Fetching Engine
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Mutual Fund NAVs are sourced via AMFI APIs, while Stock prices
-                are tracked using Yahoo Finance symbols. The data is stored in
-                the `nav_cache` table with a `fetchedAt` timestamp to ensure the
-                UI doesn't display stale data.
+                Mutual Fund NAVs are sourced via AMFI APIs. All data is stored
+                locally in the `nav_cache` table, utilizing a delayed-focus
+                loading strategy to ensure the UI remains flicker-free during
+                heavy data refreshes.
               </p>
             </div>
             <div>

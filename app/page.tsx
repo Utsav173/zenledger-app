@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PricingSection } from "@/components/PricingSection";
 import { AIExtractionDemo } from "@/components/AIExtractionDemo";
 import { LedgerHorizonPreview } from "@/components/LedgerHorizonPreview";
+import { FAQAccordion } from "@/components/FAQAccordion";
 
 export const metadata: Metadata = {
   title: "Temporal | AI-Powered Financial Intelligence Ecosystem",
@@ -108,7 +109,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-32 pb-24">
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6 pt-20 pb-12 md:pt-32 md:pb-24">
           {/* Overline */}
           <div
             className="mb-8 animate-fade-in font-mono text-[10px] tracking-[0.3em] text-gray-500 uppercase leading-relaxed md:leading-normal max-w-sm md:max-w-none"
@@ -119,17 +120,26 @@ export default function Home() {
           </div>
 
           {/* Headline */}
-          <h1
-            className="mb-8 max-w-5xl animate-slide-up font-serif text-5xl leading-[0.95] tracking-tight italic sm:text-7xl md:text-8xl lg:text-[9rem]"
-            style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}
-          >
-            Financial
-            <br />
-            Intelligence.
-            <span className="block text-gray-500 mt-2 md:mt-0">
-              Autonomous & Local.
-            </span>
-          </h1>
+          <div className="relative">
+            {/* Structural Brackets */}
+            <div className="absolute -top-12 -left-12 font-mono text-gray-800 text-4xl hidden lg:block">⌜</div>
+            <div className="absolute -bottom-12 -right-12 font-mono text-gray-800 text-4xl hidden lg:block">⌟</div>
+
+            <h1
+              className="mb-8 max-w-6xl animate-slide-up font-serif text-fluid-h1 tracking-tight italic"
+              style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}
+            >
+              Financial
+              <br />
+              <span className="relative">
+                Intelligence.
+                <span className="absolute bottom-4 left-0 h-[4px] w-full bg-white/10 -z-10" />
+              </span>
+              <span className="block text-gray-500 mt-3 md:mt-0 text-2xl sm:text-4xl md:text-5xl not-italic font-mono tracking-tighter opacity-50 uppercase">
+                Autonomous & Local.
+              </span>
+            </h1>
+          </div>
 
           {/* Subline */}
           <p
@@ -142,7 +152,7 @@ export default function Home() {
 
           {/* CTA Row */}
           <div
-            className="mb-20 flex animate-fade-in flex-col sm:flex-row gap-4"
+            className="mb-12 md:mb-20 flex animate-fade-in flex-col sm:flex-row gap-4"
             style={{ animationDelay: "0.7s", animationFillMode: "backwards" }}
           >
             <a
@@ -161,7 +171,7 @@ export default function Home() {
             className="animate-fade-in border-t-2 border-white/20 pt-10"
             style={{ animationDelay: "0.9s", animationFillMode: "backwards" }}
           >
-            <div className="grid grid-cols-2 gap-y-8 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-y-6 md:gap-y-8 md:grid-cols-4 gap-x-4">
               {STATS.map((stat) => (
                 <div key={stat.label} className="group">
                   <div className="font-serif text-3xl italic text-white transition-colors duration-300 group-hover:text-gray-400 sm:text-4xl">
@@ -178,61 +188,131 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/*  TECHNICAL SHOWCASE — Modules Grid                                  */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="relative border-b-2 border-white/20 py-24 bg-black">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-16 flex items-end justify-between">
-            <div>
-              <div className="mb-4 font-mono text-[10px] tracking-[0.3em] text-gray-500 uppercase">
-                [ ARCHITECTURE ]
+      {/*  SYSTEM_INTELLIGENCE - Luxe Brutalism Editorial                      */}
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      <section className="relative py-20 md:py-32 overflow-hidden bg-[#050505] border-y border-white/5">
+        {/* Cinematic Ambient Glow & Noise */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1000px] bg-[radial-gradient(circle_at_50%_0%,#10b98115,transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E')]" />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
+          {/* Top Editorial Header */}
+          <div className="mb-16 md:mb-24 flex flex-col md:flex-row gap-12 md:items-end justify-between">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-3 px-3 py-1 border border-emerald-500/30 bg-emerald-500/5 mb-8 accent-shimmer relative overflow-hidden">
+                 <div className="h-1 w-1 rounded-full bg-emerald-500 animate-pulse" />
+                 <span className="text-[10px] tracking-[0.4em] text-emerald-500 font-bold uppercase relative z-10">SYSTEM_INTELLIGENCE</span>
               </div>
-              <h2 className="max-w-md font-serif text-4xl italic text-white sm:text-5xl">
-                Engineered for absolute control.
+              <h2 className="text-fluid-h2 text-white font-black leading-[0.9] tracking-tighter">
+                BEYOND SIMPLE<br/>
+                <span className="text-emerald-500 italic font-serif pr-4">AUTOMATION.</span>
               </h2>
             </div>
-            <div className="hidden font-mono text-[10px] tracking-widest text-gray-600 md:block">
-              03 MODULES
+            <div className="max-w-sm md:pb-4">
+              <p className="text-gray-500 text-sm font-mono leading-relaxed uppercase tracking-[0.05em] border-l border-emerald-500/30 pl-4">
+                ZenLedger doesn't just read data; it understands it. Proprietary neural engines reconstruct shattered bank statements into a cohesive financial narrative.
+              </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-px bg-white/20 md:grid-cols-3 border-2 border-white/20">
-            {FEATURES.map((feature) => (
-              <div
-                key={feature.id}
-                className={`group cursor-crosshair border-l-4 ${feature.accent} bg-black p-10 transition-all duration-300 hover:bg-white/[0.04]`}
-              >
-                <div className="mb-6 font-mono text-[10px] tracking-[0.2em] text-gray-600 uppercase transition-colors duration-300 group-hover:text-gray-400">
-                  [{feature.id}]
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-start">
+            {/* Left Offset Slabs */}
+            <div className="lg:col-span-5 space-y-6 md:space-y-8 pt-0 lg:pt-16">
+              <div className="manifesto-slab group p-6 sm:p-8 brutalist-luxe hover:border-emerald-500/40 transition-all duration-700">
+                <div className="flex flex-col gap-6">
+                  <div className="flex justify-between items-start">
+                    <div className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center font-mono text-sm text-emerald-500 group-hover:bg-emerald-500/10 transition-colors">
+                      01
+                    </div>
+                    <div className="text-[9px] font-bold tracking-widest text-emerald-500/40 uppercase">
+                       [ ENCRYPTED ]
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">On-Device Neural Extraction</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Every document is processed locally using a optimized LLM architecture. Your financial DNA never leaves your hardware.
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mb-4 font-serif text-2xl italic text-white transition-colors duration-300 group-hover:text-white sm:text-3xl">
-                  {feature.title}
-                </h3>
-                <p className="font-sans text-sm leading-relaxed text-gray-500 transition-colors duration-300 group-hover:text-gray-400">
-                  {feature.description}
-                </p>
               </div>
-            ))}
+
+              <div className="manifesto-slab group p-6 sm:p-8 brutalist-luxe hover:border-amber-500/40 transition-all duration-700 lg:-translate-x-8">
+                <div className="flex flex-col gap-6">
+                  <div className="flex justify-between items-start">
+                    <div className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center font-mono text-sm text-amber-500 group-hover:bg-amber-500/10 transition-colors">
+                      02
+                    </div>
+                    <div className="text-[9px] font-bold tracking-widest text-amber-500/40 uppercase">
+                       [ MULTI-VECTOR ]
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">Multi-Vector Normalization</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Unified tracking across NIFTY 50, NASDAQ, and Private Equity. We handle the currency fluctuations and tax implications.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Cinematic Demo */}
+            <div className="lg:col-span-7 relative">
+              <div className="absolute -inset-4 bg-emerald-500/5 blur-2xl rounded-full opacity-50 pointer-events-none" />
+              <AIExtractionDemo />
+              
+              <div className="absolute -bottom-4 right-2 sm:right-4 md:-bottom-6 md:-right-8 p-[1px] bg-gradient-to-br from-amber-500/20 to-transparent shadow-2xl z-20 brutalist-luxe">
+                <div className="bg-[#050505] p-2 sm:p-3 border border-white/5 flex flex-col gap-1 sm:gap-2 min-w-[160px] sm:min-w-[200px]">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-[9px] font-bold tracking-[0.3em] text-amber-500 uppercase">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
+                      </span>
+                      ANALYSIS_ENGINE
+                    </div>
+                    <span className="text-[8px] font-mono text-white/20">LIVE</span>
+                  </div>
+                  <div className="flex items-center justify-between border-t border-white/5 pt-2 mt-1">
+                    <span className="text-[8px] font-mono text-white/30 tracking-widest">STATE:</span>
+                    <span className="text-[8px] font-mono text-white/70 tracking-widest">ACTIVE_0X42</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/*  INTERACTIVE DEMOS                                                */}
+      {/*  TECHNICAL SHOWCASE - The Horizon Projection                       */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden border-b-2 border-white/20 py-24">
-        <div className="mx-auto max-w-6xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <div className="mb-6 font-mono text-[10px] tracking-[0.3em] text-emerald-500 uppercase">
-              [ ON-DEVICE INFERENCE ]
+      <section className="py-20 md:py-40 bg-black relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center">
+            <div className="lg:col-span-5 mb-10 lg:mb-0">
+               <div className="text-[10px] tracking-[0.5em] text-amber-500 font-bold uppercase mb-8">HORIZON_PROJECTION</div>
+               <h2 className="text-5xl md:text-6xl font-black text-white leading-none tracking-tighter mb-8">
+                 PREDICTIVE<br/>WEALTH.
+               </h2>
+               <p className="text-gray-500 text-lg leading-relaxed mb-10">
+                 Stop looking at where you were. Start engineering where you will be. Our horizon engine uses XIRR-weighted simulations to project your terminal wealth with 94% confidence.
+               </p>
+               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                 <button className="px-8 py-4 bg-white text-black font-black hover:bg-amber-500 transition-all duration-500 uppercase tracking-widest text-xs">
+                   OPEN_LEDGER
+                 </button>
+                 <button className="px-8 py-4 border border-white/20 text-white font-black hover:bg-white/5 transition-all duration-500 uppercase tracking-widest text-xs">
+                   READ_DOCS
+                 </button>
+               </div>
             </div>
-            <AIExtractionDemo />
-          </div>
-          <div>
-            <div className="mb-6 font-mono text-[10px] tracking-[0.3em] text-amber-500 uppercase">
-              [ HORIZON MODELING ]
+            <div className="lg:col-span-7">
+               <LedgerHorizonPreview />
             </div>
-            <LedgerHorizonPreview />
           </div>
         </div>
       </section>
@@ -244,17 +324,19 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.015] blur-[150px]" />
         </div>
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 text-center">
           <div className="mb-6 font-mono text-[10px] tracking-[0.3em] text-gray-600 uppercase">
             [ PHILOSOPHY ]
           </div>
-          <blockquote className="font-serif text-3xl leading-snug italic text-gray-300 sm:text-4xl md:text-5xl">
-            &ldquo;Your financial intelligence should not require surrendering
-            your data. True innovation lies in running the models locally.&rdquo;
-          </blockquote>
-          <div className="mt-8 font-mono text-xs tracking-widest text-gray-600 uppercase">
-            — The Temporal Manifesto
-          </div>
+          <Link href="/manifesto" className="group block">
+            <blockquote className="font-serif text-3xl leading-snug italic text-gray-300 transition-colors duration-300 group-hover:text-white sm:text-4xl md:text-5xl">
+              &ldquo;Your financial intelligence should not require surrendering
+              your data. True innovation lies in running the models locally.&rdquo;
+            </blockquote>
+            <div className="mt-8 font-mono text-xs tracking-widest text-gray-600 uppercase transition-colors duration-300 group-hover:text-gray-400">
+              — Read The Temporal Manifesto →
+            </div>
+          </Link>
         </div>
       </section>
 
@@ -262,7 +344,7 @@ export default function Home() {
       {/*  FAQ — Interactive accordion-style with Schema                    */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="border-b-2 border-white/20 py-24">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div className="mb-16">
             <div className="mb-4 font-mono text-[10px] tracking-[0.3em] text-gray-500 uppercase">
               [ KNOWLEDGE BASE ]
@@ -272,25 +354,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="divide-y-2 divide-white/20 border-t-2 border-white/20">
-            {FAQ_ITEMS.map((item, index) => (
-              <div key={index} className="group py-8">
-                <div className="flex items-start gap-6">
-                  <span className="mt-1 shrink-0 font-mono text-[10px] tracking-widest text-gray-600">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h3 className="mb-4 font-sans text-lg font-semibold text-white sm:text-xl">
-                      {item.question}
-                    </h3>
-                    <p className="max-w-2xl text-sm leading-relaxed text-gray-400">
-                      {item.answer}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion items={FAQ_ITEMS} />
 
           <script
             type="application/ld+json"

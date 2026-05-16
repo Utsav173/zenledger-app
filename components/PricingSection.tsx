@@ -8,28 +8,27 @@ export function PricingSection() {
 
   return (
     <>
-      <section className="relative overflow-hidden px-6 py-32">
-        {/* Atmospheric glows */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-white/[0.03] blur-[100px]" />
-          <div className="absolute right-0 bottom-0 h-[30rem] w-[30rem] translate-x-1/3 translate-y-1/3 rounded-full bg-white/[0.02] blur-[100px]" />
-        </div>
-
+      <section className="relative overflow-hidden px-4 sm:px-6 py-20 md:py-32 border-b-2 border-white/20 grid-crosshair">
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <div className="mb-6 font-mono text-[10px] tracking-[0.3em] text-gray-600 uppercase">
-            [ UPGRADE ]
+          <div className="mb-12 flex justify-center">
+             <div className="font-mono text-[9px] text-gray-500 uppercase tracking-[0.4em] border border-white/10 px-4 py-1">
+               License_Tier // 01
+             </div>
           </div>
-          <h2 className="mb-6 font-serif text-5xl italic md:text-7xl">
-            Upgrade your temporal experience.
+          <h2 className="mb-8 font-serif text-5xl italic leading-[0.9] md:text-8xl">
+            Upgrade your
+            <br />
+            <span className="text-gray-500">experience.</span>
           </h2>
-          <p className="mx-auto mb-12 max-w-xl font-mono text-xs leading-relaxed tracking-[0.15em] text-gray-500 uppercase">
-            Unlock absolute financial clarity with lifetime access to premium features. Zero recurring fees. Control your data.
+          <p className="mx-auto mb-16 max-w-xl font-mono text-[10px] leading-relaxed tracking-[0.1em] text-[#666666] uppercase">
+            Unlock absolute financial clarity with lifetime access to premium features. One-time acquisition. Zero recurring fees. Absolute data sovereignty.
           </p>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="btn btn-primary px-10 py-4 text-sm"
+            className="group relative inline-flex items-center gap-4 sm:gap-6 border-2 border-white bg-white px-8 sm:px-12 py-4 sm:py-5 text-[10px] font-bold tracking-[0.3em] text-black transition-all hover:bg-black hover:text-white"
           >
-            → VIEW PRO PRICING
+            <span>EXPLORE PRO LAYER</span>
+            <span className="text-lg">→</span>
           </button>
         </div>
       </section>

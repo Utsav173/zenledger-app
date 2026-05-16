@@ -65,6 +65,7 @@ const jsonLd = {
 
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
+import { ScrollProgress } from "@/components/Layout/ScrollProgress";
 
 export default function RootLayout({
   children,
@@ -92,6 +93,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
+        <ScrollProgress />
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>

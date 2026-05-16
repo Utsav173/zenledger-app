@@ -69,6 +69,10 @@ export default function DocsIntroduction() {
             <span className="text-white">+</span>
             <span>Import your portfolio assets.</span>
           </li>
+          <li className="flex items-start gap-3">
+            <span className="text-white">+</span>
+            <span>Run your first AI statement discovery.</span>
+          </li>
         </ul>
       </section>
     </article>

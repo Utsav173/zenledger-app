@@ -69,28 +69,28 @@ export function PricingModal({
               LIFETIME UNLOCK. NO SUBSCRIPTIONS. NO RECURRING FEES.
             </p>
 
-            <ul className="mb-12 space-y-4 border-t border-[#333333] pt-8 font-mono text-sm text-[#888888]">
-              <li className="flex items-center gap-3">
-                <span className="text-lg font-bold text-white">+</span>{" "}
-                Unlimited Transaction History
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-lg font-bold text-white">+</span> Advanced
-                Reports Analytics
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-lg font-bold text-white">+</span> Complete
-                CSV/JSON Data Export
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-lg font-bold text-white">+</span>{" "}
-                Investment Portfolios Tracking with XIRR and CAGR
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-lg font-bold text-white">+</span>{" "}
-                Unlimited vaults support
-              </li>
-            </ul>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div>
+                <div className="mb-4 font-mono text-[10px] text-gray-500 uppercase tracking-widest">Free Layer</div>
+                <ul className="space-y-3 font-mono text-xs text-[#666666]">
+                  <li>- 500 Ledger Entries</li>
+                  <li>- Basic Categories</li>
+                  <li>- Standard Performance</li>
+                  <li>- On-Device OCR</li>
+                </ul>
+              </div>
+              <div>
+                <div className="mb-4 font-mono text-[10px] text-white uppercase tracking-widest">PRO Layer (Unlocked)</div>
+                <ul className="space-y-3 font-mono text-xs text-white">
+                  <li>+ UNLIMITED Ledger Entries</li>
+                  <li>+ Advanced Portfolio (Stocks/MF)</li>
+                  <li>+ Real-time XIRR & CAGR</li>
+                  <li>+ Automated Receipt Parsing</li>
+                  <li>+ Encrypted Data Exports</li>
+                  <li>+ Hardware Biometric Lock</li>
+                </ul>
+              </div>
+            </div>
 
             <a
               href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk"

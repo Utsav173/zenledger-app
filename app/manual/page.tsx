@@ -5,6 +5,8 @@ export const metadata: Metadata = {
   title: "Temporal Manual | Operational Handbook",
   description:
     "A comprehensive guide to mastering Temporal's minimalist interface and gaining complete financial clarity.",
+  openGraph: { images: ["/og/manual.png"] },
+  twitter: { images: ["/og/manual.png"] },
 };
 
 const faqSchema = {

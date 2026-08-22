@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Gold & Commodities Tracking | Temporal Docs",
   description: "Track gold, silver, and physical commodities in Temporal with live valuation of your hard assets alongside your portfolio.",
+  openGraph: { images: ["/og/docs-commodities.png"] },
+  twitter: { images: ["/og/docs-commodities.png"] },
 };
 
 export default function CommoditiesDocs() {

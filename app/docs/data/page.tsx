@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Data Export & Control | Temporal Docs",
   description: "Encrypted data export and full portability in Temporal. Your financial history stays under your control, always.",
+  openGraph: { images: ["/og/docs-data.png"] },
+  twitter: { images: ["/og/docs-data.png"] },
 };
 
 export default function DataDocs() {

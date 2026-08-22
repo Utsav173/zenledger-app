@@ -4,6 +4,8 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy | Temporal",
   description: "Privacy policy detailing local data sovereignty on Temporal.",
+  openGraph: { images: ["/og/default.png"] },
+  twitter: { images: ["/og/default.png"] },
 };
 
 const strictSchema = {

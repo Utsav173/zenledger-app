@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     description: "Total control over your financial data. Secure, offline, and AI-driven wealth tracking.",
     url: "https://temporal.khatriutsav.com",
     siteName: "Temporal",
+    images: [{ url: "/og/default.png", width: 1200, height: 630 }],
     locale: "en_US",
     type: "website",
   },
@@ -31,6 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Temporal | AI-Powered Financial Intelligence",
     description: "The utilitarian choice for privacy-conscious investors with on-device LLMs.",
+    images: ["/og/default.png"],
   },
 };
 

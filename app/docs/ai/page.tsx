@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "The AI Engine | Temporal Docs",
   description: "How Temporal's AI works: on-device extraction by default with the bundled Gemma model, and opt-in cloud providers using your own API key.",
+  openGraph: { images: ["/og/docs-ai.png"] },
+  twitter: { images: ["/og/docs-ai.png"] },
 };
 
 export default function AiDocs() {

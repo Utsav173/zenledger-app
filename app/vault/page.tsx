@@ -5,6 +5,8 @@ export const metadata: Metadata = {
   title: "Secure Vault | Temporal",
   description:
     "Biometric and application-level security features within Temporal.",
+  openGraph: { images: ["/og/vault.png"] },
+  twitter: { images: ["/og/vault.png"] },
 };
 
 const faqSchema = {

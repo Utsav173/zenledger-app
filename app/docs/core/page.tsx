@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Local-First Architecture | Temporal Docs",
   description: "How Temporal's local-first architecture works: on-device SQLite storage, offline operation, and zero cloud dependencies.",
+  openGraph: { images: ["/og/docs-core.png"] },
+  twitter: { images: ["/og/docs-core.png"] },
 };
 
 export default function CoreDocs() {

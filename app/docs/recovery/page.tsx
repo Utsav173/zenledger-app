@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "The Recovery Kit | Temporal Docs",
   description: "Restore your complete financial history on a new device using Temporal's encrypted Recovery Kit backup system.",
+  openGraph: { images: ["/og/docs-recovery.png"] },
+  twitter: { images: ["/og/docs-recovery.png"] },
 };
 
 export default function RecoveryDocs() {

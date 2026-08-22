@@ -5,6 +5,8 @@ export const metadata: Metadata = {
   title: "Ledger Engine | Temporal",
   description:
     "Understanding the underlying double-entry SQLite database of Temporal.",
+  openGraph: { images: ["/og/ledger.png"] },
+  twitter: { images: ["/og/ledger.png"] },
 };
 
 const faqSchema = {

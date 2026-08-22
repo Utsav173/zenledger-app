@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Fixed Income & FDs | Temporal Docs",
   description: "Track fixed deposits and fixed-income instruments in Temporal, including maturity dates and interest accrual.",
+  openGraph: { images: ["/og/docs-fixed-income.png"] },
+  twitter: { images: ["/og/docs-fixed-income.png"] },
 };
 
 export default function FixedIncomeDocs() {

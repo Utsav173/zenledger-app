@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "The Transaction Engine | Temporal Docs",
   description: "How Temporal's transaction engine works: fast entry, AI-powered statement parsing, and high-performance history.",
+  openGraph: { images: ["/og/docs-transactions.png"] },
+  twitter: { images: ["/og/docs-transactions.png"] },
 };
 
 export default function TransactionDocs() {

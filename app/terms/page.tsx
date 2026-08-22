@@ -5,6 +5,8 @@ export const metadata: Metadata = {
   title: "Terms & Conditions | Temporal",
   description:
     "Terms and conditions for utilizing the Temporal application surface.",
+  openGraph: { images: ["/og/default.png"] },
+  twitter: { images: ["/og/default.png"] },
 };
 
 const strictSchema = {

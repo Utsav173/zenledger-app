@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Security & Privacy | Temporal Docs",
   description: "Temporal's security model: biometric locks, on-device encryption, and a fortress-grade approach to financial privacy.",
+  openGraph: { images: ["/og/docs-security.png"] },
+  twitter: { images: ["/og/docs-security.png"] },
 };
 
 export default function SecurityDocs() {

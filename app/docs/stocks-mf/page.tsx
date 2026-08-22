@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Stocks & Mutual Funds | Temporal Docs",
   description: "Track stocks and mutual funds in Temporal with holdings management and portfolio insights, fully offline.",
+  openGraph: { images: ["/og/docs-stocks-mf.png"] },
+  twitter: { images: ["/og/docs-stocks-mf.png"] },
 };
 
 export default function StocksMfDocs() {

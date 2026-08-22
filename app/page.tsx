@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     "Gemma LLM finance",
     "Ledger Horizon",
   ],
+  openGraph: { images: ["/og/default.png"] },
+  twitter: { images: ["/og/default.png"] },
 };
 
 const softwareSchema = {

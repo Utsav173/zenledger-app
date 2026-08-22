@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Custom Categories | Temporal Docs",
   description: "Create and manage custom transaction categories in Temporal to organize your spending exactly how you think about it.",
+  openGraph: { images: ["/og/docs-categories.png"] },
+  twitter: { images: ["/og/docs-categories.png"] },
 };
 
 export default function CategoriesDocs() {

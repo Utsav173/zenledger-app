@@ -4,6 +4,8 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Refund Policy | Temporal",
   description: "Temporal PRO refund policy conditions.",
+  openGraph: { images: ["/og/default.png"] },
+  twitter: { images: ["/og/default.png"] },
 };
 
 const strictSchema = {

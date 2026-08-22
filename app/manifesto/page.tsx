@@ -3,6 +3,8 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "The Temporal Manifesto | Data Sovereignty",
   description: "Our philosophy on financial intelligence, privacy, and local-first architecture.",
+  openGraph: { images: ["/og/manifesto.png"] },
+  twitter: { images: ["/og/manifesto.png"] },
 };
 
 export default function ManifestoPage() {

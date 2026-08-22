@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Vaults & The Ledger | Temporal Docs",
   description: "Understanding Temporal's vaults and double-entry ledger: how every transaction is recorded with SQLite precision.",
+  openGraph: { images: ["/og/docs-ledger.png"] },
+  twitter: { images: ["/og/docs-ledger.png"] },
 };
 
 export default function LedgerDocs() {

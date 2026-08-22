@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Wealth Tracking & Performance | Temporal Docs",
   description: "Portfolio performance tracking in Temporal: returns, allocation insights, and net worth across all your investments.",
+  openGraph: { images: ["/og/docs-investments.png"] },
+  twitter: { images: ["/og/docs-investments.png"] },
 };
 
 export default function InvestmentsDocs() {

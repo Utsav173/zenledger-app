@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Gold & Commodities Tracking | Temporal Docs",
+  description: "Track gold, silver, and physical commodities in Temporal with live valuation of your hard assets alongside your portfolio.",
+};
+
 export default function CommoditiesDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">

@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "The Transaction Engine | Temporal Docs",
+  description: "How Temporal's transaction engine works: fast entry, AI-powered statement parsing, and high-performance history.",
+};
+
 export default function TransactionDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">
@@ -80,7 +87,7 @@ export default function TransactionDocs() {
               <p className="text-xs leading-relaxed text-gray-400">
                 Temporal employs a two-stage extraction process. First, a
                 programmatic parser identifies potential transaction blocks in
-                the PDF. Second, Gemini 3 Flash performs a "Refinement Pass" to
+                the PDF. Second, the on-device Gemma LLM performs a "Refinement Pass" to
                 heal OCR errors and normalize chaotic merchant strings into
                 human-readable entities.
               </p>
@@ -90,10 +97,12 @@ export default function TransactionDocs() {
                 Privacy-Preserving Inference
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                While AI inference happens in the cloud, Temporal does not store
-                your PDF or the extracted data on any server. The model only
-                sees the raw text chunks required for extraction, and the final
-                structured result is returned directly to your local device.
+                By default, AI inference runs entirely on your device using the
+                bundled Gemma model — your PDF never leaves the phone. If you
+                opt into a cloud provider with your own API key, Temporal still
+                does not store your PDF or extracted data on any server; only
+                the raw text chunks required for extraction are processed, and
+                the structured result is returned directly to your device.
               </p>
             </div>
             <div>

@@ -1,8 +1,23 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "http://temporal.khatriutsav.com";
-  
+  const baseUrl = "https://temporal.khatriutsav.com";
+
+  const staticRoutes = [
+    "",
+    "/ledger",
+    "/vault",
+    "/manual",
+    "/manifesto",
+    "/privacy",
+    "/terms",
+    "/refunds",
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: route === "" ? 1 : 0.7,
+  }));
   const docsRoutes = [
     "",
     "/core",
@@ -16,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/security",
     "/recovery",
     "/data",
+    "/ai",
   ].map((route) => ({
     url: `${baseUrl}/docs${route}`,
     lastModified: new Date(),
@@ -23,13 +39,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 1,
-    },
-    ...docsRoutes,
-  ];
+  return [...staticRoutes, ...docsRoutes];
 }

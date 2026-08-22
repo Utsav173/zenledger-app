@@ -17,6 +17,7 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
         <div key={index} className="group overflow-hidden">
           <button
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
+            aria-expanded={openIndex === index}
             className="flex w-full items-start gap-4 sm:gap-6 py-6 sm:py-8 text-left transition-colors duration-300 hover:bg-white/[0.02]"
           >
             <span className="mt-1 shrink-0 font-mono text-[10px] tracking-widest text-gray-600">

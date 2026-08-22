@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Security & Privacy | Temporal Docs",
+  description: "Temporal's security model: biometric locks, on-device encryption, and a fortress-grade approach to financial privacy.",
+};
+
 export default function SecurityDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">

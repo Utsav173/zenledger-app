@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Fixed Income & FDs | Temporal Docs",
+  description: "Track fixed deposits and fixed-income instruments in Temporal, including maturity dates and interest accrual.",
+};
+
 export default function FixedIncomeDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">

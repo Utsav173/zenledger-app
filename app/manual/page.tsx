@@ -13,10 +13,10 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "How does Temporal synchronize data?",
+      name: "Does Temporal require an internet connection?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Data synchronizes automatically across devices when online. Full functionality is available offline, and changes queue to upload once connectivity is restored.",
+        text: "No. Temporal works fully offline. Your data is stored locally on your device in an encrypted SQLite database, and there is no account or sign-up required.",
       },
     },
     {
@@ -41,7 +41,7 @@ export default function ManualPage() {
             Operational Handbook
           </div>
           <h1 className="mb-8 font-serif text-4xl leading-none font-bold italic md:text-6xl">
-            Temporal User Manual // v1.0
+            Temporal User Manual // v2.5
           </h1>
           <p className="max-w-xl font-sans text-xl leading-relaxed font-light text-[#888888]">
             Financial Purity. Designed for the modern stoic. This manual guides
@@ -76,10 +76,10 @@ export default function ManualPage() {
               </p>
               <div className="border border-[#333333] bg-[#1a1a1a] p-6 font-mono text-xs">
                 <div className="mb-2 text-white">// CAPABILITY MATRIX</div>
-                - Account Creation for Secure Storage
+                - No account or sign-up required
                 <br />
-                - Automatic Cloud Sync via Convex
-                <br />- Robust Offline Queue Support
+                - Local SQLite storage on your device only
+                <br />- Fully functional offline, zero cloud dependency
               </div>
             </div>
           </section>
@@ -154,7 +154,7 @@ export default function ManualPage() {
         </div>
 
         <section className="mt-32 border-t border-[#333333] pt-16 text-center">
-          <h3 className="mb-6 font-mono text-xl">Ready for Implementation?</h3>
+          <h3 className="mb-6 font-mono text-xl">Ready to Get Started?</h3>
           <p className="mx-auto mb-10 max-w-sm font-sans text-sm font-light text-[#888888]">
             Temporal is available for manual installation on compatible mobile
             hardware.
@@ -164,11 +164,8 @@ export default function ManualPage() {
               href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk"
               className="btn btn-primary"
             >
-              DOWNLOAD_APK_V1.1
+              DOWNLOAD_APK
             </a>
-            <div className="font-mono text-[10px] text-[#888888]">
-              SHA-256: 8f3c...b2e1
-            </div>
           </div>
         </section>
       </main>

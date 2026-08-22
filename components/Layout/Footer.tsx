@@ -25,19 +25,19 @@ export default function Footer() {
               href="/ledger"
               className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
             >
-              /Ledger_Engine
+              /Ledger
             </Link>
             <Link
               href="/vault"
               className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
             >
-              /Secure_Vault
+              /Vault
             </Link>
             <Link
               href="/manual"
               className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
             >
-              /Handbook
+              /Manual
             </Link>
             <Link
               href="/manifesto"
@@ -56,7 +56,7 @@ export default function Footer() {
               href="/docs"
               className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
             >
-              /Documentation
+              /Docs
             </Link>
             <Link
               href="/privacy"

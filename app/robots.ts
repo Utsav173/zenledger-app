@@ -16,6 +16,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: "/",
       },
     ],
-    sitemap: "http://temporal.khatriutsav.com/sitemap.xml",
+    sitemap: "https://temporal.khatriutsav.com/sitemap.xml",
   };
 }

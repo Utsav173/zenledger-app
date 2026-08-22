@@ -36,9 +36,36 @@ const DOCS_NAV = [
       { name: "Biometric Enclave", href: "/docs/security" },
       { name: "The Recovery Kit", href: "/docs/recovery" },
       { name: "Data Portability", href: "/docs/data" },
+      { name: "The AI Engine", href: "/docs/ai" },
     ],
   },
 ];
+
+const SITE_URL = "https://temporal.khatriutsav.com";
+
+function buildBreadcrumbSchema(pathname: string) {
+  const current =
+    DOCS_NAV.flatMap((group) => group.items).find(
+      (item) => item.href === pathname
+    ) ?? null;
+  const trail: Array<{ name: string; item?: string }> = [
+    { name: "Home", item: SITE_URL },
+    { name: "Documentation", item: `${SITE_URL}/docs` },
+  ];
+  if (current && current.href !== "/docs") {
+    trail.push({ name: current.name, item: `${SITE_URL}${current.href}` });
+  }
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      ...(crumb.item ? { item: crumb.item } : {}),
+    })),
+  };
+}
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -66,16 +93,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": DOCS_NAV.flatMap((group) => group.items).map((item, index) => ({
-              "@type": "ListItem",
-              "position": index + 1,
-              "name": item.name,
-              "item": `http://temporal.khatriutsav.com${item.href}`,
-            })),
-          }),
+          __html: JSON.stringify(buildBreadcrumbSchema(pathname)),
         }}
       />
       

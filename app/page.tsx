@@ -39,9 +39,9 @@ const softwareSchema = {
 
 const STATS = [
   { value: "0%", label: "Cloud Exposure" },
-  { value: "60fps", label: "Virtualization" },
-  { value: "LiteRT", label: "NPU Pipeline" },
-  { value: "SQLite", label: "Direct Engine" },
+  { value: "60fps", label: "Scroll Performance" },
+  { value: "On-Device", label: "AI Processing" },
+  { value: "SQLite", label: "Local Database" },
 ];
 
 const FEATURES = [
@@ -72,7 +72,7 @@ const FAQ_ITEMS = [
   {
     question: "Is my data sent to an AI server?",
     answer:
-      "Absolutely not. Temporal utilizes an on-device AI pipeline (LiteRT + Gemma LLM). All optical character recognition (OCR) and natural language processing happen directly on your device's NPU/CPU. Your financial data never touches an external server.",
+      "Not by default. Temporal runs an on-device AI pipeline (LiteRT + Gemma LLM). All optical character recognition (OCR) and natural language processing happen directly on your device's NPU/CPU, and your financial data never touches our servers. Cloud AI providers are strictly opt-in — you supply your own API key.",
   },
   {
     question: "How does it handle large datasets?",
@@ -82,7 +82,7 @@ const FAQ_ITEMS = [
   {
     question: "What happens if I lose my phone?",
     answer:
-      "Since we don't store your data on our servers, you are responsible for your backups. Temporal provides an encrypted Data Export feature, allowing you to restore your entire financial history and AI learning models on a new device instantly.",
+      "Since we don't store your data on our servers, you are responsible for your backups. Temporal provides an encrypted Data Export feature, allowing you to restore your entire financial history on a new device instantly.",
   },
 ];
 
@@ -210,9 +210,9 @@ export default function Home() {
               </h2>
             </div>
             <div className="max-w-sm md:pb-4">
-              <p className="text-gray-500 text-sm font-mono leading-relaxed uppercase tracking-[0.05em] border-l border-emerald-500/30 pl-4">
-                ZenLedger doesn't just read data; it understands it. Proprietary neural engines reconstruct shattered bank statements into a cohesive financial narrative.
-              </p>
+                <p className="text-gray-500 text-sm font-mono leading-relaxed uppercase tracking-[0.05em] border-l border-emerald-500/30 pl-4">
+                  Temporal doesn't just read data; it understands it. Proprietary neural engines reconstruct shattered bank statements into a cohesive financial narrative.
+                </p>
             </div>
           </div>
 
@@ -299,16 +299,16 @@ export default function Home() {
                  PREDICTIVE<br/>WEALTH.
                </h2>
                <p className="text-gray-500 text-lg leading-relaxed mb-10">
-                 Stop looking at where you were. Start engineering where you will be. Our horizon engine uses XIRR-weighted simulations to project your terminal wealth with 94% confidence.
-               </p>
-               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                 <button className="px-8 py-4 bg-white text-black font-black hover:bg-amber-500 transition-all duration-500 uppercase tracking-widest text-xs">
-                   OPEN_LEDGER
-                 </button>
-                 <button className="px-8 py-4 border border-white/20 text-white font-black hover:bg-white/5 transition-all duration-500 uppercase tracking-widest text-xs">
-                   READ_DOCS
-                 </button>
-               </div>
+                  Stop looking at where you were. Start engineering where you will be. Our horizon engine uses XIRR-weighted simulations to project your wealth trajectory — transparent math you can audit, not a black box.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                  <a href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk" className="px-8 py-4 bg-white text-black font-black hover:bg-amber-500 transition-all duration-500 uppercase tracking-widest text-xs text-center">
+                    DOWNLOAD_APK
+                  </a>
+                  <Link href="/docs" className="px-8 py-4 border border-white/20 text-white font-black hover:bg-white/5 transition-all duration-500 uppercase tracking-widest text-xs text-center">
+                    READ_DOCS
+                  </Link>
+                </div>
             </div>
             <div className="lg:col-span-7">
                <LedgerHorizonPreview />

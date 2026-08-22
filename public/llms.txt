@@ -1,0 +1,42 @@
+# Temporal
+
+> Temporal is a privacy-focused, local-first personal finance app for Android. It combines a double-entry ledger, investment portfolio tracking (stocks, mutual funds, gold, fixed deposits), and an on-device AI pipeline (Gemma LLM via LiteRT) that parses bank statements and receipts entirely on-device. Financial data never touches Temporal's servers.
+
+## Product
+
+- One-time purchase (₹49), no subscription, no account required.
+- Works fully offline; cloud AI providers are strictly opt-in with the user's own API key.
+- Data storage: local SQLite on the user's device only.
+
+## Key Facts
+
+- Platform: Android
+- Pricing model: one-time lifetime license, zero recurring fees
+- AI: on-device inference by default (LiteRT + Gemma); optional user-keyed cloud providers
+- Backup/restore: encrypted data export ("Recovery Kit")
+
+## Documentation
+
+- [Documentation](https://temporal.khatriutsav.com/docs): Official documentation index.
+- [Local-First Architecture](https://temporal.khatriutsav.com/docs/core): How on-device SQLite and offline operation work.
+- [Vaults & The Ledger](https://temporal.khatriutsav.com/docs/ledger): Double-entry ledger and vault system.
+- [The Transaction Engine](https://temporal.khatriutsav.com/docs/transactions): Fast entry and AI-powered statement parsing.
+- [Custom Categories](https://temporal.khatriutsav.com/docs/categories): Personalized transaction categorization.
+- [Wealth Tracking & Performance](https://temporal.khatriutsav.com/docs/investments): Portfolio returns and net worth insights.
+- [Stocks & Mutual Funds](https://temporal.khatriutsav.com/docs/stocks-mf): Offline holdings management.
+- [Gold & Commodities](https://temporal.khatriutsav.com/docs/commodities): Physical hard-asset tracking.
+- [Fixed Income & FDs](https://temporal.khatriutsav.com/docs/fixed-income): Fixed deposits and maturity tracking.
+- [Security & Privacy](https://temporal.khatriutsav.com/docs/security): Biometric locks and on-device encryption.
+- [The Recovery Kit](https://temporal.khatriutsav.com/docs/recovery): Encrypted backup and restore.
+- [Data Export & Control](https://temporal.khatriutsav.com/docs/data): Full data portability.
+- [The AI Engine](https://temporal.khatriutsav.com/docs/ai): How on-device AI extraction works, and how opt-in cloud providers use the user's own API key.
+
+## Policies
+
+- [Privacy Policy](https://temporal.khatriutsav.com/privacy)
+- [Terms of Service](https://temporal.khatriutsav.com/terms)
+- [Refunds Policy](https://temporal.khatriutsav.com/refunds)
+
+## Download
+
+- [Download APK (Android)](https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk)

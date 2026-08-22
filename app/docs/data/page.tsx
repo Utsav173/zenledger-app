@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Data Export & Control | Temporal Docs",
+  description: "Encrypted data export and full portability in Temporal. Your financial history stays under your control, always.",
+};
+
 export default function DataDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">

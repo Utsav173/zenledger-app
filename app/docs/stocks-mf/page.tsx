@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Stocks & Mutual Funds | Temporal Docs",
+  description: "Track stocks and mutual funds in Temporal with holdings management and portfolio insights, fully offline.",
+};
+
 export default function StocksMfDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">
@@ -69,13 +76,14 @@ export default function StocksMfDocs() {
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Yahoo Finance Proxy
+                Market Price Feed
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                To bypass restricted access to standard quote endpoints,
-                Temporal utilizes the `query2` chart endpoint via a specialized
-                proxy. This ensures reliable 1-minute to 1-day interval data for
-                NSE/BSE symbols without requiring user-side authentication.
+                Market quotes for NSE/BSE symbols are sourced through a
+                lightweight price-feed service covering 1-minute to 1-day
+                intervals — no brokerage login or user-side authentication
+                required. Quotes are cached locally so your portfolio view
+                stays fast and works with previously fetched data even offline.
               </p>
             </div>
             <div>

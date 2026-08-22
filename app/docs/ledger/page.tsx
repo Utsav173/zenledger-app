@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Vaults & The Ledger | Temporal Docs",
+  description: "Understanding Temporal's vaults and double-entry ledger: how every transaction is recorded with SQLite precision.",
+};
+
 export default function LedgerDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">

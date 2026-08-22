@@ -21,10 +21,25 @@ export function PricingModal({
     };
   }, [isOpen]);
 
+  // Close on Escape
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center px-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Temporal Pro pricing"
+    >
       {/* Backdrop */}
       <div
         className="animate-fade-in absolute inset-0 bg-black/80 backdrop-blur-md"
@@ -74,9 +89,9 @@ export function PricingModal({
                 <div className="mb-4 font-mono text-[10px] text-gray-500 uppercase tracking-widest">Free Layer</div>
                 <ul className="space-y-3 font-mono text-xs text-[#666666]">
                   <li>- 500 Ledger Entries</li>
-                  <li>- Basic Categories</li>
-                  <li>- Standard Performance</li>
-                  <li>- On-Device OCR</li>
+                  <li>- Core Categories</li>
+                  <li>- Manual Transaction Entry</li>
+                  <li>- Full Offline Mode</li>
                 </ul>
               </div>
               <div>

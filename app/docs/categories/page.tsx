@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Custom Categories | Temporal Docs",
+  description: "Create and manage custom transaction categories in Temporal to organize your spending exactly how you think about it.",
+};
+
 export default function CategoriesDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">

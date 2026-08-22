@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Documentation | Temporal",
+  description: "Official Temporal documentation: local-first architecture, the double-entry ledger engine, transaction handling, investments, security, and data control.",
+};
+
 export default function DocsIntroduction() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">

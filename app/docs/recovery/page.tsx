@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "The Recovery Kit | Temporal Docs",
+  description: "Restore your complete financial history on a new device using Temporal's encrypted Recovery Kit backup system.",
+};
+
 export default function RecoveryDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">

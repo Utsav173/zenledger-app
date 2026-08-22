@@ -22,13 +22,16 @@ const ALL_PAGES = [
   { name: "Biometric Enclave", href: "/docs/security", category: "Docs" },
   { name: "The Recovery Kit", href: "/docs/recovery", category: "Docs" },
   { name: "Data Portability", href: "/docs/data", category: "Docs" },
+  { name: "The AI Engine", href: "/docs/ai", category: "Docs" },
 ];
 
 export function SearchModal({
   isOpen,
+  onOpen,
   onClose,
 }: {
   isOpen: boolean;
+  onOpen: () => void;
   onClose: () => void;
 }) {
   const [query, setQuery] = useState("");
@@ -45,14 +48,18 @@ export function SearchModal({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        if (isOpen) onClose();
-        else setQuery(""); // Reset query when opening
+        if (isOpen) {
+          onClose();
+        } else {
+          setQuery(""); // Reset query when opening
+          onOpen();
+        }
       }
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, onOpen, onClose]);
 
   if (!isOpen) return null;
 

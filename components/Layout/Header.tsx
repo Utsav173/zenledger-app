@@ -113,7 +113,11 @@ export default function Header() {
         </div>
       </header>
 
-      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <SearchModal
+        isOpen={isSearchOpen}
+        onOpen={() => setIsSearchOpen(true)}
+        onClose={() => setIsSearchOpen(false)}
+      />
 
       {/* Full-Screen Mobile Menu Overlay */}
       {isMobileMenuOpen && (
@@ -123,25 +127,25 @@ export default function Header() {
               href="/ledger"
               className="px-4 py-2 text-xl tracking-[0.2em] text-white transition-none hover:bg-white hover:text-black"
             >
-              LEDGER ENGINE
+              LEDGER
             </Link>
             <Link
               href="/vault"
               className="px-4 py-2 text-xl tracking-[0.2em] text-white transition-none hover:bg-white hover:text-black"
             >
-              SECURE VAULT
+              VAULT
             </Link>
             <Link
               href="/manual"
               className="px-4 py-2 text-xl tracking-[0.2em] text-white transition-none hover:bg-white hover:text-black"
             >
-              HANDBOOK
+              MANUAL
             </Link>
             <Link
               href="/docs"
               className="px-4 py-2 text-xl tracking-[0.2em] text-white transition-none hover:bg-white hover:text-black"
             >
-              DOCUMENTATION
+              DOCS
             </Link>
 
             <div className="mt-8 flex flex-col gap-4 text-xs tracking-[0.15em] text-gray-500">

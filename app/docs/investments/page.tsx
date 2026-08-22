@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Wealth Tracking & Performance | Temporal Docs",
+  description: "Portfolio performance tracking in Temporal: returns, allocation insights, and net worth across all your investments.",
+};
+
 export default function InvestmentsDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">

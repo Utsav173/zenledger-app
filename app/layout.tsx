@@ -13,6 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://temporal.khatriutsav.com"),
   title: "Temporal | AI-Powered Financial Intelligence Ecosystem",
   description:
     "Master your net worth with Temporal. A privacy-focused, local-first personal finance app powered by on-device AI (Gemma LLM). Zero cloud dependencies, 100% data sovereignty.",
@@ -23,13 +24,6 @@ export const metadata: Metadata = {
     description: "Total control over your financial data. Secure, offline, and AI-driven wealth tracking.",
     url: "https://temporal.khatriutsav.com",
     siteName: "Temporal",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
@@ -37,30 +31,20 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Temporal | AI-Powered Financial Intelligence",
     description: "The utilitarian choice for privacy-conscious investors with on-device LLMs.",
-    images: ["/og-image.png"],
   },
   alternates: {
     canonical: "https://temporal.khatriutsav.com",
   },
 };
 
-const jsonLd = {
+const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "Organization",
   "name": "Temporal",
-  "operatingSystem": "Android",
-  "applicationCategory": "FinanceApplication",
-  "offers": {
-    "@type": "Offer",
-    "price": "49.00",
-    "priceCurrency": "INR"
-  },
-  "description": "A high-performance offline ledger and investment portfolio tracker with on-device AI intelligence.",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "ratingCount": "120"
-  }
+  "url": "https://temporal.khatriutsav.com",
+  "logo": "https://temporal.khatriutsav.com/favicon.png",
+  "description":
+    "Developers of Temporal, a privacy-focused, local-first personal finance app powered by on-device AI.",
 };
 
 import Footer from "@/components/Layout/Footer";
@@ -87,7 +71,7 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
       <body

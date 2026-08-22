@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Local-First Architecture | Temporal Docs",
+  description: "How Temporal's local-first architecture works: on-device SQLite storage, offline operation, and zero cloud dependencies.",
+};
+
 export default function CoreDocs() {
   return (
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">

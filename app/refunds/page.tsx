@@ -35,24 +35,23 @@ export default function RefundsPage() {
               Non-Refundable Purchases
             </h2>
             <p className="mb-4">
-              The Temporal PRO upgrade explicitly operates on a strictly
-              non-refundable basis. Because the fee of ₹49 acts as an
-              unrecoverable, one-time lifetime unlock mechanism that permanently
-              rewrites local configuration arrays, we cannot confidently reverse
-              access parameters post-checkout. All sales are final.
+              The Temporal PRO upgrade is a one-time ₹49 lifetime purchase, and
+              all sales are final. Because the license is applied permanently to
+              your local installation and grants access immediately, we are
+              unable to reverse it after checkout.
             </p>
           </section>
 
           <section>
             <h2 className="mb-4 border-b border-[#333333] pb-2 font-mono text-sm tracking-widest text-white uppercase">
-              Charge Dispute Logic
+              Duplicate Charges
             </h2>
             <p className="mb-4">
-              If an errant secondary charge event happens due to a gateway
-              timeout loop or banking sync failure during the checkout protocol,
-              notify us within 7 working protocols to review logs for genuine
-              duplicate auth-drops. Normal dissatisfaction or buyer remorse is
-              entirely excluded from refunds.
+              If you were charged more than once due to a payment gateway
+              timeout or error during checkout, contact us within 7 business
+              days with your payment details and we will investigate and refund
+              any genuine duplicate charge. Refunds are not offered for change
+              of mind or buyer remorse.
             </p>
           </section>
         </article>

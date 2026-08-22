@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "lastUpdated": "2026-08-22",
   "google": [
     {
@@ -15,16 +15,7 @@
       "name": "Gemini 3.5 Flash-Lite",
       "contextTokens": 1048576,
       "isFree": true,
-      "supportsVision": true,
-      "isRecommended": true
-    },
-    {
-      "id": "gemini-3.1-pro",
-      "name": "Gemini 3.1 Pro",
-      "contextTokens": 2097152,
-      "isFree": true,
-      "supportsVision": true,
-      "isRecommended": true
+      "supportsVision": true
     },
     {
       "id": "gemini-2.5-flash",
@@ -34,81 +25,83 @@
       "supportsVision": true
     },
     {
+      "id": "gemini-2.5-flash-lite",
+      "name": "Gemini 2.5 Flash Lite",
+      "contextTokens": 1048576,
+      "isFree": true,
+      "supportsVision": true
+    },
+    {
       "id": "gemini-2.5-pro",
       "name": "Gemini 2.5 Pro",
-      "contextTokens": 2097152,
-      "isFree": true,
+      "contextTokens": 1048576,
+      "isFree": false,
       "supportsVision": true
     }
   ],
   "openrouter": [
     {
-      "id": "openrouter/free",
-      "name": "Auto Free Router",
-      "contextTokens": 131072,
+      "id": "google/gemma-4-31b-it:free",
+      "name": "Gemma 4 31B (Free)",
+      "contextTokens": 262144,
       "isFree": true,
       "supportsVision": true,
       "isRecommended": true
     },
     {
-      "id": "meta-llama/llama-3.3-70b-instruct:free",
-      "name": "Llama 3.3 70B Instruct (Free)",
-      "contextTokens": 131072,
+      "id": "nvidia/nemotron-3-super-120b-a12b:free",
+      "name": "Nemotron 3 Super 120B (Free)",
+      "contextTokens": 262144,
       "isFree": true,
       "supportsVision": false,
       "isRecommended": true
     },
     {
-      "id": "deepseek/deepseek-chat:free",
-      "name": "DeepSeek V3 (Free)",
-      "contextTokens": 65536,
+      "id": "google/gemma-4-26b-a4b-it:free",
+      "name": "Gemma 4 26B A4B (Free)",
+      "contextTokens": 262144,
       "isFree": true,
-      "supportsVision": false,
-      "isRecommended": true
+      "supportsVision": true
     },
     {
-      "id": "deepseek/deepseek-r1:free",
-      "name": "DeepSeek R1 (Free)",
-      "contextTokens": 65536,
+      "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "name": "Nemotron 3 Ultra 550B (Free)",
+      "contextTokens": 1048576,
       "isFree": true,
       "supportsVision": false
     },
     {
-      "id": "qwen/qwen-2.5-72b-instruct:free",
-      "name": "Qwen 2.5 72B (Free)",
-      "contextTokens": 32768,
+      "id": "z-ai/glm-5.2:free",
+      "name": "GLM 5.2 (Free)",
+      "contextTokens": 256000,
       "isFree": true,
       "supportsVision": false
     }
   ],
   "nvidia": [
     {
+      "id": "google/gemma-4-31b-it",
+      "name": "Gemma 4 31B",
+      "isFree": true,
+      "supportsVision": true,
+      "isRecommended": true
+    },
+    {
       "id": "meta/llama-3.3-70b-instruct",
       "name": "Llama 3.3 70B Instruct",
-      "contextTokens": 131072,
       "isFree": true,
       "supportsVision": false,
       "isRecommended": true
     },
     {
-      "id": "deepseek-ai/deepseek-r1",
-      "name": "DeepSeek R1",
-      "contextTokens": 65536,
-      "isFree": true,
-      "supportsVision": false,
-      "isRecommended": true
-    },
-    {
-      "id": "nvidia/llama-3.1-nemotron-70b-instruct",
-      "name": "Nemotron 70B Instruct",
-      "contextTokens": 131072,
+      "id": "nvidia/nemotron-3-super-120b-a12b",
+      "name": "Nemotron 3 Super 120B",
       "isFree": true,
       "supportsVision": false
     },
     {
-      "id": "mistralai/mistral-large-2-instruct",
-      "name": "Mistral Large 2",
-      "contextTokens": 128000,
+      "id": "nvidia/llama-3.1-nemotron-70b-instruct",
+      "name": "Nemotron 70B Instruct",
       "isFree": true,
       "supportsVision": false
     }

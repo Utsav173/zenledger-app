@@ -1,0 +1,749 @@
+# Temporal — Full Documentation
+
+Temporal is a privacy-focused, local-first personal finance app for Android with on-device AI. Full documentation content follows below.
+
+---
+
+## Introduction
+
+Source: https://temporal.khatriutsav.com/docs
+
+[00] Introduction
+
+Master the Ledger.
+
+Temporal is not a traditional app. It is a local-only financial engine
+designed for extreme transparency and absolute data sovereignty.
+
+## Learn the System
+
+This documentation is split into two perspectives. Most of what you
+will read is about
+**Use Cases**—how
+to actually leverage Temporal to achieve financial clarity. The rest
+is
+**Technical Specs**
+(25%)—the underlying architecture that makes this privacy possible.
+
+### The End-User POV
+
+"How do I track my XIRR?" "How can I group home expenses?" "Why
+should I use vaults?"
+
+### The Technical POV
+
+"How is SQLite configured?" "What is the NAV caching policy?" "How
+does local-auth work?"
+
+## Getting Started
+
+The best way to learn Temporal is by doing. Download the APK, create
+your first Vault (or Account), and log a transaction.
+
++
+Setup your local biometric lock.
+
++
+Generate your Recovery Kit (Keep it safe!).
+
++
+Import your portfolio assets.
+
++
+Run your first AI statement discovery.
+
+---
+
+## Local-First Architecture
+
+Source: https://temporal.khatriutsav.com/docs/core
+
+[00.1] System Core
+
+Local-First Architecture.
+
+Why we chose to build an app that doesn't live in the cloud.
+
+## The End-User Perspective
+
+### Zero Latency, Instant Feedback
+
+Most finance apps feel sluggish because every action requires a
+round-trip to a database in Virginia or Mumbai. In Temporal, the
+database is in your pocket. This results in an interface that
+feels "mechanical" and responsive—no spinners, no loading states.
+
+### Immunity to Service Outages
+
+If our company's servers go down, or if you lose your internet
+connection, Temporal remains 100% functional. You can still track
+expenses, view your portfolio, and analyze your wealth. You are
+not dependent on us to manage your money.
+
+#### The "Air-Gap" Philosophy
+
+By keeping data offline, we eliminate entire classes of security
+vulnerabilities like data breaches, man-in-the-middle attacks, and
+cloud-side identity theft. Your phone is your fortress.
+
+Technical Specs (25%)
+
+## The SQLite Engine
+
+#### Transactional Integrity
+
+Temporal uses `expo-sqlite` to manage data. We wrap critical
+operations (like investment lot creation) in SQL transactions to
+ensure that the database never ends up in a partial state.
+
+#### Migration Strategy
+
+As we release new features, we use a incremental migration
+system based on the `user_version` PRAGMA. This allows us to
+safely evolve your local database schema without risk of data
+loss or corruption.
+
+---
+
+## Vaults & The Ledger
+
+Source: https://temporal.khatriutsav.com/docs/ledger
+
+[01] Daily Finance
+
+Vaults & The Ledger.
+
+More than just accounts. A multi-layered system for total financial
+organization.
+
+## The End-User Perspective
+
+### What are Vaults?
+
+In Temporal, we call accounts "Vaults." A vault can be your
+physical wallet (Cash), a bank account, or even a virtual bucket
+for a specific project (e.g., "Europe Trip Fund"). By separating
+your money into vaults, you get a clear view of your
+**Liquidity Distribution**
+.
+
+### The Transaction Engine
+
+Every expense, income, or transfer is logged into the Ledger.
+We've designed the input flow to be "Hyper-Fast." You can add
+notes, tags, and custom categories in seconds.
+
+#### Use Case: The Business/Personal Split
+
+"I'm a freelancer and my personal and business money often gets
+mixed." In Temporal, you can create a 'Business' Vault and
+'Personal' Vault. When you move money from one to the other, use
+the
+**Transfer**type to ensure your Net Worth remains accurate while your expense
+tracking stays clean.
+
+Technical Specs (25%)
+
+## The Database Schema
+
+#### Transaction Consistency
+
+Transactions use a robust schema that links to `categoryId` and
+`accountId`. We use SQLite Foreign Keys with `ON DELETE SET
+NULL` or `CASCADE` to maintain data integrity even if you delete
+a category.
+
+#### WAL-Mode Performance
+
+The Ledger uses Write-Ahead Logging (WAL). This means reading
+your transaction list for reports is lightning-fast and doesn't
+block the UI while you are writing new data into the database.
+
+---
+
+## The Transaction Engine
+
+Source: https://temporal.khatriutsav.com/docs/transactions
+
+[01.1] Ledger Mechanics
+
+The Transaction Engine.
+
+Precision entry. Instant feedback. Total clarity.
+
+## The End-User Perspective
+
+### Expense vs Income vs Transfer
+
+Temporal handles three primary transaction types.**Expenses**reduce your net worth,**Income**increases it, and**Transfers**move money between your Vaults without affecting your total
+wealth. Using these correctly ensures your analytics remain
+accurate.
+
+### AI-Powered Extraction
+
+Manual entry is the bottleneck of financial clarity. Temporal
+solves this with an**AI-First**discovery engine. Simply upload a PDF of your bank statement, and
+the system automatically identifies transactions, normalizes
+merchant names, and suggests categories.
+
+#### Use Case: The Monthly Bulk Sync
+
+"I have 200 transactions this month from three different banks."
+Instead of typing them one-by-one, you can drop your PDFs into the
+Discovery Pass. The AI will refine the "shattered" rows of the PDF
+into a clean ledger, saving you hours of manual work.
+
+Technical Specs (25%)
+
+## Extraction Intelligence
+
+#### Discovery & Refinement Model
+
+Temporal employs a two-stage extraction process. First, a
+programmatic parser identifies potential transaction blocks in
+the PDF. Second, the on-device Gemma LLM performs a "Refinement Pass" to
+heal OCR errors and normalize chaotic merchant strings into
+human-readable entities.
+
+#### Privacy-Preserving Inference
+
+By default, AI inference runs entirely on your device using the
+bundled Gemma model — your PDF never leaves the phone. If you
+opt into a cloud provider with your own API key, Temporal still
+does not store your PDF or extracted data on any server; only
+the raw text chunks required for extraction are processed, and
+the structured result is returned directly to your device.
+
+#### Client-Side UUIDs
+
+To prevent collisions and ensure offline reliability, every
+transaction—whether manual or AI-generated—is assigned a Version
+4 UUID upon creation.
+
+---
+
+## Custom Categories
+
+Source: https://temporal.khatriutsav.com/docs/categories
+
+[01.2] Organization
+
+Custom Categories.
+
+Tailor the system to your life. No forced rigid structures.
+
+## The End-User Perspective
+
+### Define Your Own Rules
+
+Standard finance apps give you generic categories like "Food" and
+"Rent." Temporal allows you to delete these and create your own.
+Want a category specifically for "Espresso" or "Cat Toys"? You can
+create it with custom icons and colors.
+
+### The Power of Visual Cues
+
+By assigning distinct colors and icons to your categories, your
+transaction list becomes a readable map of your lifestyle. You can
+quickly see patterns—like a sea of red indicating high impulsive
+spending on shopping.
+
+#### Use Case: Project Tracking
+
+"I'm renovating my house and want to see only those costs." You
+can create a temporary category called 'Renovation.' Once the
+project is done, you can delete it or archive it—Temporal's
+database will keep the transaction records while unlinking the
+category.
+
+Technical Specs (25%)
+
+## Identity & Linkage
+
+#### Relational Integrity
+
+Categories are stored in the `categories` table. Every
+transaction holds a `categoryId`. If a category is deleted, the
+database is instructed to keep the transaction but set its
+category reference to `null`, ensuring your total expense
+records never disappear.
+
+#### Default Seeding
+
+On first launch, the app seeds 15 default categories into your
+local SQLite db. These are marked with an `isDefault` flag,
+allowing them to be available to every vault you create.
+
+---
+
+## Wealth Tracking & Performance
+
+Source: https://temporal.khatriutsav.com/docs/investments
+
+[03] Wealth Tracking
+
+Wealth Tracking & Performance.
+
+Move beyond simple balance tracking. Understand the true velocity of
+your investments.
+
+## The End-User Perspective
+
+### Tracking Portfolio Growth
+
+Temporal aggregates different asset classes—Stocks, Mutual Funds,
+Gold, and Fixed Income—into a unified portfolio view. This allows
+you to see your**
+Allocated Distribution
+**in real-time, helping you identify if you are over-exposed to a
+particular risk.
+
+### Why XIRR vs Absolute Gain?
+
+Absolute gain tells you how much money you made. XIRR (Extended
+Internal Rate of Return) tells you how
+_efficient_ your capital
+was over time, accounting for different entry dates. In Temporal,
+we prioritize XIRR so you can compare your portfolio performance
+directly against benchmarks like the FD rate or Index Funds.
+
+#### Use Case: The SIP Tracker
+
+"I invest ₹10,000 every month into an ELSS fund. How do I know if
+I'm actually beating inflation?" By logging each 'Lot' in
+Temporal, the system automatically calculates the compound annual
+growth rate of your systematic contributions. Combined with our**
+Watchlist
+**feature, you can benchmark your SIPs against potential alternatives
+in real-time.
+
+Technical Specs (25%)
+
+## The Performance Engine
+
+#### XIRR Algorithm
+
+Temporal implements the Newton-Raphson method to solve for the
+discount rate that makes the net present value (NPV) of all
+transaction 'lots' zero. This calculation is performed entirely
+on your device's CPU, ensuring zero data leakage.
+
+#### NAV Caching Strategy
+
+Real-time market data is fetched via the Mutual Fund API and
+cached in the local `nav_cache` table. To respect API limits and
+battery life, NAVs are refreshed once every 24 hours or manually
+upon request.
+
+---
+
+## Stocks & Mutual Funds
+
+Source: https://temporal.khatriutsav.com/docs/stocks-mf
+
+[03.1] Market Assets
+
+Stocks & Mutual Funds.
+
+Deep analytics for your equity and debt portfolios.
+
+## The End-User Perspective
+
+### Unified Portfolio Management
+
+Temporal allows you to track both Stocks and Mutual Funds in a
+single interface. By adding your 'Lots' (purchase history), the
+app automatically handles price updates and computes your weighted
+gains.
+
+### Market Watchlists
+
+Beyond tracking what you own, Temporal provides a high-density**Watchlist**engine. Designed with "Financial Brutalism" in mind, it allows you
+to monitor Indian Equities (NIFTY 50) and Mutual Funds with
+zero-latency price updates and sparkline visualizations.
+
+#### Use Case: Market Sentiment
+
+"I want to track the NIFTY Next 50 but I'm not ready to buy yet."
+By adding symbols like `HDFCBANK.NS` to your watchlist, you can
+keep a pulse on the market without cluttering your actual
+portfolio.
+
+Technical Specs (25%)
+
+## Market Data Integration
+
+#### Market Price Feed
+
+Market quotes for NSE/BSE symbols are sourced through a
+lightweight price-feed service covering 1-minute to 1-day
+intervals — no brokerage login or user-side authentication
+required. Quotes are cached locally so your portfolio view
+stays fast and works with previously fetched data even offline.
+
+#### NAV Fetching Engine
+
+Mutual Fund NAVs are sourced via AMFI APIs. All data is stored
+locally in the `nav_cache` table, utilizing a delayed-focus
+loading strategy to ensure the UI remains flicker-free during
+heavy data refreshes.
+
+#### XIRR Precision
+
+The XIRR calculation iterates until the NPV is less than 0.0001,
+providing high-precision return metrics. All calculation logic
+is contained within the `src/lib/investmentCalc.ts` module.
+
+---
+
+## Gold & Commodities
+
+Source: https://temporal.khatriutsav.com/docs/commodities
+
+[03.2] Hard Assets
+
+Gold & Commodities.
+
+Track your physical and digital bullion with precision.
+
+## The End-User Perspective
+
+### Hard Asset Valuation
+
+Temporal supports tracking Gold, Silver, and other physical
+assets. You can record the**
+Purity (e.g., 22k vs 24k)
+**and**
+Making Charges
+**, giving you a more accurate "Sell Value" compared to standard
+market spot prices.
+
+### The Wealth Safeguard
+
+Commodities often act as a hedge against inflation. By including
+them in your Net Worth calculation, you get a full picture of your
+"True Wealth," including assets that aren't sitting in a bank
+account.
+
+#### Use Case: Jewelry Inventory
+
+"I have family gold that I want to track but not sell." You can
+add these as holdings with a 'Note' describing the items. Temporal
+will track their value growth over decades without you needing to
+do anything.
+
+Technical Specs (25%)
+
+## Asset Logic
+
+#### Live Price Feeds
+
+Commodity prices are fetched via specialized feeds that provide
+global spot prices for Gold and Silver. This is then adjusted
+locally based on the purity metric you've specified for the
+holding.
+
+#### Making Charge Amortization
+
+While the market value ignores making charges, Temporal stores
+them as part of your `totalInvested` cost basis, allowing for a
+more realistic calculation of your true profit/loss.
+
+---
+
+## Fixed Income (FD)
+
+Source: https://temporal.khatriutsav.com/docs/fixed-income
+
+[03.3] Stable Assets
+
+Fixed Income (FD).
+
+Track your deposits, maturity dates, and compounding interest.
+
+## The End-User Perspective
+
+### The Stability Anchor
+
+Fixed Deposits (FDs) and Bonds are the backbone of many
+portfolios. Temporal lets you track interest rates, compounding
+frequency, and**
+Maturity Dates
+**. This ensures you never miss a renewal deadline.
+
+### Projected Maturity Value
+
+Temporal automatically calculates the projected value of your
+deposit at maturity based on the rates you provide. This helps you
+plan for future big-ticket expenses with confidence.
+
+#### Use Case: Laddering FDs
+
+"I have 5 different FDs maturing at different times." By using the
+Maturity Date view, you can 'ladder' your income, ensuring you
+always have liquidity when you need it while maximizing interest
+rates.
+
+Technical Specs (25%)
+
+## Compounding Logic
+
+#### Accumulation Algorithm
+
+Temporal supports Monthly, Quarterly, and Yearly compounding
+models. We calculate the accumulated interest using the standard
+compound interest formula, adjusted daily to give you a "Current
+Value" estimate.
+
+#### TDS Deductions
+
+The schema includes flags for TDS (Tax Deducted at Source),
+allowing the system to subtract projected tax liabilities from
+your net-of-tax maturity value for more realistic planning.
+
+---
+
+## Security & Privacy
+
+Source: https://temporal.khatriutsav.com/docs/security
+
+[04] Security & Sovereignty
+
+The Fortress.
+
+Privacy is not a feature; it is the foundation. We have built a system
+that we cannot access even if we wanted to.
+
+## The End-User Perspective
+
+### No "Forgot Password"
+
+In a typical app, you can reset your password because the company
+stores your data on their servers.**
+Temporal does not store your data.
+**Your database lives only on your phone. If you lose access and
+haven't backed up your Recovery Kit, your data is gone forever.
+This is the price of true sovereignty.
+
+### Why you need a Recovery Kit
+
+The Recovery Kit is a secure JSON payload containing a "snapshot"
+of your local configuration. Since everything is offline, this is
+your only way to move data to a new device. Think of it like a
+hardware wallet for your finances.
+
+#### Daily Use-Case: Biometric Entry
+
+"I open the app 10 times a day. I don't want to type a PIN."
+Biometric integration (FaceID/Fingerprint) allows for instant,
+secure access while keeping the underlying decryption keys
+protected within the phone's hardware enclave.
+
+Technical Specs (25%)
+
+## The Hardware Enclave
+
+#### SecureStore Key Management
+
+User credentials and recovery hashes are stored using the
+`expo-secure-store` library, which utilizes iOS Keychain and
+Android Keystore. This ensures that even if the device is
+physically compromised, extracting these keys without biometric
+authentication is cryptographically difficult.
+
+#### Zero-Network Surface Area
+
+Apart from fetching market NAVs, the app core has a zero-network
+surface area. No analytics, no session tracking, and no
+cloud-side transaction processing.
+
+---
+
+## The Recovery Kit
+
+Source: https://temporal.khatriutsav.com/docs/recovery
+
+[04.1] Survival Protocols
+
+The Recovery Kit.
+
+Your backup. Your way back. Your responsibility.
+
+## The End-User Perspective
+
+### Why it matters
+
+Temporal does not use cloud accounts. If you uninstall the app or
+lose your phone, your data goes with it. The**
+Recovery Kit
+**is a digital snapshot of your setup. If you have this kit, you can
+regain control of your financial history on any new device.
+
+### How to store it
+
+We recommend saving your Recovery Kit in multiple secure
+locations—a password manager, an encrypted cloud drive, or even a
+physical USB drive. Treat it with the same level of care you would
+a bank locker key.
+
+#### Use Case: Device Migration
+
+"I'm upgrading to a new phone. How do I move my data?" Simply
+generate a Recovery Kit on your old device, transfer the file to
+your new device, and select 'Import Recovery Kit' during the
+initial setup of the Temporal app.
+
+Technical Specs (25%)
+
+## Kit Structure
+
+#### JSON Encapsulation
+
+The kit is a structured JSON object containing your
+`categories`, `accounts`, and basic configuration settings.
+Currently, it serves as a lightweight "Setup Snapshot" rather
+than a full transaction backup, which is handled via the
+separate Data Export feature.
+
+#### Seedless Architecture
+
+Unlike crypto wallets, we don't use 12-word seeds because we
+don't derive addresses. The Recovery Kit simply re-initializes
+your local SQLite environment with your preferred metadata and
+structure.
+
+---
+
+## Data Export & Control
+
+Source: https://temporal.khatriutsav.com/docs/data
+
+[05] Data Sovereignty
+
+Your Data. Your Control.
+
+Temporal is built on the principle that digital tools should not hold
+your data hostage.
+
+## The End-User Perspective
+
+### Exporting for External Use
+
+Whether it's for tax filing, deep-diving in Excel, or simply peace
+of mind, Temporal allow you to export your entire database in
+universal formats like**CSV** and
+**JSON**. We
+believe that if you can't leave a service with your data, you
+don't really own it.
+
+### Offline Reliability
+
+Because Temporal stores data locally, it works perfectly in
+"Flight Mode" or areas with zero connectivity. Your transactions
+are saved instantly without waiting for a server handshake.
+
+#### Use Case: The Auditor's Flow
+
+"My accountant needs a list of all my investment sells this year."
+Instead of manually copying data, you can generate a filtered JSON
+export of your `holding_lots` and send it over in seconds.
+
+Technical Specs (25%)
+
+## The Export Pipeline
+
+#### JSON Serialization
+
+Our export engine transforms internal SQLite rows into a
+standardized JSON schema. This schema includes normalized
+timestamps and UID references, making it easy to parse with any
+modern programming language (Python, Node.js, etc.).
+
+#### FileSystem Integration
+
+Temporal uses `expo-sharing` to pass the generated file directly
+to your device's native sharing sheet. The file is created in a
+temporary directory and wiped immediately after the share intent
+is completed.
+
+---
+
+## The AI Engine
+
+Source: https://temporal.khatriutsav.com/docs/ai
+
+[05] Intelligence Core
+
+The AI Engine.
+
+On-device by default. Cloud only if you ask for it.
+
+## The End-User Perspective
+
+### The Native Engine (Default)
+
+Temporal ships with Google's
+**Gemma**
+language model running entirely on your phone via LiteRT. When you
+scan a bank statement or a receipt, the model reads it, extracts
+the transactions, and suggests categories — all without a single
+byte leaving your device. No API key, no account, no internet
+connection required.
+
+### Optional Cloud Engines
+
+If your device cannot run the local model — or you simply want
+faster results — you can route AI tasks through OpenRouter,
+NVIDIA NIM, or Google AI. These are strictly opt-in: you supply
+your own API key, and Temporal charges you nothing. When a cloud
+engine is active, transaction fragments are processed by that
+provider under their privacy terms, so switch back to the Native
+engine whenever data sovereignty matters more than speed.
+
+### Choosing Models
+
+Each cloud provider comes with a curated catalog of models —
+free-tier options included — which you can browse, search, and
+filter in the app. If the model you want isn't listed, you
+can add any custom model ID yourself.
+
+#### Use Case: Airport Statement Scan
+
+"I landed in another country with no SIM card and three weeks
+of untracked expenses." With the Native engine, scanning your
+statements works in flight mode. Nothing to configure, nothing
+transmitted — the extraction happens between your fingers and
+your screen.
+
+#### Use Case: Older Device
+
+"My phone is a few years old and can't load the local
+model." Switch the engine to a cloud provider, paste an API
+key from OpenRouter (which offers free models), and statement
+scanning works instantly — with a clear on-screen warning that
+you've left the offline sandbox.
+
+Technical Specs (25%)
+
+## Engine Architecture
+
+#### LiteRT Acceleration
+
+The local model runs through LiteRT-LM with automatic backend
+selection across NPU, GPU, and CPU. If hardware acceleration
+fails on a device, Temporal permanently falls back to a stable
+CPU path so extraction never becomes unusable.
+
+#### Structured Output
+
+Extraction requests return schema-validated JSON, not free-form
+text. Malformed responses are retried against fallback models
+before surfacing an error, keeping your ledger free of
+half-parsed entries.
+
+#### Key Storage
+
+Cloud API keys are stored locally on your device only and are
+sent directly to the provider you chose. Temporal has no server
+that could see, store, or leak them.
+

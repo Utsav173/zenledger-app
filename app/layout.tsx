@@ -39,12 +39,35 @@ export const metadata: Metadata = {
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Temporal",
-  "url": "https://temporal.khatriutsav.com",
-  "logo": "https://temporal.khatriutsav.com/favicon.png",
-  "description":
-    "Developers of Temporal, a privacy-focused, local-first personal finance app powered by on-device AI.",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Temporal",
+      "url": "https://temporal.khatriutsav.com",
+      "logo": "https://temporal.khatriutsav.com/favicon.png",
+      "description":
+        "Developers of Temporal, a privacy-focused, local-first personal finance app powered by on-device AI.",
+      "founder": {
+        "@type": "Person",
+        "name": "Utsav Khatri",
+        "url": "https://khatriutsav.com",
+      },
+      "sameAs": [
+        "https://khatriutsav.com",
+        "https://github.com/Utsav173",
+        "https://github.com/Utsav173/zenledger-app",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "name": "Temporal",
+      "alternateName": "Temporal by Utsav Khatri",
+      "url": "https://temporal.khatriutsav.com",
+      "publisher": {
+        "@id": "https://temporal.khatriutsav.com/#organization",
+      },
+    },
+  ],
 };
 
 import Footer from "@/components/Layout/Footer";

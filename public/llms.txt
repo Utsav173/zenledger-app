@@ -2,6 +2,8 @@
 
 > Temporal is a privacy-focused, local-first personal finance app for Android. It combines a double-entry ledger, investment portfolio tracking (stocks, mutual funds, gold, fixed deposits), and an on-device AI pipeline (Gemma LLM via LiteRT) that parses bank statements and receipts entirely on-device. Financial data never touches Temporal's servers.
 
+- [llms-full.txt](https://temporal.khatriutsav.com/llms-full.txt): Complete documentation content in plain markdown.
+
 ## Product
 
 - One-time purchase (₹49), no subscription, no account required.

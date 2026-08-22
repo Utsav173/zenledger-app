@@ -8,11 +8,27 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
       {
-        userAgent: ["GPTBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot", "Applebot-Extended"],
+        // Search + AI answer engines we WANT crawling us.
+        // OAI-SearchBot powers ChatGPT Search citations (distinct from GPTBot).
+        userAgent: [
+          "GPTBot",
+          "OAI-SearchBot",
+          "ChatGPT-User",
+          "ClaudeBot",
+          "Claude-SearchBot",
+          "PerplexityBot",
+          "Google-Extended",
+          "Googlebot",
+          "Bingbot",
+          "Applebot",
+          "Applebot-Extended",
+          "Amazonbot",
+          "meta-externalagent",
+        ],
         allow: "/",
       },
       {
-        userAgent: ["Amazonbot", "Bytespider", "CCBot"],
+        userAgent: ["Bytespider", "CCBot"],
         disallow: "/",
       },
     ],

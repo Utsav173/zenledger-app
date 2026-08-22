@@ -157,6 +157,50 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       <main className="w-full md:w-auto md:ml-64 px-6 py-10 pb-40 md:py-20">
         <div className="mx-auto max-w-3xl">
           <div className="docs-container animate-fade-in">{children}</div>
+
+          {/* Prev / Next navigation */}
+          {(() => {
+            const flat = DOCS_NAV.flatMap((group) => group.items);
+            const idx = flat.findIndex((item) => item.href === pathname);
+            const prev = idx > 0 ? flat[idx - 1] : null;
+            const next = idx >= 0 && idx < flat.length - 1 ? flat[idx + 1] : null;
+            if (!prev && !next) return null;
+            return (
+              <nav
+                aria-label="Documentation pagination"
+                className="mt-24 flex items-stretch justify-between gap-4 border-t border-white/10 pt-8 font-mono text-xs"
+              >
+                {prev ? (
+                  <Link
+                    href={prev.href}
+                    className="group max-w-[48%] text-left"
+                  >
+                    <span className="mb-2 block text-[9px] uppercase tracking-[0.3em] text-gray-600 group-hover:text-gray-400">
+                      ← Previous
+                    </span>
+                    <span className="text-gray-400 transition-colors group-hover:text-white">
+                      {prev.name}
+                    </span>
+                  </Link>
+                ) : (
+                  <span />
+                )}
+                {next && (
+                  <Link
+                    href={next.href}
+                    className="group max-w-[48%] text-right"
+                  >
+                    <span className="mb-2 block text-[9px] uppercase tracking-[0.3em] text-gray-600 group-hover:text-gray-400">
+                      Next →
+                    </span>
+                    <span className="text-gray-400 transition-colors group-hover:text-white">
+                      {next.name}
+                    </span>
+                  </Link>
+                )}
+              </nav>
+            );
+          })()}
         </div>
       </main>
     </div>

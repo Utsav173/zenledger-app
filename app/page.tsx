@@ -28,6 +28,8 @@ const softwareSchema = {
   name: "Temporal",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Android",
+  softwareVersion: "2.5",
+  downloadUrl: "https://temporal.khatriutsav.com/download",
   offers: {
     "@type": "Offer",
     price: "49.00",
@@ -35,6 +37,14 @@ const softwareSchema = {
   },
   description:
     "A high-performance offline ledger and investment portfolio tracker with on-device AI intelligence.",
+  featureList: [
+    "Offline double-entry ledger with vaults",
+    "On-device AI statement scanning (Gemma LLM via LiteRT)",
+    "Stocks, mutual funds, gold, and fixed deposit tracking",
+    "XIRR and CAGR portfolio performance",
+    "Biometric security with local encryption",
+    "Encrypted data export — no cloud, no account",
+  ],
 };
 
 const STATS = [
@@ -83,6 +93,21 @@ const FAQ_ITEMS = [
     question: "What happens if I lose my phone?",
     answer:
       "Since we don't store your data on our servers, you are responsible for your backups. Temporal provides an encrypted Data Export feature, allowing you to restore your entire financial history on a new device instantly.",
+  },
+  {
+    question: "How much does Temporal cost?",
+    answer:
+      "Temporal is free to start with up to 500 ledger entries. The PRO upgrade is a one-time ₹49 lifetime purchase — no subscription, no recurring fees, no account required.",
+  },
+  {
+    question: "Does Temporal need an internet connection?",
+    answer:
+      "No. Temporal is fully offline. Transactions, portfolio tracking, and even AI-powered statement scanning run locally on your device, so the app works in flight mode or areas with zero connectivity.",
+  },
+  {
+    question: "Which platforms does Temporal support?",
+    answer:
+      "Temporal is currently available for Android as a direct APK install. It is designed for phones with 4GB+ RAM for on-device AI; older devices can still use all tracking features and opt into cloud AI with their own API key.",
   },
 ];
 

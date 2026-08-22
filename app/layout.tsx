@@ -32,9 +32,6 @@ export const metadata: Metadata = {
     title: "Temporal | AI-Powered Financial Intelligence",
     description: "The utilitarian choice for privacy-conscious investors with on-device LLMs.",
   },
-  alternates: {
-    canonical: "https://temporal.khatriutsav.com",
-  },
 };
 
 const organizationJsonLd = {

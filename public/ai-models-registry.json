@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-08-22",
+  "google": [
+    {
+      "id": "gemini-2.5-flash",
+      "name": "Gemini 2.5 Flash",
+      "contextTokens": 1048576,
+      "isFree": true,
+      "supportsVision": true,
+      "isRecommended": true
+    },
+    {
+      "id": "gemini-2.0-flash",
+      "name": "Gemini 2.0 Flash",
+      "contextTokens": 1048576,
+      "isFree": true,
+      "supportsVision": true,
+      "isRecommended": true
+    },
+    {
+      "id": "gemini-1.5-flash",
+      "name": "Gemini 1.5 Flash",
+      "contextTokens": 1048576,
+      "isFree": true,
+      "supportsVision": true
+    },
+    {
+      "id": "gemini-1.5-pro",
+      "name": "Gemini 1.5 Pro",
+      "contextTokens": 2097152,
+      "isFree": true,
+      "supportsVision": true
+    }
+  ],
+  "openrouter": [
+    {
+      "id": "google/gemma-4-31b-it:free",
+      "name": "Gemma 4 31B (Free)",
+      "contextTokens": 32768,
+      "isFree": true,
+      "supportsVision": false,
+      "isRecommended": true
+    },
+    {
+      "id": "meta-llama/llama-3.3-70b-instruct:free",
+      "name": "Llama 3.3 70B Instruct (Free)",
+      "contextTokens": 131072,
+      "isFree": true,
+      "supportsVision": false,
+      "isRecommended": true
+    },
+    {
+      "id": "deepseek/deepseek-chat:free",
+      "name": "DeepSeek V3 (Free)",
+      "contextTokens": 65536,
+      "isFree": true,
+      "supportsVision": false
+    },
+    {
+      "id": "deepseek/deepseek-r1:free",
+      "name": "DeepSeek R1 (Free)",
+      "contextTokens": 65536,
+      "isFree": true,
+      "supportsVision": false
+    },
+    {
+      "id": "qwen/qwen-2.5-72b-instruct:free",
+      "name": "Qwen 2.5 72B (Free)",
+      "contextTokens": 32768,
+      "isFree": true,
+      "supportsVision": false
+    }
+  ],
+  "nvidia": [
+    {
+      "id": "google/gemma-4-31b-it",
+      "name": "Gemma 4 31B",
+      "contextTokens": 32768,
+      "isFree": true,
+      "supportsVision": false,
+      "isRecommended": true
+    },
+    {
+      "id": "meta/llama-3.3-70b-instruct",
+      "name": "Llama 3.3 70B Instruct",
+      "contextTokens": 131072,
+      "isFree": true,
+      "supportsVision": false,
+      "isRecommended": true
+    },
+    {
+      "id": "nvidia/llama-3.1-nemotron-70b-instruct",
+      "name": "Nemotron 70B Instruct",
+      "contextTokens": 131072,
+      "isFree": true,
+      "supportsVision": false
+    },
+    {
+      "id": "deepseek-ai/deepseek-r1",
+      "name": "DeepSeek R1",
+      "contextTokens": 65536,
+      "isFree": true,
+      "supportsVision": false
+    }
+  ]
+}

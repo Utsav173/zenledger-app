@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "ZenLedger Local-First Financial OS Architecture",
+    "subtitle": "Brutalist Offline-First Ledger & On-Device Gemma AI Pipeline",
+    "output": "public/architecture/zenledger-architecture.html",
+    "visual_preset": "blueprint",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "zero-trust-local",
+        "label": "Zero-Trust Local Core",
+        "focus": ["ui_layer", "biometric_gate", "query_cache", "repo_layer", "sqlite_core"],
+        "note": "Financial transactions, assets, and balances are computed and stored in encrypted on-device SQLite."
+      },
+      {
+        "id": "ondevice-ai-pipeline",
+        "label": "On-Device Gemma AI Extraction",
+        "focus": ["doc_ingest", "doc_cleaner", "gemma_engine", "repo_layer", "sqlite_core"],
+        "note": "Bank statements and receipts are parsed through LiteRT/Gemma on-device with zero cloud telemetry."
+      },
+      {
+        "id": "market-telemetry",
+        "label": "Market Feeds & Cloud Showcase",
+        "focus": ["market_feed", "query_cache", "cloud_llm", "cf_public"],
+        "note": "AMFI Mutual Fund NAVs, Yahoo Finance stock quotes, and Cloudflare landing page showcase."
+      }
+    ]
+  },
+  "components": [
+    { "id": "ui_layer", "type": "frontend", "label": "Brutalist Mobile UI", "sublabel": "Expo Router / JetBrains Mono", "pos": [38, 280], "size": [136, 62], "tag": "client" },
+    { "id": "biometric_gate", "type": "security", "label": "Secure Enclave", "sublabel": "Hardware KeyStore / PIN", "pos": [220, 160], "size": [136, 62], "tag": "security" },
+    { "id": "query_cache", "type": "backend", "label": "TanStack Query", "sublabel": "Reactive State Engine", "pos": [220, 400], "size": [136, 62], "tag": "state" },
+    { "id": "doc_ingest", "type": "frontend", "label": "Document Ingest", "sublabel": "PDF / Camera Scanner", "pos": [410, 80], "size": [136, 62], "tag": "pipeline" },
+    { "id": "doc_cleaner", "type": "backend", "label": "Layout Analyzer", "sublabel": "Document Normalizer", "pos": [600, 80], "size": [136, 62], "tag": "pipeline" },
+    { "id": "gemma_engine", "type": "backend", "label": "LiteRT Gemma 2B", "sublabel": "On-Device LLM Parser", "pos": [790, 80], "size": [136, 62], "tag": "on-device" },
+    { "id": "repo_layer", "type": "backend", "label": "Repository Engine", "sublabel": "Ledger / Portfolio Math", "pos": [410, 280], "size": [136, 62], "tag": "domain" },
+    { "id": "sqlite_core", "type": "database", "label": "Expo SQLite DB", "sublabel": "Encrypted Local Storage", "pos": [600, 280], "size": [136, 62], "tag": "local-first" },
+    { "id": "market_feed", "type": "external", "label": "Market Telemetry", "sublabel": "AMFI NAV / Yahoo / Gold", "pos": [410, 480], "size": [136, 62], "tag": "telemetry" },
+    { "id": "cloud_llm", "type": "cloud", "label": "Hybrid Cloud AI", "sublabel": "OpenRouter / Gemini (Opt-in)", "pos": [790, 280], "size": [136, 62], "tag": "optional" },
+    { "id": "cf_public", "type": "cloud", "label": "Public Showcase", "sublabel": "Cloudflare / Cinematic Web", "pos": [790, 480], "size": [136, 62], "tag": "edge" }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "On-Device Hardware Sandbox (Zero Cloud Telemetry)", "wraps": ["ui_layer", "biometric_gate", "query_cache", "doc_ingest", "doc_cleaner", "gemma_engine", "repo_layer", "sqlite_core"], "pad": 16 }
+  ],
+  "connections": [
+    { "from": "ui_layer", "to": "biometric_gate", "label": "auth gate", "variant": "security", "fromSide": "top", "toSide": "left", "via": [[106, 191], [220, 191]], "labelAt": [155, 178] },
+    { "from": "ui_layer", "to": "query_cache", "label": "user dispatch", "variant": "emphasis", "fromSide": "bottom", "toSide": "left", "via": [[106, 431], [220, 431]], "labelAt": [155, 445] },
+    { "from": "ui_layer", "to": "doc_ingest", "label": "statement upload", "variant": "default", "fromSide": "top", "toSide": "left", "via": [[106, 111], [410, 111]], "labelAt": [260, 98] },
+    { "from": "doc_ingest", "to": "doc_cleaner", "label": "raw OCR text", "variant": "emphasis", "route": "straight", "labelAt": [573, 68] },
+    { "from": "doc_cleaner", "to": "gemma_engine", "label": "context prompt", "variant": "emphasis", "route": "straight", "labelAt": [763, 68] },
+    { "from": "gemma_engine", "to": "repo_layer", "label": "extracted JSON", "variant": "security", "fromSide": "bottom", "toSide": "top", "via": [[858, 210], [478, 210]], "labelAt": [668, 198] },
+    { "from": "query_cache", "to": "repo_layer", "label": "cached queries", "variant": "emphasis", "fromSide": "right", "toSide": "bottom", "via": [[390, 431], [390, 375], [478, 375]], "labelAt": [435, 362] },
+    { "from": "repo_layer", "to": "sqlite_core", "label": "ACID commits", "variant": "security", "route": "straight", "labelAt": [573, 268] },
+    { "from": "market_feed", "to": "query_cache", "label": "live quotes", "variant": "default", "fromSide": "left", "toSide": "bottom", "via": [[340, 511], [340, 490], [288, 490]], "labelAt": [330, 502] },
+    { "from": "sqlite_core", "to": "cloud_llm", "label": "opt-in cloud sync", "variant": "dashed", "route": "straight", "labelAt": [763, 268] },
+    { "from": "market_feed", "to": "cf_public", "label": "feed status", "variant": "dashed", "route": "straight", "labelAt": [668, 468] }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Zero Data Leak Core", "items": ["All ledger items, bank statements, and gold/stocks portfolios remain in on-device SQLite", "No personal telemetry or financial records are uploaded to remote servers", "Hardware Secure Enclave handles user authentication"] },
+    { "dot": "rose", "title": "Local Gemma 2B Extraction", "items": ["LiteRT engine runs on-device neural parser for PDF & image bank statements", "Rule-based LayoutAnalyzer cleans document bounding boxes before tokenization", "Fallback to OpenRouter / Gemini is user-controlled and opt-in"] },
+    { "dot": "emerald", "title": "High Data Density Engine", "items": ["Real-time NAV and stock telemetry aggregated into memory-efficient SQLite tables", "Brutalist terminal design with sub-16ms query latency", "Complete deterministic export kits in JSON and CSV"] }
+  ]
+}

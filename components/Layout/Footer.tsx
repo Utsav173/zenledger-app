@@ -59,6 +59,12 @@ export default function Footer() {
               /Docs
             </Link>
             <Link
+              href="/queries"
+              className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
+            >
+              /Queries
+            </Link>
+            <Link
               href="/privacy"
               className="block w-max px-1 text-gray-500 hover:bg-white hover:text-black"
             >

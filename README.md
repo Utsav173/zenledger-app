@@ -1,26 +1,34 @@
 # Temporal // Public Site
 
-**Utilitarian Wealth Tracking.** This is the public-facing documentation and landing page for Temporal, a high-performance personal finance tracking application.
+**Utilitarian Wealth Tracking.** This is the public-facing documentation, interactive architectural schematics, and 60-question knowledge base for Temporal.
 
 ## Tech Stack
 
-- **Framework**: [Vinext](https://github.com/vinext/vinext) (Experimental Vite-based React framework)
-- **Styling**: Tailwind CSS v4 (Utilitarian Brutalism)
+- **Framework**: [Vinext](https://github.com/vinext/vinext) (Vite 7-based React framework)
+- **Architecture Schematics**: [Archify](https://github.com/tt-a1i/archify) (Validated SVG/HTML schematics)
+- **Styling**: Tailwind CSS v4 (Utilitarian Financial Brutalism)
 - **Runtime**: [Bun](https://bun.sh)
 - **Infrastructure**: Cloudflare Workers / Pages
 - **Typography**: Newsreader (Serif), JetBrains Mono (Mono), Inter (Sans)
 
-## Project Structure
+## Routes & Pages
 
-- `app/`: React App Router tracks (`/`, `/manual`, `/ledger`, `/vault`, `/privacy`, `/terms`, `/refunds`)
-- `components/`: Reusable UI components (Header, Footer, SEO)
-- `public/`: Static assets, icons, and APK download binaries
+- `/`: Main landing page with interactive terminal, feature grid, and embedded Archify topology.
+- `/queries`: Comprehensive 60-item system query knowledge base with live keyword search and `FAQPage` schema.
+- `/docs`: Technical documentation hub (Core, Ledger, AI, Security, Investments, Recovery).
+- `/ledger` & `/vault`: Interactive ledger previews and double-entry breakdowns.
+- `/manual` & `/manifesto`: Engineering philosophy and operation guides.
+- `/architecture/zenledger-architecture.html`: Standalone Core System Topology schematic.
+- `/architecture/ai-pipeline.html`: Standalone On-Device Neural Statement Pipeline dataflow.
 
 ## Local Development
 
 Ensure you have [Bun](https://bun.sh) installed.
 
 ```bash
+# Navigate to public-site
+cd public-site
+
 # Install dependencies
 bun install
 
@@ -28,24 +36,13 @@ bun install
 bun run dev:vinext
 ```
 
-The dev server will be available at `http://localhost:3001`.
+The site will be available at `http://localhost:3000`.
 
-## Deployment
+## Production Build
 
-Deployment is handled via the root-level scripts:
-
-1. `scripts/sync-public-site.sh`: Syncs the latest Android APK build into the public download folder.
-2. `scripts/deploy-to-cloudflare.sh`: Compiles the Vinext bundle and deploys to Cloudflare Workers.
-
-## Aesthetic Guidelines
-
-Temporal follows a strict **Utilitarian Brutalist** philosophy:
-
-- 0px border radius on all elements.
-- Absolute monochrome palette (#000000 / #FFFFFF).
-- High-contrast, instantaneous hover states (no transitions).
-- Heavy structural borders (1px to 4px).
-- Monospace metadata metadata paired with elegant italic serifs.
+```bash
+bun run build
+```
 
 ---
 

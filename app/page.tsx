@@ -5,6 +5,7 @@ import { PricingSection } from "@/components/PricingSection";
 import { AIExtractionDemo } from "@/components/AIExtractionDemo";
 import { LedgerHorizonPreview } from "@/components/LedgerHorizonPreview";
 import { FAQAccordion } from "@/components/FAQAccordion";
+import { SystemArchitectureInteractive } from "@/components/SystemArchitectureInteractive";
 
 export const metadata: Metadata = {
   title: "Temporal | AI-Powered Financial Intelligence Ecosystem",
@@ -19,6 +20,10 @@ export const metadata: Metadata = {
     "on-device AI",
     "Gemma LLM finance",
     "Ledger Horizon",
+    "deterministic financial OS",
+    "LiteRT on-device LLM",
+    "air-gapped bank statement parser",
+    "LedgerPathFinder DAG solver",
   ],
   openGraph: { images: ["/og/default.png"] },
   twitter: { images: ["/og/default.png"] },
@@ -38,14 +43,15 @@ const softwareSchema = {
     priceCurrency: "INR",
   },
   description:
-    "A high-performance offline ledger and investment portfolio tracker with on-device AI intelligence.",
+    "A high-performance offline financial operating system and investment portfolio tracker with on-device AI intelligence (LiteRT Gemma 2B) and zero cloud data leaks.",
   featureList: [
-    "Offline double-entry ledger with vaults",
-    "On-device AI statement scanning (Gemma LLM via LiteRT)",
-    "Stocks, mutual funds, gold, and fixed deposit tracking",
-    "XIRR and CAGR portfolio performance",
-    "Biometric security with local encryption",
-    "Encrypted data export — no cloud, no account",
+    "Offline double-entry ledger with encrypted SQLite vaults",
+    "On-device AI statement scanning (Gemma 2B LLM via LiteRT)",
+    "Deterministic LedgerPathFinder DAG Dynamic Programming balance alignment",
+    "Stocks, mutual funds, gold, and fixed deposit tracking with live telemetry",
+    "XIRR and CAGR portfolio performance with Horizon projections",
+    "Biometric security with hardware KeyStore encryption",
+    "Encrypted data export — 100% air-gapped by default, zero account requirement",
   ],
 };
 
@@ -345,6 +351,11 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
+      {/*  SYSTEM ARCHITECTURE — Interactive Brutalist Schematic (Archify)     */}
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      <SystemArchitectureInteractive />
+
+      {/* ═══════════════════════════════════════════════════════════════════ */}
       {/*  PHILOSOPHY — Full-width statement section                        */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden border-b-2 border-white/20 py-32 scanlines">
@@ -382,6 +393,16 @@ export default function Home() {
           </div>
 
           <FAQAccordion items={FAQ_ITEMS} />
+
+          <div className="mt-12 text-center">
+            <Link
+              href="/queries"
+              className="inline-flex items-center gap-3 border border-white/20 px-8 py-4 font-mono text-xs text-white hover:bg-white hover:text-black transition-all duration-300 tracking-widest uppercase"
+            >
+              <span>EXPLORE ALL 60 SYSTEM QUERIES</span>
+              <span>→</span>
+            </Link>
+          </div>
 
           <script
             type="application/ld+json"

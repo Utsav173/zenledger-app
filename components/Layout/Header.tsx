@@ -67,6 +67,12 @@ export default function Header() {
               MANUAL
             </Link>
             <Link
+              href="/queries"
+              className="px-2 py-1 transition-none hover:bg-white hover:text-black"
+            >
+              QUERIES
+            </Link>
+            <Link
               href="/docs"
               className="px-2 py-1 transition-none hover:bg-white hover:text-black"
             >

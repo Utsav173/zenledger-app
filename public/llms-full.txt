@@ -747,3 +747,18 @@ Cloud API keys are stored locally on your device only and are
 sent directly to the provider you chose. Temporal has no server
 that could see, store, or leak them.
 
+#### LedgerPathFinder & DAG Balance Continuity
+
+Raw bank statements often contain same-day scrambled entries or
+inconsistent sorting. Temporal's proprietary `LedgerPathFinder` builds
+a Directed Acyclic Graph (DAG) of candidate rows and solves the
+Weighted Longest Path Dynamic Programming problem in O(N^2) time.
+It auto-detects forward vs reverse chronological ordering and validates
+the fundamental financial invariant: Closing Balance = Opening Balance ± sum(delta)
+before any transaction is committed to the local SQLite database.
+
+## System Schematics & Verified Intermediate Representation
+
+- Core Topology Interactive Schematic: https://temporal.khatriutsav.com/architecture/zenledger-architecture.html
+- Neural Statement Pipeline Dataflow: https://temporal.khatriutsav.com/architecture/ai-pipeline.html
+

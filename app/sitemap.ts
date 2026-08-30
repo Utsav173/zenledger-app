@@ -5,6 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = [
     "",
+    "/queries",
     "/ledger",
     "/vault",
     "/manual",
@@ -16,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
-    priority: route === "" ? 1 : 0.7,
+    priority: route === "" ? 1 : route === "/queries" ? 0.9 : 0.7,
   }));
   const docsRoutes = [
     "",

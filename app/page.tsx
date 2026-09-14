@@ -3,9 +3,12 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { PricingSection } from "@/components/PricingSection";
 import { AIExtractionDemo } from "@/components/AIExtractionDemo";
+import { IntelligenceOrchestrationHub } from "@/components/IntelligenceOrchestrationHub";
+import { MultiAssetPortfolioShowcase } from "@/components/MultiAssetPortfolioShowcase";
 import { LedgerHorizonPreview } from "@/components/LedgerHorizonPreview";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { SystemArchitectureInteractive } from "@/components/SystemArchitectureInteractive";
+import { MobileStickyDownloadBar } from "@/components/MobileStickyDownloadBar";
 
 export const metadata: Metadata = {
   title: "Temporal | AI-Powered Financial Intelligence Ecosystem",
@@ -24,6 +27,8 @@ export const metadata: Metadata = {
     "LiteRT on-device LLM",
     "air-gapped bank statement parser",
     "LedgerPathFinder DAG solver",
+    "AMFI mutual fund tracker offline",
+    "cognitive vector search",
   ],
   openGraph: { images: ["/og/default.png"] },
   twitter: { images: ["/og/default.png"] },
@@ -46,10 +51,13 @@ const softwareSchema = {
     "A high-performance offline financial operating system and investment portfolio tracker with on-device AI intelligence (LiteRT Gemma 2B) and zero cloud data leaks.",
   featureList: [
     "Offline double-entry ledger with encrypted SQLite vaults",
-    "On-device AI statement scanning (Gemma 2B LLM via LiteRT)",
+    "On-device AI statement scanning (Gemma 2B LLM via LiteRT) for PDF, CSV, XLS, TXT",
+    "On-device Camera Receipt OCR & Automated Transaction Entry",
+    "Atomic Conversational Agent for instant text-based transaction creation",
+    "Cognitive TF-IDF Semantic Search across transaction histories",
     "Deterministic LedgerPathFinder DAG Dynamic Programming balance alignment",
-    "Stocks, mutual funds, gold, and fixed deposit tracking with live telemetry",
-    "XIRR and CAGR portfolio performance with Horizon projections",
+    "Stocks, AMFI mutual funds, gold bullion, and fixed deposit tracking with live telemetry",
+    "XIRR and CAGR portfolio performance with Horizon projections and cash chromatography",
     "Biometric security with hardware KeyStore encryption",
     "Encrypted data export — 100% air-gapped by default, zero account requirement",
   ],
@@ -62,45 +70,31 @@ const STATS = [
   { value: "SQLite", label: "Local Database" },
 ];
 
-const FEATURES = [
-  {
-    id: "01",
-    title: "On-Device Intelligence",
-    description:
-      "Powered by Google's Gemma LLM via LiteRT. The system ingests bank statements and receipts locally, parsing complex unstructured text into precise, categorized JSON—without ever sending your data to the cloud.",
-    accent: "border-l-emerald-400",
-  },
-  {
-    id: "02",
-    title: "High-Density Virtualization",
-    description:
-      "Built on @legendapp/list for flawless 60fps performance. Render thousands of transaction records instantly with optimized memory management and zero scroll lag.",
-    accent: "border-l-sky-400",
-  },
-  {
-    id: "03",
-    title: "Ledger Horizon",
-    description:
-      "Visualize your financial trajectory with precision. Proprietary ridge-plot modeling renders your wealth accumulation as a dynamic, high-fidelity landscape.",
-    accent: "border-l-amber-400",
-  },
-];
-
 const FAQ_ITEMS = [
   {
-    question: "Is my data sent to an AI server?",
+    question: "Is my financial data or bank statement text sent to an AI server?",
     answer:
-      "Not by default. Temporal runs an on-device AI pipeline (LiteRT + Gemma LLM). All optical character recognition (OCR) and natural language processing happen directly on your device's NPU/CPU, and your financial data never touches our servers. Cloud AI providers are strictly opt-in — you supply your own API key.",
+      "No. Temporal runs an on-device AI pipeline (LiteRT + Gemma LLM). All optical character recognition (OCR), multi-format bank statement parsing (PDF, CSV, Excel, TXT), and natural language processing happen directly on your device's NPU/CPU. Your financial data never touches remote servers. Cloud AI providers are strictly opt-in — you supply your own API key.",
+  },
+  {
+    question: "What types of statements and receipts can Temporal import?",
+    answer:
+      "Temporal supports direct camera receipt scanning (OCR) as well as multi-page bank, credit card, and broker statements in PDF (with in-memory password unlock), CSV, XLS, XLSX, TXT, and JSON. The local engine maps columns and normalizes balances with zero cloud parsing.",
+  },
+  {
+    question: "How does Temporal track Stocks, Mutual Funds, and Gold offline?",
+    answer:
+      "Temporal stores your complete investment registry in encrypted local SQLite tables. When online, it fetches live market telemetry from AMFI (for 44,000+ mutual fund NAVs), Yahoo Finance (for global equities), and spot bullion feeds to compute real-time XIRR, CAGR, and portfolio beta.",
   },
   {
     question: "How does it handle large datasets?",
     answer:
-      "The app employs an offline-first SQLite repository pattern combined with high-performance list virtualization (@legendapp/list). It is engineered to handle decades of transaction history with instantaneous load times.",
+      "The app employs an offline-first SQLite repository pattern combined with high-performance list virtualization (@legendapp/list). It is engineered to handle decades of transaction history with instantaneous load times and zero scroll stutter.",
   },
   {
     question: "What happens if I lose my phone?",
     answer:
-      "Since we don't store your data on our servers, you are responsible for your backups. Temporal provides an encrypted Data Export feature, allowing you to restore your entire financial history on a new device instantly.",
+      "Since we don't store your data on our servers, you are in control of your backups. Temporal provides an encrypted Data Export feature and recovery kit, allowing you to restore your entire financial history on a new device instantly.",
   },
   {
     question: "How much does Temporal cost?",
@@ -110,12 +104,12 @@ const FAQ_ITEMS = [
   {
     question: "Does Temporal need an internet connection?",
     answer:
-      "No. Temporal is fully offline. Transactions, portfolio tracking, and even AI-powered statement scanning run locally on your device, so the app works in flight mode or areas with zero connectivity.",
+      "No. Temporal is fully offline. Transactions, portfolio tracking, statement simplifier, atomic chat, and AI-powered scanning run locally on your device, so the app works in flight mode or areas with zero connectivity.",
   },
   {
     question: "Which platforms does Temporal support?",
     answer:
-      "Temporal is currently available for Android as a direct APK install. It is designed for phones with 4GB+ RAM for on-device AI; older devices can still use all tracking features and opt into cloud AI with their own API key.",
+      "Temporal is currently available for Android as a direct APK install. It is designed for phones with 4GB+ RAM for on-device AI; older devices can still use all tracking features and optionally configure cloud AI with their own private API key.",
   },
 ];
 
@@ -137,19 +131,18 @@ export default function Home() {
         {/* Scrolling marquee background texture */}
         <div className="pointer-events-none absolute top-1/2 left-0 z-[0] w-full -translate-y-1/2 overflow-hidden opacity-[0.04] select-none">
           <div className="animate-marquee font-mono text-[8rem] md:text-[12rem] font-black tracking-tighter whitespace-nowrap text-white">
-            FINANCIAL INTELLIGENCE — ON-DEVICE LLM — 60FPS VIRTUALIZATION —
-            FINANCIAL INTELLIGENCE — ON-DEVICE LLM — 60FPS VIRTUALIZATION —
+            FINANCIAL INTELLIGENCE · ON-DEVICE LLM · 60FPS VIRTUALIZATION ·
+            FINANCIAL INTELLIGENCE · ON-DEVICE LLM · 60FPS VIRTUALIZATION ·
           </div>
         </div>
 
         <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6 pt-20 pb-12 md:pt-32 md:pb-24">
           {/* Overline */}
           <div
-            className="mb-8 animate-fade-in font-mono text-[10px] tracking-[0.3em] text-gray-500 uppercase leading-relaxed md:leading-normal max-w-sm md:max-w-none"
+            className="mb-8 animate-fade-in font-mono text-[10px] tracking-[0.3em] text-gray-400 uppercase leading-relaxed md:leading-normal max-w-sm md:max-w-none"
             style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}
           >
-            [ SYSTEM: TEMPORAL v2.5 ] — [ PIPELINE: GEMMA / LITERT ] — [ MODE:
-            OFFLINE ]
+            [ SYSTEM: TEMPORAL v2.5 ] · [ PIPELINE: GEMMA / LITERT ] · [ MODE: OFFLINE ]
           </div>
 
           {/* Headline */}
@@ -176,32 +169,32 @@ export default function Home() {
 
           {/* Subline */}
           <p
-            className="mb-16 max-w-lg animate-fade-in font-mono text-xs leading-loose tracking-[0.15em] text-gray-400 uppercase sm:text-sm"
+            className="mb-12 sm:mb-16 max-w-lg animate-fade-in font-mono text-xs leading-loose tracking-[0.15em] text-gray-400 uppercase sm:text-sm"
             style={{ animationDelay: "0.5s", animationFillMode: "backwards" }}
           >
-            A high-performance ecosystem leveraging on-device LLMs and generative
+            A high-performance ecosystem leveraging on-device LLMs, multi-asset telemetry, and generative
             visualizations. True data sovereignty without compromise.
           </p>
 
-          {/* CTA Row */}
+          {/* CTA Row - Thumb friendly on mobile */}
           <div
-            className="mb-12 md:mb-20 flex animate-fade-in flex-col sm:flex-row gap-4"
+            className="mb-12 md:mb-20 flex animate-fade-in flex-col sm:flex-row gap-3 sm:gap-4"
             style={{ animationDelay: "0.7s", animationFillMode: "backwards" }}
           >
             <a
               href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk"
-              className="btn btn-primary group relative overflow-hidden px-8 py-4 text-sm"
+              className="btn btn-primary group relative overflow-hidden px-8 py-4 text-sm w-full sm:w-auto min-h-[48px] text-center"
             >
-              <span className="relative z-10">→ DOWNLOAD APK</span>
+              <span className="relative z-10">→ DOWNLOAD APK (v2.5)</span>
             </a>
-            <Link href="/docs" className="btn btn-outline px-8 py-4 text-sm">
+            <Link href="/docs" className="btn btn-outline px-8 py-4 text-sm w-full sm:w-auto min-h-[48px] text-center">
               VIEW ARCHITECTURE
             </Link>
           </div>
 
           {/* Stats Band */}
           <div
-            className="animate-fade-in border-t-2 border-white/20 pt-10"
+            className="animate-fade-in border-t-2 border-white/20 pt-8 sm:pt-10"
             style={{ animationDelay: "0.9s", animationFillMode: "backwards" }}
           >
             <div className="grid grid-cols-2 gap-y-6 md:gap-y-8 md:grid-cols-4 gap-x-4">
@@ -210,7 +203,7 @@ export default function Home() {
                   <div className="font-serif text-3xl italic text-white transition-colors duration-300 group-hover:text-gray-400 sm:text-4xl">
                     {stat.value}
                   </div>
-                  <div className="mt-2 font-mono text-[10px] tracking-[0.15em] text-gray-600 uppercase">
+                  <div className="mt-2 font-mono text-[10px] tracking-[0.15em] text-gray-500 uppercase">
                     {stat.label}
                   </div>
                 </div>
@@ -221,104 +214,88 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* ═══════════════════════════════════════════════════════════════════ */}
       {/*  SYSTEM_INTELLIGENCE - Luxe Brutalism Editorial                      */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-20 md:py-32 overflow-hidden bg-[#050505] border-y border-white/5">
-        {/* Cinematic Ambient Glow & Noise */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1000px] bg-[radial-gradient(circle_at_50%_0%,#10b98115,transparent_70%)] pointer-events-none" />
-        <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none bg-[url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E')]" />
+      <section className="relative py-20 md:py-32 overflow-hidden bg-[#050505] border-y border-white/10">
+        {/* Subtle Ambient Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-[radial-gradient(circle_at_50%_0%,#10b98110,transparent_70%)] pointer-events-none" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
           {/* Top Editorial Header */}
-          <div className="mb-16 md:mb-24 flex flex-col md:flex-row gap-12 md:items-end justify-between">
+          <div className="mb-14 sm:mb-20 flex flex-col md:flex-row gap-8 md:items-end justify-between border-b border-white/10 pb-8">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-3 px-3 py-1 border border-emerald-500/30 bg-emerald-500/5 mb-8 accent-shimmer relative overflow-hidden">
-                 <div className="h-1 w-1 rounded-full bg-emerald-500 animate-pulse" />
-                 <span className="text-[10px] tracking-[0.4em] text-emerald-500 font-bold uppercase relative z-10">SYSTEM_INTELLIGENCE</span>
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-emerald-500/30 bg-emerald-500/5 mb-6">
+                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                 <span className="text-[10px] tracking-[0.35em] text-emerald-400 font-mono font-bold uppercase">
+                   SYSTEM_INTELLIGENCE // ON-DEVICE
+                 </span>
               </div>
-              <h2 className="text-fluid-h2 text-white font-black leading-[0.9] tracking-tighter">
-                BEYOND SIMPLE<br/>
-                <span className="text-emerald-500 italic font-serif pr-4">AUTOMATION.</span>
+              <h2 className="text-fluid-h2 text-white font-serif italic leading-none tracking-tight">
+                Beyond Simple Automation.
               </h2>
             </div>
-            <div className="max-w-sm md:pb-4">
-                <p className="text-gray-500 text-sm font-mono leading-relaxed uppercase tracking-[0.05em] border-l border-emerald-500/30 pl-4">
-                  Temporal doesn't just read data; it understands it. Proprietary neural engines reconstruct shattered bank statements into a cohesive financial narrative.
-                </p>
+            <div className="max-w-md">
+              <p className="text-gray-400 text-xs font-mono leading-relaxed uppercase tracking-wider border border-emerald-500/30 bg-emerald-500/[0.03] p-4 sm:p-5">
+                Proprietary neural pipelines reconstruct bank PDF statements, receipts, and investment telemetry directly on your local hardware: 100% air-gapped without remote servers.
+              </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-start">
-            {/* Left Offset Slabs */}
-            <div className="lg:col-span-5 space-y-6 md:space-y-8 pt-0 lg:pt-16">
-              <div className="manifesto-slab group p-6 sm:p-8 brutalist-luxe hover:border-emerald-500/40 transition-all duration-700">
-                <div className="flex flex-col gap-6">
-                  <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center font-mono text-sm text-emerald-500 group-hover:bg-emerald-500/10 transition-colors">
-                      01
-                    </div>
-                    <div className="text-[9px] font-bold tracking-widest text-emerald-500/40 uppercase">
-                       [ ENCRYPTED ]
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">On-Device Neural Extraction</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      Every document is processed locally using a optimized LLM architecture. Your financial DNA never leaves your hardware.
-                    </p>
-                  </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Slabs */}
+            <div className="lg:col-span-5 space-y-4">
+              <div className="border border-white/15 bg-black/60 p-6 sm:p-7 hover:border-emerald-500/40 transition-all">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="font-mono text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 border border-emerald-500/20">
+                    01 // HARDWARE_BOUND
+                  </span>
+                  <span className="text-[9px] font-mono font-bold tracking-widest text-gray-500 uppercase">
+                    [ ZERO_CLOUD ]
+                  </span>
                 </div>
+                <h3 className="text-xl font-serif italic text-white mb-2">
+                  On-Device Neural Extraction
+                </h3>
+                <p className="text-gray-400 text-xs font-mono leading-relaxed">
+                  Documents are tokenized locally via LiteRT and Google Gemma 2B. Your sensitive account numbers and balances never leave your physical device.
+                </p>
               </div>
 
-              <div className="manifesto-slab group p-6 sm:p-8 brutalist-luxe hover:border-amber-500/40 transition-all duration-700 lg:-translate-x-8">
-                <div className="flex flex-col gap-6">
-                  <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center font-mono text-sm text-amber-500 group-hover:bg-amber-500/10 transition-colors">
-                      02
-                    </div>
-                    <div className="text-[9px] font-bold tracking-widest text-amber-500/40 uppercase">
-                       [ MULTI-VECTOR ]
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">Multi-Vector Normalization</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      Unified tracking across NIFTY 50, NASDAQ, and Private Equity. We handle the currency fluctuations and tax implications.
-                    </p>
-                  </div>
+              <div className="border border-white/15 bg-black/60 p-6 sm:p-7 hover:border-amber-500/40 transition-all">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="font-mono text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 border border-amber-500/20">
+                    02 // DETERMINISTIC_DAG
+                  </span>
+                  <span className="text-[9px] font-mono font-bold tracking-widest text-gray-500 uppercase">
+                    [ AUTO_ALIGNED ]
+                  </span>
                 </div>
+                <h3 className="text-xl font-serif italic text-white mb-2">
+                  Multi-Vector Normalization
+                </h3>
+                <p className="text-gray-400 text-xs font-mono leading-relaxed">
+                  Unified balance verification across NSE/BSE stocks, 44,000+ AMFI mutual fund NAVs, Gold Bullion, and Fixed Deposits.
+                </p>
               </div>
             </div>
 
             {/* Right Cinematic Demo */}
-            <div className="lg:col-span-7 relative">
-              <div className="absolute -inset-4 bg-emerald-500/5 blur-2xl rounded-full opacity-50 pointer-events-none" />
+            <div className="lg:col-span-7">
               <AIExtractionDemo />
-              
-              <div className="absolute -bottom-4 right-2 sm:right-4 md:-bottom-6 md:-right-8 p-[1px] bg-gradient-to-br from-amber-500/20 to-transparent shadow-2xl z-20 brutalist-luxe">
-                <div className="bg-[#050505] p-2 sm:p-3 border border-white/5 flex flex-col gap-1 sm:gap-2 min-w-[160px] sm:min-w-[200px]">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-[9px] font-bold tracking-[0.3em] text-amber-500 uppercase">
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
-                      </span>
-                      ANALYSIS_ENGINE
-                    </div>
-                    <span className="text-[8px] font-mono text-white/20">LIVE</span>
-                  </div>
-                  <div className="flex items-center justify-between border-t border-white/5 pt-2 mt-1">
-                    <span className="text-[8px] font-mono text-white/30 tracking-widest">STATE:</span>
-                    <span className="text-[8px] font-mono text-white/70 tracking-widest">ACTIVE_0X42</span>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      {/*  INTELLIGENCE HUB — Interactive 6X Feature Matrix                   */}
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      <IntelligenceOrchestrationHub />
+
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      {/*  MULTI-VECTOR ASSETS — Finvest Portfolio Engine                     */}
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      <MultiAssetPortfolioShowcase />
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/*  TECHNICAL SHOWCASE - The Horizon Projection                       */}
@@ -332,7 +309,7 @@ export default function Home() {
                  PREDICTIVE<br/>WEALTH.
                </h2>
                <p className="text-gray-500 text-lg leading-relaxed mb-10">
-                  Stop looking at where you were. Start engineering where you will be. Our horizon engine uses XIRR-weighted simulations to project your wealth trajectory — transparent math you can audit, not a black box.
+                  Stop looking at where you were. Start engineering where you will be. Our horizon engine uses XIRR-weighted simulations and Cash Chromatography to project your wealth trajectory — transparent math you can audit, not a black box.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                   <a href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk" className="px-8 py-4 bg-white text-black font-black hover:bg-amber-500 transition-all duration-500 uppercase tracking-widest text-xs text-center">
@@ -371,8 +348,8 @@ export default function Home() {
               &ldquo;Your financial intelligence should not require surrendering
               your data. True innovation lies in running the models locally.&rdquo;
             </blockquote>
-            <div className="mt-8 font-mono text-xs tracking-widest text-gray-600 uppercase transition-colors duration-300 group-hover:text-gray-400">
-              — Read The Temporal Manifesto →
+            <div className="mt-8 font-mono text-xs tracking-widest text-gray-500 uppercase transition-colors duration-300 group-hover:text-white">
+              [ READ THE TEMPORAL MANIFESTO → ]
             </div>
           </Link>
         </div>
@@ -426,6 +403,9 @@ export default function Home() {
 
       {/* PRO Pricing */}
       <PricingSection />
+
+      {/* Mobile Sticky Install Bar */}
+      <MobileStickyDownloadBar />
     </>
   );
 }

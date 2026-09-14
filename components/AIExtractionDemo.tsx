@@ -2,337 +2,318 @@
 
 import React, { useState, useEffect } from "react";
 
-const STEP_DURATION = 3200;
+const STEP_DURATION = 4200;
 
-const steps = [
+interface PipelineStep {
+  id: string;
+  code: string;
+  label: string;
+  sublabel: string;
+  status: string;
+}
+
+const STEPS: PipelineStep[] = [
   {
     id: "01",
+    code: "RAM_INGEST",
     label: "INPUT_STREAM",
-    sublabel: "Secure ingestion",
-    color: "emerald",
+    sublabel: "In-memory volatile buffer",
+    status: "PASS",
   },
   {
     id: "02",
-    label: "LITERT_SCAN",
-    sublabel: "Pixel vectorization",
-    color: "emerald",
+    code: "DAG_ALIGN",
+    label: "SPATIAL_DAG",
+    sublabel: "Column & balance solver",
+    status: "ALIGNED",
   },
   {
     id: "03",
-    label: "GEMMA_INFER",
-    sublabel: "Neural inference",
-    color: "emerald",
+    code: "LITERT_INFER",
+    label: "GEMMA_2B",
+    sublabel: "NPU token categorization",
+    status: "42MS",
   },
   {
     id: "04",
-    label: "STRUCT_DATA",
-    sublabel: "Output assembly",
-    color: "emerald",
+    code: "SQLITE_ACID",
+    label: "COMMIT_LEDGER",
+    sublabel: "Encrypted table write",
+    status: "COMMITTED",
   },
 ];
 
-function CornerMarks() {
+function Step01Visualization() {
   return (
-    <>
-      {/* Top-left */}
-      <span className="pointer-events-none absolute top-0 left-0 z-20">
-        <span className="block h-4 w-px bg-emerald-500/40" />
-        <span className="block h-px w-4 bg-emerald-500/40" />
-      </span>
-      {/* Top-right */}
-      <span className="pointer-events-none absolute top-0 right-0 z-20 flex flex-col items-end">
-        <span className="block h-4 w-px bg-emerald-500/40" />
-        <span className="block h-px w-4 bg-emerald-500/40" />
-      </span>
-      {/* Bottom-left */}
-      <span className="pointer-events-none absolute bottom-0 left-0 z-20 flex flex-col justify-end">
-        <span className="block h-px w-4 bg-emerald-500/20" />
-        <span className="block h-4 w-px bg-emerald-500/20" />
-      </span>
-      {/* Bottom-right */}
-      <span className="pointer-events-none absolute bottom-0 right-0 z-20 flex flex-col items-end justify-end">
-        <span className="block h-px w-4 bg-emerald-500/20" />
-        <span className="block h-4 w-px bg-emerald-500/20" />
-      </span>
-    </>
-  );
-}
-
-function StepInputVisualization() {
-  return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 font-mono">
-      <div className="mb-5 text-[9px] font-bold tracking-[0.4em] text-emerald-400 uppercase">
-        / SYSTEM_READY /
-      </div>
-      <div className="space-y-3 text-[10px] leading-relaxed uppercase">
-        {[
-          { k: "SOURCE", v: "LOCAL_FS_ENCRYPTED" },
-          { k: "TYPE", v: "PDF_FINANCIAL_X4" },
-          { k: "SIZE", v: "1.42_MB" },
-          { k: "HASH", v: "SHA256:8f3c...b2e1" },
-        ].map((row) => (
-          <div key={row.k} className="flex items-baseline gap-3">
-            <span className="w-14 shrink-0 text-white/30">{row.k}</span>
-            <span className="text-white/70">{row.v}</span>
-          </div>
-        ))}
-      </div>
-      <div className="mt-7">
-        <span className="inline-flex items-center gap-2 border border-emerald-500/40 px-3 py-1.5 text-[9px] text-emerald-400 tracking-widest uppercase">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          INIT_DEEP_SCAN
+    <div className="font-mono w-full">
+      <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
+        <span className="text-[9px] font-bold tracking-[0.3em] text-emerald-400 uppercase flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          STAGE_01 // SECURE_INGESTION
         </span>
+        <span className="text-[8px] text-gray-500 uppercase">VOLATILE_RAM_ONLY</span>
       </div>
-    </div>
-  );
-}
 
-function StepScanVisualization() {
-  return (
-    <div className="animate-in fade-in zoom-in-95 duration-700 font-mono w-full">
-      <div className="mb-5 text-[9px] tracking-[0.2em] text-white/30 uppercase">
-        [ PIXEL_TO_VECTOR_CONVERSION ]
-      </div>
-      <div className="space-y-3 mb-8">
-        {[100, 67, 83, 50, 90].map((w, i) => (
-          <div key={i} className="flex items-center gap-3">
-            <span className="text-[8px] text-white/20 w-4">{i + 1}</span>
-            <div className="flex-1 h-px bg-white/5 relative overflow-hidden">
-              <div
-                className="absolute left-0 top-0 h-full bg-emerald-500/50 animate-scan"
-                style={{ width: `${w}%`, animationDelay: `${i * 0.18}s` }}
-              />
-            </div>
-            <span className="text-[8px] text-white/20 w-6">{w}%</span>
-          </div>
-        ))}
-      </div>
-      <div className="font-serif text-xl leading-snug text-white/50 italic">
-        &ldquo;Deconstructing tabular structures...&rdquo;
-      </div>
-    </div>
-  );
-}
-
-function StepInferVisualization() {
-  return (
-    <div className="animate-in fade-in duration-700 flex flex-col items-center text-center w-full">
-      <div className="relative mb-6 h-28 w-28">
-        <div className="absolute inset-0 animate-ping rounded-full border border-emerald-500/15 duration-[3000ms]" />
-        <div className="absolute inset-3 animate-pulse rounded-full border border-emerald-500/30 duration-[2000ms]" />
-        <div className="absolute inset-6 rounded-full border border-emerald-500/50" />
-        <div className="flex h-full w-full items-center justify-center">
-          <span className="text-[10px] font-black tracking-[0.5em] text-white uppercase">
-            GEMMA
-          </span>
+      <div className="border border-white/10 bg-black/90 p-3.5 space-y-2 text-[10px]">
+        <div className="flex justify-between items-baseline border-b border-white/5 pb-1.5">
+          <span className="text-gray-500 text-[9px] uppercase">SOURCE_FILE</span>
+          <span className="text-white font-bold tracking-tight">HDFC_DEC_2025.PDF</span>
+        </div>
+        <div className="flex justify-between items-baseline border-b border-white/5 pb-1.5">
+          <span className="text-gray-500 text-[9px] uppercase">DECRYPTION</span>
+          <span className="text-emerald-400 font-bold tracking-tight">IN-MEMORY (ZERO-DISK)</span>
+        </div>
+        <div className="flex justify-between items-baseline border-b border-white/5 pb-1.5">
+          <span className="text-gray-500 text-[9px] uppercase">EXTRACTED_RECORDS</span>
+          <span className="text-white font-bold">148 TRANSACTIONS</span>
+        </div>
+        <div className="flex justify-between items-baseline">
+          <span className="text-gray-500 text-[9px] uppercase">SECURITY_BOUNDARY</span>
+          <span className="text-sky-400 font-bold">HARDWARE_KEYSTORE</span>
         </div>
       </div>
-      <div className="max-w-[200px] text-[8px] leading-loose tracking-[0.3em] text-white/25 uppercase">
-        Semantic synthesis active on secure enclave
-      </div>
-      <div className="mt-5 flex gap-2">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <span
-            key={i}
-            className="w-1 bg-emerald-500/40 animate-pulse rounded-sm"
-            style={{
-              height: `${8 + Math.sin(i) * 6}px`,
-              animationDelay: `${i * 0.15}s`,
-            }}
-          />
-        ))}
+
+      <div className="mt-3 flex items-center justify-between text-[8px] font-mono uppercase tracking-widest text-gray-500">
+        <span>PARSING STATUS: 100% OK</span>
+        <span className="text-emerald-400">0 BYTES TRANSMITTED</span>
       </div>
     </div>
   );
 }
 
-function StepOutputVisualization() {
-  const rows = [
-    { k: "TX_DATE", v: "2026.01.12" },
-    { k: "AMOUNT", v: "₹1,24,000.00" },
-    { k: "CATEGORY", v: "EQUITY_SETTLE" },
-    { k: "MERCHANT", v: "ZERODHA_MKT" },
-  ];
+function Step02Visualization() {
   return (
-    <div className="animate-in fade-in slide-in-from-top-4 duration-700 w-full">
-      <div className="mb-5 flex items-center gap-2 text-[9px] font-bold tracking-[0.4em] text-emerald-400 uppercase">
-        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        RECOVERY_COMPLETE
+    <div className="font-mono w-full">
+      <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
+        <span className="text-[9px] font-bold tracking-[0.3em] text-sky-400 uppercase flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-sky-400 animate-pulse" />
+          STAGE_02 // SPATIAL_DAG_NORMALIZATION
+        </span>
+        <span className="text-[8px] text-gray-500 uppercase">O(N^2) DP SOLVER</span>
       </div>
-      <div className="grid grid-cols-2 gap-px bg-white/[0.06] overflow-hidden border border-white/10">
-        {rows.map((item) => (
-          <div
-            key={item.k}
-            className="group/item bg-[#070707] p-4 transition-colors duration-500 hover:bg-emerald-500/[0.04]"
-          >
-            <div className="mb-1.5 text-[7px] font-bold tracking-widest text-white/25 uppercase">
-              {item.k}
-            </div>
-            <div className="text-[11px] font-bold text-white/80 group-hover/item:text-emerald-400 transition-colors">
-              {item.v}
+
+      <div className="border border-white/10 bg-black/90 p-3 space-y-2 text-[9px]">
+        {[
+          { metric: "DATE_COLUMN_ALIGNMENT", score: "100%", state: "ALIGNED" },
+          { metric: "MERCHANT_NORMALIZATION", score: "99.4%", state: "RECONSTRUCTED" },
+          { metric: "DEBIT_CREDIT_DISCRIMINATION", score: "100%", state: "BALANCED" },
+          { metric: "RUNNING_BALANCE_DAG_PROOF", score: "99.8%", state: "VERIFIED" },
+        ].map((item, i) => (
+          <div key={i} className="flex items-center justify-between border-b border-white/5 pb-1.5 last:border-0 last:pb-0">
+            <span className="text-gray-400">{item.metric}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-white font-bold">{item.score}</span>
+              <span className="text-[8px] text-sky-400 font-bold">[{item.state}]</span>
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-3 text-[8px] text-gray-500 uppercase tracking-widest flex justify-between">
+        <span>GEOMETRY: 4-COLUMN MATRIX</span>
+        <span className="text-sky-400">MATH_CONSISTENT</span>
+      </div>
+    </div>
+  );
+}
+
+function Step03Visualization() {
+  return (
+    <div className="font-mono w-full">
+      <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
+        <span className="text-[9px] font-bold tracking-[0.3em] text-indigo-400 uppercase flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
+          STAGE_03 // GEMMA_2B_LOCAL_INFERENCE
+        </span>
+        <span className="text-[8px] text-indigo-400 uppercase">LATENCY: 42MS</span>
+      </div>
+
+      <div className="border border-white/10 bg-black/90 p-3 space-y-2.5 text-[9px]">
+        <div>
+          <span className="text-gray-500 uppercase text-[8px]">INPUT_TOKEN_STREAM:</span>
+          <div className="text-white font-bold bg-white/5 border border-white/10 p-2 mt-1 truncate">
+            "UPI/60293019230/ZERODHA_BROKING/NSE_SETTLE"
+          </div>
+        </div>
+        <div className="border-t border-white/5 pt-2 grid grid-cols-2 gap-2 text-[9px]">
+          <div>
+            <span className="text-gray-500 text-[8px] uppercase block">INFERRED_CATEGORY</span>
+            <span className="text-emerald-400 font-bold">EQUITY_INVESTMENT</span>
+          </div>
+          <div>
+            <span className="text-gray-500 text-[8px] uppercase block">FLOW_TAXONOMY</span>
+            <span className="text-rose-400 font-bold">CAPITAL_OUTFLOW</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-3 text-[8px] text-gray-500 uppercase tracking-widest flex justify-between">
+        <span>INFERENCE TARGET: LOCAL_NPU</span>
+        <span className="text-indigo-400">NO_CLOUD_LEAK</span>
+      </div>
+    </div>
+  );
+}
+
+function Step04Visualization() {
+  const rows = [
+    { merchant: "ZERODHA BROKING", date: "2026.01.12", amt: "-₹1,24,000.00", cat: "INVESTMENTS", positive: false },
+    { merchant: "AMAZON RETAIL BLR", date: "2026.01.10", amt: "-₹3,450.00", cat: "COMMERCE", positive: false },
+    { merchant: "ACME CORP PAYROLL", date: "2026.01.01", amt: "+₹2,10,000.00", cat: "SALARY", positive: true },
+  ];
+
+  return (
+    <div className="font-mono w-full">
+      <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
+        <span className="text-[9px] font-bold tracking-[0.3em] text-emerald-400 uppercase flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          STAGE_04 // ACID_COMMIT_SUCCESS
+        </span>
+        <span className="text-[8px] text-emerald-400 uppercase">LOCAL_SQLITE</span>
+      </div>
+
+      <div className="space-y-1.5">
+        {rows.map((r, i) => (
+          <div
+            key={i}
+            className="flex items-center justify-between border border-white/10 bg-black/90 p-2.5 hover:border-emerald-500/40 transition-colors text-[9px]"
+          >
+            <div>
+              <div className="font-bold text-white uppercase tracking-tight">{r.merchant}</div>
+              <div className="text-[8px] text-gray-500">{r.date} · {r.cat}</div>
+            </div>
+            <div className={`font-bold text-xs tabular-nums ${r.positive ? "text-emerald-400" : "text-gray-200"}`}>
+              {r.amt}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-3 text-[8px] text-gray-500 uppercase tracking-widest flex justify-between">
+        <span>LEDGER STATE: ACID_PERSISTED</span>
+        <span className="text-emerald-400 font-bold">COMMIT_HASH: 0x8F2B</span>
       </div>
     </div>
   );
 }
 
 export function AIExtractionDemo() {
-  const [step, setStep] = useState(0);
-  const [tick, setTick] = useState(0);
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [tick, setTick] = useState<number>(0);
 
   useEffect(() => {
-    const stepTimer = setInterval(() => {
-      setStep((prev) => (prev + 1) % 4);
+    const stepInterval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % 4);
     }, STEP_DURATION);
-    const tickTimer = setInterval(() => {
-      setTick((prev) => prev + 1);
-    }, 1200);
+    const tickInterval = setInterval(() => {
+      setTick((t) => t + 1);
+    }, 1800);
     return () => {
-      clearInterval(stepTimer);
-      clearInterval(tickTimer);
+      clearInterval(stepInterval);
+      clearInterval(tickInterval);
     };
   }, []);
 
-  const mem = (0.8 + (tick % 5) * 0.03).toFixed(2);
-  const temp = (34.1 + (tick % 3) * 0.15).toFixed(1);
+  const memVal = (0.75 + (tick % 3) * 0.02).toFixed(2);
+  const tempVal = (33.2 + (tick % 4) * 0.15).toFixed(1);
 
   return (
-    <div className="brutalist-luxe relative w-full overflow-hidden min-h-[420px] md:h-[500px]">
-      {/* Ambient glow */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_70%_30%,#10b98110,transparent_60%)] pointer-events-none" />
-
-      {/* Laser scanner line */}
+    <div className="border border-white/20 bg-[#030303] relative w-full overflow-hidden shadow-2xl">
+      {/* Laser line: clean technical scanner indicator */}
       <div
-        className="pointer-events-none absolute left-0 right-0 z-30 h-px shadow-[0_0_16px_2px_#10b981] transition-all duration-[3200ms] ease-linear"
+        className="pointer-events-none absolute left-0 right-0 z-20 h-px transition-all duration-[4200ms] ease-linear"
         style={{
-          top: `${(step / 3) * 84 + 8}%`,
-          opacity: 0.55,
+          top: `${(activeStep / 3) * 80 + 10}%`,
+          opacity: 0.35,
           background: "linear-gradient(90deg, transparent, #10b981, transparent)",
         }}
       />
 
-      <div className="relative z-10 flex h-full flex-col">
-        {/* ── Header ── */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 bg-white/[0.025] px-4 sm:px-6 py-3 md:py-4 gap-2">
-          <div className="flex items-center gap-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
-            <span className="text-[10px] font-bold tracking-[0.45em] text-white/90 uppercase">
-              MODULE::NEURAL_EXTRACTOR
-            </span>
-          </div>
-          <div className="flex gap-4 font-mono text-[8px] md:text-[9px] tracking-tight text-gray-600 uppercase">
-            <span className="hidden xs:inline">[ LATENCY_42ms ]</span>
-            <span className="text-emerald-500/70">[ STATUS_OPTIMAL ]</span>
-          </div>
+      {/* Top HUD Frame */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 bg-white/[0.02] px-4 sm:px-5 py-3 gap-2">
+        <div className="flex items-center gap-2.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-white uppercase">
+            PIPELINE::ON_DEVICE_PARSER
+          </span>
         </div>
+        <div className="flex items-center gap-3 font-mono text-[9px] text-gray-500 uppercase">
+          <span className="text-emerald-400">[ READY ]</span>
+          <span className="hidden sm:inline">[ ZERO_CLOUD_SYNC ]</span>
+        </div>
+      </div>
 
-        {/* ── Body ── */}
-        <div className="flex flex-1 overflow-hidden min-h-0">
-
-          {/* Pipeline rail sidebar */}
-          <div className="relative flex w-14 md:w-40 shrink-0 flex-col border-r border-white/10 bg-black/30">
-            <div className="absolute left-[26px] md:left-[25.5px] top-6 bottom-6 w-px bg-white/5 z-0" />
-            <div
-              className="absolute left-[26px] md:left-[25.5px] top-6 w-px bg-emerald-500/40 z-0 transition-all duration-[3200ms] ease-linear"
-              style={{ height: `${(step / 3) * 78}%` }}
-            />
-
-            <div className="flex flex-col justify-around h-full py-6 px-3 md:px-5 relative z-10">
-              {steps.map((s, i) => {
-                const isActive = step === i;
-                const isDone = step > i;
-                return (
-                  <div
-                    key={i}
-                    className={`flex items-center gap-3 transition-all duration-700 ${
-                      isActive
-                        ? "opacity-100"
-                        : isDone
-                        ? "opacity-40"
-                        : "opacity-15"
-                    }`}
-                    style={{ transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)" }}
-                  >
-                    {/* Node dot */}
-                    <div
-                      className={`h-3 w-3 shrink-0 rounded-full border transition-all duration-500 ${
-                        isActive
-                          ? "border-emerald-500 bg-emerald-500 shadow-[0_0_10px_#10b981]"
-                          : isDone
-                          ? "border-emerald-500/50 bg-emerald-500/30"
-                          : "border-white/15 bg-transparent"
-                      }`}
-                    />
-                    <div className="hidden md:block min-w-0">
-                      <div
-                        className={`text-[8px] font-black tracking-[0.2em] uppercase leading-tight truncate transition-colors ${
-                          isActive ? "text-emerald-400" : "text-white/50"
-                        }`}
-                      >
+      {/* Pipeline Body */}
+      <div className="grid grid-cols-1 md:grid-cols-12 min-h-[380px]">
+        {/* Left Rail Steps (Horizontal on mobile, Vertical on desktop) */}
+        <div className="md:col-span-4 border-b md:border-b-0 md:border-r border-white/10 bg-black/60 p-2.5 sm:p-4 flex flex-col justify-between">
+          <div className="flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible gap-1.5 pb-1 md:pb-0 scrollbar-none touch-pan-x overscroll-x-contain pr-4 md:pr-0">
+            {STEPS.map((s, idx) => {
+              const isCurrent = activeStep === idx;
+              const isPast = activeStep > idx;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => setActiveStep(idx)}
+                  className={`min-w-[130px] md:min-w-0 md:w-full text-left p-2 sm:p-2.5 border transition-all cursor-pointer shrink-0 ${
+                    isCurrent
+                      ? "border-emerald-500/80 bg-emerald-500/10"
+                      : isPast
+                      ? "border-white/10 bg-black/40 text-gray-400"
+                      : "border-white/5 text-gray-600 hover:text-gray-400"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-mono text-[9px] font-bold text-gray-500">[{s.id}]</span>
+                      <span className={`font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider ${isCurrent ? "text-emerald-400" : "text-white"}`}>
                         {s.label}
-                      </div>
-                      <div className="text-[7px] text-white/20 tracking-wide truncate mt-0.5">
-                        {s.sublabel}
-                      </div>
+                      </span>
                     </div>
+                    <span className={`font-mono text-[7px] sm:text-[8px] font-bold uppercase px-1 py-0.2 border ${isCurrent ? "border-emerald-500/40 text-emerald-400" : "border-white/10 text-gray-600"}`}>
+                      {s.status}
+                    </span>
                   </div>
-                );
-              })}
-            </div>
+                  <div className="font-mono text-[7px] sm:text-[8px] text-gray-500 truncate pl-4 md:pl-5">
+                    {s.sublabel}
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Visualization area */}
-          <div className="relative flex-1 overflow-hidden">
-            {/* Inner grid crosshair background */}
-            <div
-              className="absolute inset-0 opacity-[0.03] pointer-events-none"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
-                backgroundSize: "40px 40px",
-              }}
-            />
-
-            {/* Corner precision marks */}
-            <CornerMarks />
-
-            <div className="relative flex h-full w-full items-center justify-center p-4 sm:p-8 md:p-10">
-              <div className="w-full max-w-xs">
-                {step === 0 && <StepInputVisualization />}
-                {step === 1 && <StepScanVisualization />}
-                {step === 2 && <StepInferVisualization />}
-                {step === 3 && <StepOutputVisualization />}
-              </div>
-            </div>
-
-            {/* Step label watermark bottom-right */}
-            <div className="absolute bottom-4 right-4 font-mono text-[8px] tracking-widest text-white/10 uppercase pointer-events-none">
-              {steps[step].id} / {steps[step].label}
-            </div>
+          <div className="border-t border-white/10 pt-3 mt-3 hidden md:block">
+            <div className="font-mono text-[8px] text-gray-500 uppercase tracking-widest mb-1">EXECUTION TARGET</div>
+            <div className="font-mono text-[9px] text-white font-bold">LITERT · GEMMA 2B ON NPU</div>
           </div>
         </div>
 
-        <div className="flex items-center justify-between border-t border-white/10 bg-black/50 px-4 sm:px-6 py-2.5 font-mono text-[7px] md:text-[8px] tracking-[0.15em] md:tracking-widest text-white/20 uppercase">
-          <div className="flex items-center gap-3 md:gap-5">
-            <span>ID: 0x42_FL</span>
-            <span className="text-emerald-500/40 hidden xs:inline">ENCRYPTED</span>
+        {/* Right Stage Display */}
+        <div className="md:col-span-8 p-4 sm:p-6 flex items-center justify-center bg-black/80 relative">
+          {/* Corner Precision Marks */}
+          <span className="absolute top-2 left-2 block h-2 w-2 border-t border-l border-white/20 pointer-events-none" />
+          <span className="absolute top-2 right-2 block h-2 w-2 border-t border-r border-white/20 pointer-events-none" />
+          <span className="absolute bottom-2 left-2 block h-2 w-2 border-b border-l border-white/20 pointer-events-none" />
+          <span className="absolute bottom-2 right-2 block h-2 w-2 border-b border-r border-white/20 pointer-events-none" />
+
+          <div className="w-full max-w-md min-h-[220px] flex flex-col justify-center">
+            {activeStep === 0 && <Step01Visualization />}
+            {activeStep === 1 && <Step02Visualization />}
+            {activeStep === 2 && <Step03Visualization />}
+            {activeStep === 3 && <Step04Visualization />}
           </div>
-          <div className="flex items-center gap-3 md:gap-5">
-            <span
-              className="transition-all duration-700"
-              style={{ color: `rgba(255,255,255,${0.15 + (tick % 3) * 0.05})` }}
-            >
-              T: {temp}°C
-            </span>
-            <span
-              className="transition-all duration-700"
-              style={{ color: `rgba(255,255,255,${0.15 + (tick % 4) * 0.04})` }}
-            >
-              M: {mem}GB
-            </span>
-          </div>
+        </div>
+      </div>
+
+      {/* Bottom Telemetry Bar */}
+      <div className="flex items-center justify-between border-t border-white/10 bg-black px-4 sm:px-5 py-2 font-mono text-[8px] text-gray-500 uppercase tracking-wider">
+        <div className="flex items-center gap-3">
+          <span>MODEL: GEMMA_2B_IT</span>
+          <span className="text-emerald-400 hidden sm:inline">100% AIR_GAPPED</span>
+        </div>
+        <div className="flex items-center gap-4">
+          <span>TEMP: {tempVal}°C</span>
+          <span>RAM: {memVal}GB</span>
         </div>
       </div>
     </div>

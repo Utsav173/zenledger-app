@@ -41,33 +41,33 @@ export function SystemArchitectureInteractive() {
           </div>
 
           {/* Subsystem Switcher Toolbar */}
-          <div className="flex flex-wrap sm:flex-nowrap items-center border border-white/20 bg-[#050505] p-1 shadow-inner self-start lg:self-auto shrink-0">
+          <div className="flex flex-wrap sm:flex-nowrap items-center border border-white/20 bg-[#050505] p-1 shadow-inner self-start lg:self-auto shrink-0 w-full sm:w-auto">
             <button
               onClick={() => setActiveTab("topology")}
-              className={`px-3 py-2 font-mono text-[10px] sm:text-[11px] tracking-wider uppercase transition-all whitespace-nowrap ${
+              className={`px-3 py-2.5 min-h-[44px] flex-1 sm:flex-initial font-mono text-[10px] sm:text-[11px] tracking-wider uppercase transition-all whitespace-nowrap text-center ${
                 activeTab === "topology"
                   ? "bg-white text-black font-bold"
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
+                  : "text-gray-400 hover:text-white hover:bg-white/5 active:bg-white/10"
               }`}
             >
               [01. TOPOLOGY]
             </button>
             <button
               onClick={() => setActiveTab("ai_pipeline")}
-              className={`px-3 py-2 font-mono text-[10px] sm:text-[11px] tracking-wider uppercase transition-all whitespace-nowrap ${
+              className={`px-3 py-2.5 min-h-[44px] flex-1 sm:flex-initial font-mono text-[10px] sm:text-[11px] tracking-wider uppercase transition-all whitespace-nowrap text-center ${
                 activeTab === "ai_pipeline"
                   ? "bg-white text-black font-bold"
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
+                  : "text-gray-400 hover:text-white hover:bg-white/5 active:bg-white/10"
               }`}
             >
               [02. AI_PIPELINE]
             </button>
             <button
               onClick={() => setActiveTab("spec")}
-              className={`px-3 py-2 font-mono text-[10px] sm:text-[11px] tracking-wider uppercase transition-all whitespace-nowrap ${
+              className={`px-3 py-2.5 min-h-[44px] flex-1 sm:flex-initial font-mono text-[10px] sm:text-[11px] tracking-wider uppercase transition-all whitespace-nowrap text-center ${
                 activeTab === "spec"
                   ? "bg-white text-black font-bold"
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
+                  : "text-gray-400 hover:text-white hover:bg-white/5 active:bg-white/10"
               }`}
             >
               [03. SPEC_IR]
@@ -76,7 +76,7 @@ export function SystemArchitectureInteractive() {
               href={currentIframeSrc}
               target="_blank"
               rel="noreferrer"
-              className="px-3 py-2 border-l border-white/10 font-mono text-[10px] sm:text-[11px] text-[#00b2ff] hover:text-white hover:bg-[#00b2ff]/10 tracking-wider uppercase transition-all flex items-center gap-1 whitespace-nowrap"
+              className="px-3 py-2.5 min-h-[44px] border-l border-white/10 font-mono text-[10px] sm:text-[11px] text-[#00b2ff] hover:text-white hover:bg-[#00b2ff]/10 active:bg-[#00b2ff]/20 tracking-wider uppercase transition-all flex items-center justify-center gap-1 whitespace-nowrap w-full sm:w-auto"
               title="Open full standalone schematic"
             >
               <span>FULLSCREEN</span>

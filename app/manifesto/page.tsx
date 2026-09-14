@@ -45,22 +45,22 @@ export default function ManifestoPage() {
                 your spending habits, and your financial trajectory are yours alone.
               </p>
 
-              <section className="group relative border-l-4 border-white py-8 pl-12 transition-all hover:bg-white/[0.02]">
-                <div className="absolute top-0 left-[-4px] h-4 w-[4px] bg-white group-hover:h-full transition-all duration-500" />
-                <h2 className="text-white text-3xl mb-6">01 / The Local-First Imperative</h2>
-                <p>
-                  The cloud is just someone else's computer. For something as intimate
-                  as financial records, "secure servers" are not enough. The only
+              <section className="p-6 sm:p-8 border border-white/20 bg-black/50 transition-all hover:border-white/50 hover:bg-white/[0.02]">
+                <div className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-3">PRINCIPLE // 01</div>
+                <h2 className="text-white font-serif italic text-2xl sm:text-3xl mb-4">01 / The Local-First Imperative</h2>
+                <p className="font-sans text-base sm:text-lg text-gray-300 leading-relaxed font-light">
+                  The cloud is just someone else&apos;s computer. For something as intimate
+                  as financial records, &ldquo;secure servers&rdquo; are not enough. The only
                   truly secure data is the data that never leaves your physical possession.
-                  Temporal is built on a local-first architecture—your device is the
-                  source of truth.
+                  Temporal is built on a local-first architecture: your device is the
+                  exclusive source of truth.
                 </p>
               </section>
 
-              <section className="group relative border-l-4 border-white py-8 pl-12 transition-all hover:bg-white/[0.02]">
-                <div className="absolute top-0 left-[-4px] h-4 w-[4px] bg-white group-hover:h-full transition-all duration-500" />
-                <h2 className="text-white text-3xl mb-6">02 / Intelligence Without Surveillance</h2>
-                <p>
+              <section className="p-6 sm:p-8 border border-white/20 bg-black/50 transition-all hover:border-white/50 hover:bg-white/[0.02]">
+                <div className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-3">PRINCIPLE // 02</div>
+                <h2 className="text-white font-serif italic text-2xl sm:text-3xl mb-4">02 / Intelligence Without Surveillance</h2>
+                <p className="font-sans text-base sm:text-lg text-gray-300 leading-relaxed font-light">
                   Artificial Intelligence does not require a data harvest. By leveraging
                   on-device LLMs (Gemma via LiteRT), we provide sophisticated financial
                   insights without a single byte of your ledger ever touching an external
@@ -68,11 +68,11 @@ export default function ManifestoPage() {
                 </p>
               </section>
 
-              <section className="group relative border-l-4 border-white py-8 pl-12 transition-all hover:bg-white/[0.02]">
-                <div className="absolute top-0 left-[-4px] h-4 w-[4px] bg-white group-hover:h-full transition-all duration-500" />
-                <h2 className="text-white text-3xl mb-6">03 / Utilitarian Brutalism</h2>
-                <p>
-                  We reject the "gamification" of finance. We do not use dopamine-loops
+              <section className="p-6 sm:p-8 border border-white/20 bg-black/50 transition-all hover:border-white/50 hover:bg-white/[0.02]">
+                <div className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-3">PRINCIPLE // 03</div>
+                <h2 className="text-white font-serif italic text-2xl sm:text-3xl mb-4">03 / Utilitarian Brutalism</h2>
+                <p className="font-sans text-base sm:text-lg text-gray-300 leading-relaxed font-light">
+                  We reject the &ldquo;gamification&rdquo; of finance. We do not use dopamine-loops
                   or cluttered interfaces. Temporal is a tool for clarity. We prioritize
                   high-density information, mathematical precision, and professional-grade
                   performance (60fps virtualization). It is designed for the serious,
@@ -80,9 +80,9 @@ export default function ManifestoPage() {
                 </p>
               </section>
 
-              <div className="pt-24 text-center">
-                <p className="font-mono text-xs uppercase tracking-[0.5em] text-white opacity-40">
-                  — Data Sovereignty or Nothing.
+              <div className="pt-16 sm:pt-24 text-center">
+                <p className="font-mono text-xs uppercase tracking-[0.4em] text-white opacity-40">
+                  [ DATA SOVEREIGNTY OR NOTHING ]
                 </p>
               </div>
             </div>

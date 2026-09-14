@@ -18,19 +18,19 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
           <button
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
             aria-expanded={openIndex === index}
-            className="flex w-full items-start gap-4 sm:gap-6 py-6 sm:py-8 text-left transition-colors duration-300 hover:bg-white/[0.02]"
+            className="flex w-full items-start gap-3 sm:gap-6 py-5 sm:py-8 text-left transition-colors duration-200 hover:bg-white/[0.02] cursor-pointer min-h-[52px]"
           >
-            <span className="mt-1 shrink-0 font-mono text-[10px] tracking-widest text-gray-600">
-              {String(index + 1).padStart(2, "0")}
+            <span className="mt-1 shrink-0 font-mono text-[10px] tracking-widest text-emerald-400 font-bold">
+              [{String(index + 1).padStart(2, "0")}]
             </span>
             <div className="flex-1">
               <div className="flex items-center justify-between gap-4">
-                <h3 className="font-sans text-lg font-semibold text-white sm:text-xl">
+                <h3 className="font-sans text-base sm:text-xl font-bold text-white tracking-tight leading-snug">
                   {item.question}
                 </h3>
                 <span className={clsx(
-                  "font-mono text-xs transition-transform duration-300",
-                  openIndex === index ? "rotate-45" : "rotate-0"
+                  "font-mono text-xs text-gray-400 transition-transform duration-300 shrink-0 select-none",
+                  openIndex === index ? "rotate-45 text-white font-bold" : "rotate-0"
                 )}>
                   [ + ]
                 </span>

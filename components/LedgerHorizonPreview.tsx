@@ -103,18 +103,24 @@ export function LedgerHorizonPreview() {
             </svg>
           </div>
 
-          {/* Floating Data Nodes - Refined */}
-          <div className="absolute top-24 sm:top-28 left-4 sm:left-16 animate-pulse duration-[4000ms]">
-             <div className="border-l-2 border-amber-500 bg-black/60 p-3 sm:p-4 backdrop-blur-xl border border-white/5">
-                <div className="text-[7px] text-amber-500/60 mb-2 uppercase font-black tracking-widest">NET_WORTH::CURRENT</div>
-                <div className="text-xs sm:text-sm text-white font-bold tracking-tight tabular-nums">₹42,85,200.00</div>
+          {/* Floating Data Nodes - Full brutalist borders, responsive layout */}
+          <div className="absolute top-20 sm:top-28 left-3 sm:left-12 animate-pulse duration-[4000ms] pointer-events-none">
+             <div className="border border-amber-500/50 bg-black/85 p-2.5 sm:p-4 backdrop-blur-xl shadow-lg shadow-black/80">
+                <div className="text-[7px] text-amber-400 mb-1 sm:mb-2 uppercase font-mono font-bold tracking-widest flex items-center gap-1.5">
+                  <span className="h-1 w-1 rounded-full bg-amber-400" />
+                  NET_WORTH::CURRENT
+                </div>
+                <div className="text-xs sm:text-sm text-white font-mono font-bold tracking-tight tabular-nums">₹42,85,200.00</div>
              </div>
           </div>
 
-          <div className="absolute bottom-32 sm:bottom-40 right-4 sm:right-16 animate-pulse duration-[5000ms]">
-             <div className="border-r-2 border-emerald-500 bg-black/60 p-3 sm:p-4 backdrop-blur-xl border border-white/5 text-right">
-                <div className="text-[7px] text-emerald-500/60 mb-2 uppercase font-black tracking-widest">PROJECTION::2030_EST</div>
-                <div className="text-xs sm:text-sm text-emerald-400 font-bold tracking-tight tabular-nums">+₹1,20,42,000</div>
+          <div className="absolute bottom-24 sm:bottom-36 right-3 sm:right-12 animate-pulse duration-[5000ms] pointer-events-none">
+             <div className="border border-emerald-500/50 bg-black/85 p-2.5 sm:p-4 backdrop-blur-xl shadow-lg shadow-black/80 text-right">
+                <div className="text-[7px] text-emerald-400 mb-1 sm:mb-2 uppercase font-mono font-bold tracking-widest flex items-center justify-end gap-1.5">
+                  PROJECTION::2030_EST
+                  <span className="h-1 w-1 rounded-full bg-emerald-400" />
+                </div>
+                <div className="text-xs sm:text-sm text-emerald-400 font-mono font-bold tracking-tight tabular-nums">+₹1,20,42,000</div>
              </div>
           </div>
         </div>

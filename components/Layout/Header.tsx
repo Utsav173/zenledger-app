@@ -31,7 +31,7 @@ export default function Header() {
     <>
       <header className="sticky top-0 z-50 border-b-2 border-white/20 bg-black/90 backdrop-blur-md">
         <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-3 sm:px-6">
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             <div className="font-mono text-sm font-bold tracking-[0.2em] text-white">
               <Link
                 href="/"
@@ -83,7 +83,7 @@ export default function Header() {
           </nav>
 
           {/* CTA & Search & Mobile Toggle */}
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-4 shrink-0">
             <button 
               onClick={() => setIsSearchOpen(true)}
               className="font-mono text-[10px] text-gray-500 hover:text-white hidden sm:block border border-white/20 px-2 py-1"
@@ -93,27 +93,29 @@ export default function Header() {
 
             <a
               href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk"
-              className="border-2 border-white bg-black px-3 py-1.5 font-mono text-[10px] font-bold tracking-widest text-white uppercase transition-none hover:bg-white hover:text-black"
+              className="border-2 border-white bg-black px-3 py-1.5 min-h-[38px] flex items-center justify-center font-mono text-[10px] font-bold tracking-widest text-white uppercase transition-none hover:bg-white hover:text-black active:bg-white active:text-black"
               download
             >
               <span className="hidden sm:inline">GET_SYSTEM.APK</span>
               <span className="sm:hidden">GET_APK</span>
             </a>
 
-            {/* Mobile Search Icon */}
+            {/* Mobile Search Icon - Min 44px Tap Target */}
             <button 
               onClick={() => setIsSearchOpen(true)}
-              className="sm:hidden font-mono text-[10px] text-gray-400 hover:text-white"
+              className="sm:hidden font-mono text-xs text-gray-400 hover:text-white active:text-white min-w-[44px] min-h-[44px] flex items-center justify-center border border-white/10"
+              aria-label="Open search"
             >
               [ Q ]
             </button>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Menu Toggle - Min 44px Tap Target */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="font-mono text-[10px] font-bold tracking-widest text-gray-400 transition-colors hover:text-white md:hidden"
+              className="font-mono text-[10px] font-bold tracking-widest text-gray-400 transition-colors hover:text-white active:text-white min-w-[44px] min-h-[44px] flex items-center justify-center border border-white/15 px-2 md:hidden"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              {isMobileMenuOpen ? "[ CLOSE ]" : "[ MENU ]"}
+              {isMobileMenuOpen ? "[ X ]" : "[ MENU ]"}
             </button>
           </div>
         </div>
@@ -127,38 +129,52 @@ export default function Header() {
 
       {/* Full-Screen Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 flex flex-col bg-black/95 pt-20 backdrop-blur-xl md:hidden">
-          <nav className="flex flex-col items-center justify-center gap-6 px-6 pb-20 text-center font-mono">
+        <div className="fixed inset-0 z-40 flex flex-col bg-black/98 pt-20 px-6 backdrop-blur-2xl md:hidden">
+          <nav className="flex flex-col items-stretch justify-center gap-3 text-center font-mono max-w-xs mx-auto w-full">
             <Link
               href="/ledger"
-              className="px-4 py-2 text-xl tracking-[0.2em] text-white transition-none hover:bg-white hover:text-black"
+              className="px-4 py-3 min-h-[48px] flex items-center justify-center border border-white/10 text-base tracking-[0.2em] text-white hover:bg-white hover:text-black transition-none uppercase"
             >
-              LEDGER
+              /LEDGER
             </Link>
             <Link
               href="/vault"
-              className="px-4 py-2 text-xl tracking-[0.2em] text-white transition-none hover:bg-white hover:text-black"
+              className="px-4 py-3 min-h-[48px] flex items-center justify-center border border-white/10 text-base tracking-[0.2em] text-white hover:bg-white hover:text-black transition-none uppercase"
             >
-              VAULT
+              /VAULT
             </Link>
             <Link
               href="/manual"
-              className="px-4 py-2 text-xl tracking-[0.2em] text-white transition-none hover:bg-white hover:text-black"
+              className="px-4 py-3 min-h-[48px] flex items-center justify-center border border-white/10 text-base tracking-[0.2em] text-white hover:bg-white hover:text-black transition-none uppercase"
             >
-              MANUAL
+              /MANUAL
             </Link>
             <Link
               href="/docs"
-              className="px-4 py-2 text-xl tracking-[0.2em] text-white transition-none hover:bg-white hover:text-black"
+              className="px-4 py-3 min-h-[48px] flex items-center justify-center border border-white/10 text-base tracking-[0.2em] text-white hover:bg-white hover:text-black transition-none uppercase"
             >
-              DOCS
+              /DOCS
+            </Link>
+            <Link
+              href="/queries"
+              className="px-4 py-3 min-h-[48px] flex items-center justify-center border border-white/10 text-base tracking-[0.2em] text-white hover:bg-white hover:text-black transition-none uppercase"
+            >
+              /QUERIES
             </Link>
 
-            <div className="mt-8 flex flex-col gap-4 text-xs tracking-[0.15em] text-gray-500">
-              <span>[ ENCRYPTION: AES-256 ]</span>
-              <span>[ MODE: OFFLINE ]</span>
-              <span className="mt-4 border-t border-white/20 pt-4 text-[10px]">
-                TEMPORAL ARCHITECTURE v2.0
+            <a
+              href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk"
+              download
+              className="mt-4 px-4 py-3.5 min-h-[48px] flex items-center justify-center border-2 border-white bg-white text-black font-bold text-xs tracking-widest uppercase hover:bg-black hover:text-white transition-none"
+            >
+              ↓ DOWNLOAD ANDROID APK
+            </a>
+
+            <div className="mt-8 flex flex-col gap-2 text-[10px] tracking-[0.15em] text-gray-500 border-t border-white/10 pt-4">
+              <span>[ ENCRYPTION: HARDWARE AES-256 ]</span>
+              <span>[ ENGINE: ON-DEVICE LITERT + GEMMA ]</span>
+              <span className="text-gray-600">
+                TEMPORAL FOS v2.5 · 100% AIR-GAPPED
               </span>
             </div>
           </nav>

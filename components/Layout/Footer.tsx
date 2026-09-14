@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t-2 border-white/20 bg-black px-6 py-20">
+    <footer className="mt-auto border-t-2 border-white/20 bg-black px-6 pt-16 pb-28 md:py-20">
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-3">
           {/* Brand */}
@@ -86,9 +86,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-20 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
-          <div className="font-mono text-[10px] text-gray-600">
-            © {new Date().getFullYear()} TEMPORAL SYSTEMS — DATA SOVEREIGNTY
-            SINCE 2024
+          <div className="font-mono text-[10px] text-gray-600 text-center md:text-left">
+            © {new Date().getFullYear()} TEMPORAL SYSTEMS · DATA SOVEREIGNTY SINCE 2024
           </div>
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />

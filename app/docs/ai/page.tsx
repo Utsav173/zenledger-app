@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "The AI Engine | Temporal Docs",
-  description: "How Temporal's AI works: on-device extraction by default with the bundled Gemma model, and opt-in cloud providers using your own API key.",
+  description: "How Temporal's AI works: on-device dual-engine intelligence with the bundled Gemma model and Laya Decision Engine, plus opt-in cloud providers.",
   openGraph: { images: ["/og/docs-ai.png"] },
   twitter: { images: ["/og/docs-ai.png"] },
 };
@@ -30,17 +30,25 @@ export default function AiDocs() {
         <div className="space-y-12">
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              The Native Engine (Default)
+              The Dual-Engine Local AI Architecture
             </h3>
-            <p className="leading-relaxed text-gray-400">
-              Temporal ships with Google&apos;s{" "}
-              <strong className="font-semibold text-gray-200">Gemma</strong>{" "}
-              language model running entirely on your phone via LiteRT. When you
-              scan a bank statement or a receipt, the model reads it, extracts
-              the transactions, and suggests categories — all without a single
-              byte leaving your device. No API key, no account, no internet
-              connection required.
+            <p className="leading-relaxed text-gray-400 mb-4">
+              Temporal utilizes a decoupled dual-engine paradigm for on-device intelligence: a <strong className="font-semibold text-gray-200">System 1 Fast Decision Engine (Laya)</strong> and a <strong className="font-semibold text-gray-200">System 2 Generative Model (Gemma 2B)</strong>.
             </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div className="border border-white/10 bg-black/60 p-4">
+                <div className="font-mono text-xs font-bold text-amber-400 mb-1">[ SYSTEM 1: LAYA DECISION ENGINE ]</div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  A 185 MB Int4 non-autoregressive encoder (based on mmBERT / ModernBERT) executing in 15–35ms. Dispatched for deterministic classification: statement column auto-detection, transaction category prediction, and payment rail disambiguation (UPI, P2P, P2M, POS) with zero token generation overhead and zero hallucination risk.
+                </p>
+              </div>
+              <div className="border border-white/10 bg-black/60 p-4">
+                <div className="font-mono text-xs font-bold text-emerald-400 mb-1">[ SYSTEM 2: GEMMA 2B GENERATIVE ]</div>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  Google&apos;s multimodal Gemma 2B running via LiteRT on device NPU/GPU. Dispatched for complex visual document parsing, camera receipt extraction, conversational queries, and unstructured spatial table reconstruction.
+                </p>
+              </div>
+            </div>
           </div>
 
           <div>
@@ -109,13 +117,21 @@ export default function AiDocs() {
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                LiteRT Acceleration
+                LiteRT Acceleration (Gemma 2B)
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                The local model runs through LiteRT-LM with automatic backend
+                The generative model runs through LiteRT-LM with automatic backend
                 selection across NPU, GPU, and CPU. If hardware acceleration
                 fails on a device, Temporal permanently falls back to a stable
                 CPU path so extraction never becomes unusable.
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                System 1 Decision Engine (Laya)
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                Laya is an air-gapped non-autoregressive decision model running directly on-device. With an execution envelope of 15ms–35ms per transaction, it classifies complex Indian and international banking narrations into structured categories and detects statement column headers with 99%+ deterministic confidence.
               </p>
             </div>
             <div>

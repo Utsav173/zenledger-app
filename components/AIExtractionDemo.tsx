@@ -29,10 +29,10 @@ const STEPS: PipelineStep[] = [
   },
   {
     id: "03",
-    code: "LITERT_INFER",
-    label: "GEMMA_2B",
-    sublabel: "NPU token categorization",
-    status: "42MS",
+    code: "DUAL_AI_INFER",
+    label: "GEMMA + LAYA",
+    sublabel: "Generative LLM + System 1 Classifier",
+    status: "28MS",
   },
   {
     id: "04",
@@ -123,9 +123,9 @@ function Step03Visualization() {
       <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
         <span className="text-[9px] font-bold tracking-[0.3em] text-indigo-400 uppercase flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
-          STAGE_03 // GEMMA_2B_LOCAL_INFERENCE
+          STAGE_03 // DUAL_AI_INFERENCE_PIPELINE
         </span>
-        <span className="text-[8px] text-indigo-400 uppercase">LATENCY: 42MS</span>
+        <span className="text-[8px] text-emerald-400 uppercase">LATENCY: 28MS (LAYA)</span>
       </div>
 
       <div className="border border-white/10 bg-black/90 p-3 space-y-2.5 text-[9px]">
@@ -137,18 +137,18 @@ function Step03Visualization() {
         </div>
         <div className="border-t border-white/5 pt-2 grid grid-cols-2 gap-2 text-[9px]">
           <div>
-            <span className="text-gray-500 text-[8px] uppercase block">INFERRED_CATEGORY</span>
-            <span className="text-emerald-400 font-bold">EQUITY_INVESTMENT</span>
+            <span className="text-gray-500 text-[8px] uppercase block">LAYA DECISION (SYS 1)</span>
+            <span className="text-emerald-400 font-bold">EQUITY_INVESTMENT (99.4%)</span>
           </div>
           <div>
-            <span className="text-gray-500 text-[8px] uppercase block">FLOW_TAXONOMY</span>
-            <span className="text-rose-400 font-bold">CAPITAL_OUTFLOW</span>
+            <span className="text-gray-500 text-[8px] uppercase block">FLOW & RAIL</span>
+            <span className="text-cyan-400 font-bold">OUTFLOW · P2M MERCHANT</span>
           </div>
         </div>
       </div>
 
       <div className="mt-3 text-[8px] text-gray-500 uppercase tracking-widest flex justify-between">
-        <span>INFERENCE TARGET: LOCAL_NPU</span>
+        <span>ENGINE: GEMMA_2B + LAYA_INT4</span>
         <span className="text-indigo-400">NO_CLOUD_LEAK</span>
       </div>
     </div>
@@ -283,8 +283,8 @@ export function AIExtractionDemo() {
           </div>
 
           <div className="border-t border-white/10 pt-3 mt-3 hidden md:block">
-            <div className="font-mono text-[8px] text-gray-500 uppercase tracking-widest mb-1">EXECUTION TARGET</div>
-            <div className="font-mono text-[9px] text-white font-bold">LITERT · GEMMA 2B ON NPU</div>
+            <div className="font-mono text-[8px] text-gray-500 uppercase tracking-widest mb-1">EXECUTION TARGETS</div>
+            <div className="font-mono text-[9px] text-white font-bold">GEMMA 2B (NPU) · LAYA INT4 (CPU/NPU)</div>
           </div>
         </div>
 
@@ -308,7 +308,7 @@ export function AIExtractionDemo() {
       {/* Bottom Telemetry Bar */}
       <div className="flex items-center justify-between border-t border-white/10 bg-black px-4 sm:px-5 py-2 font-mono text-[8px] text-gray-500 uppercase tracking-wider">
         <div className="flex items-center gap-3">
-          <span>MODEL: GEMMA_2B_IT</span>
+          <span>ENGINES: GEMMA_2B + LAYA_DECISION_INT4</span>
           <span className="text-emerald-400 hidden sm:inline">100% AIR_GAPPED</span>
         </div>
         <div className="flex items-center gap-4">

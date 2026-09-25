@@ -98,25 +98,26 @@ const ORCHESTRATION_NODES: SubFeature[] = [
   {
     id: "smart_categorize",
     code: "04",
-    tag: "AUTO TAGGING",
-    title: "Neural Smart Categorizer",
+    tag: "SYSTEM 1 DECISION ENGINE",
+    title: "Laya Neural Decision Model",
     summary:
-      "Continuously learns spending taxonomy to auto-tag uncategorized entries. Converts cryptic merchant descriptors (e.g. 'POS_049182_AMZN_IN') into clean structured categories.",
+      "Non-autoregressive System 1 decision engine based on quantized mmBERT / ModernBERT. Achieves sub-35ms deterministic transaction classification, column auto-detection, and counterparty rail extraction without generative hallucinations.",
     pillColor: "border-amber-500/30 bg-amber-500/5 text-amber-400",
     specs: [
-      { label: "TAXONOMY_MAP", value: "DYNAMIC_CATEGORY_V2" },
-      { label: "CONFIDENCE_GATE", value: "> 94% APPROVAL_REQ" },
-      { label: "BULK_CAPACITY", value: "500 TX / 0.14 SEC" },
+      { label: "MODEL_ARCH", value: "LAYA_INT4_NON_AUTOREGRESSIVE" },
+      { label: "LATENCY_PROFILE", value: "< 35MS DETERMINISTIC" },
+      { label: "ON_CHIP_FOOTPRINT", value: "185 MB QUANTIZED" },
+      { label: "COLUMN_SOLVER", value: "SEMANTIC_ROLE_CLASSIFIER" },
     ],
-    command: "APPLY::SMART_TAXONOMY --BATCH",
+    command: "APPLY::LAYA_DECISION_ENGINE --BATCH",
     interactiveType: "categorize",
     mockData: {
-      heading: "TAXONOMY_INFERENCE // CLASSIFIER",
-      subheading: "VECTOR SIMILARITY COSINE SCORE: 0.968",
+      heading: "LAYA_DECISION_ENGINE // RUNTIME",
+      subheading: "NON-AUTOREGRESSIVE LOGIT PROBABILITY: 0.994",
       items: [
-        { label: "RAW_STRING", detail: "UPI/234910293/SWIGGY_BLR", status: "FOOD & DINING", badge: "98.4%" },
-        { label: "RAW_STRING", detail: "ACH_DR_ZERODHA_MKT_NSE", status: "INVESTMENTS", badge: "99.1%" },
-        { label: "RAW_STRING", detail: "NETFLIX_DIGITAL_ENT_MUM", status: "SUBSCRIPTIONS", badge: "97.5%" },
+        { label: "UPI_P2M", detail: "UPI/234910293/SWIGGY_BLR", status: "FOOD & DINING", badge: "28MS · P2M" },
+        { label: "ACH_DR", detail: "ACH_DR_ZERODHA_MKT_NSE", status: "INVESTMENTS", badge: "22MS · BROKER" },
+        { label: "REV_COL", detail: "HEADER: 'Narration / Description'", status: "DESCRIPTION_COL", badge: "99.8% CONF" },
       ],
     },
   },
@@ -217,9 +218,9 @@ export function IntelligenceOrchestrationHub() {
           <div className="font-mono text-[10px] text-gray-500 uppercase tracking-wider flex items-center gap-4">
             <span className="text-emerald-400 flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
-              [ ENGINE: LITERT + GEMMA ]
+              [ ENGINES: GEMMA 2B + LAYA DUAL-AI ]
             </span>
-            <span className="hidden sm:inline text-gray-600">[ NPU_ACCELERATED ]</span>
+            <span className="hidden sm:inline text-gray-600">[ NPU + CPU ACCELERATED ]</span>
           </div>
         </div>
 

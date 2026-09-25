@@ -122,7 +122,8 @@ export function SystemArchitectureInteractive() {
   "security_model": "Zero-Trust Local Hardware Enclave",
   "storage_engine": "Expo SQLite Encrypted (ACID Compliant)",
   "intelligence": {
-    "engine": "LiteRT / Google Gemma 2B",
+    "generative_engine": "LiteRT / Google Gemma 2B (Multimodal)",
+    "decision_engine": "Laya Non-Autoregressive Classifier (Int4 185MB)",
     "execution_target": "NPU / CPU On-Device",
     "telemetry": "Zero Remote Cloud Ingestion",
     "preprocessor": "LayoutAnalyzer Spatial Bounding Normalizer",

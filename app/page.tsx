@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     "secure portfolio manager",
     "on-device AI",
     "Gemma LLM finance",
+    "Laya decision engine",
+    "System 1 financial model",
+    "sub-35ms categorization",
     "Ledger Horizon",
     "deterministic financial OS",
     "LiteRT on-device LLM",
@@ -48,10 +51,11 @@ const softwareSchema = {
     priceCurrency: "INR",
   },
   description:
-    "A high-performance offline financial operating system and investment portfolio tracker with on-device AI intelligence (LiteRT Gemma 2B) and zero cloud data leaks.",
+    "A high-performance offline financial operating system and investment portfolio tracker with dual on-device AI intelligence (LiteRT Gemma 2B + Laya System 1 Decision Engine) and zero cloud data leaks.",
   featureList: [
     "Offline double-entry ledger with encrypted SQLite vaults",
     "On-device AI statement scanning (Gemma 2B LLM via LiteRT) for PDF, CSV, XLS, TXT",
+    "System 1 Laya Decision Model for sub-35ms transaction auto-categorization and column detection",
     "On-device Camera Receipt OCR & Automated Transaction Entry",
     "Atomic Conversational Agent for instant text-based transaction creation",
     "Cognitive TF-IDF Semantic Search across transaction histories",
@@ -142,7 +146,7 @@ export default function Home() {
             className="mb-8 animate-fade-in font-mono text-[10px] tracking-[0.3em] text-gray-400 uppercase leading-relaxed md:leading-normal max-w-sm md:max-w-none"
             style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}
           >
-            [ SYSTEM: TEMPORAL v2.5 ] · [ PIPELINE: GEMMA / LITERT ] · [ MODE: OFFLINE ]
+            [ SYSTEM: TEMPORAL v2.5 ] · [ PIPELINE: GEMMA + LAYA DUAL-AI ] · [ MODE: OFFLINE ]
           </div>
 
           {/* Headline */}
@@ -275,6 +279,23 @@ export default function Home() {
                 </h3>
                 <p className="text-gray-400 text-xs font-mono leading-relaxed">
                   Unified balance verification across NSE/BSE stocks, 44,000+ AMFI mutual fund NAVs, Gold Bullion, and Fixed Deposits.
+                </p>
+              </div>
+
+              <div className="border border-white/15 bg-black/60 p-6 sm:p-7 hover:border-sky-500/40 transition-all">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="font-mono text-xs font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 border border-sky-500/20">
+                    03 // SYSTEM_1_DECISION
+                  </span>
+                  <span className="text-[9px] font-mono font-bold tracking-widest text-gray-500 uppercase">
+                    [ &lt; 35MS LATENCY ]
+                  </span>
+                </div>
+                <h3 className="text-xl font-serif italic text-white mb-2">
+                  Laya Decision Engine
+                </h3>
+                <p className="text-gray-400 text-xs font-mono leading-relaxed">
+                  Quantized 185 MB non-autoregressive encoder for instantaneous statement column classification and bank rail tagging without hallucinations.
                 </p>
               </div>
             </div>

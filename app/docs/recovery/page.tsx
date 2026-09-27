@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "The Recovery Kit | Temporal Docs",
-  description: "Restore your complete financial history on a new device using Temporal's encrypted Recovery Kit backup system.",
+  description: "Restore your complete financial history on a new device using Temporal's encrypted AES-256-GCM Recovery Kit backup envelope.",
   openGraph: { images: ["/og/docs-recovery.png"] },
   twitter: { images: ["/og/docs-recovery.png"] },
 };
@@ -18,7 +18,7 @@ export default function RecoveryDocs() {
           The Recovery Kit.
         </h1>
         <p className="font-mono text-sm leading-relaxed tracking-wider text-gray-400 uppercase">
-          Your backup. Your way back. Your responsibility.
+          Client-side AES-256-GCM envelope &middot; 13 SQLite tables &middot; Universal portability
         </p>
       </div>
 
@@ -30,40 +30,39 @@ export default function RecoveryDocs() {
         <div className="space-y-12">
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Why it matters
+              Why the Recovery Kit Is Your Single Source of Truth
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Temporal does not use cloud accounts. If you uninstall the app or
-              lose your phone, your data goes with it. The{" "}
+              Temporal runs zero cloud databases. If you switch to a new phone, lose your device,
+              or reinstall the operating system, your entire financial record moves with your{" "}
               <strong className="font-semibold text-gray-200">
-                Recovery Kit
-              </strong>{" "}
-              is a digital snapshot of your setup. If you have this kit, you can
-              regain control of your financial history on any new device.
+                Recovery Kit (.zenkit)
+              </strong>.
+              It packages your complete transaction ledger, investment lots, custom categories,
+              and cryptographic license receipt into an authenticated file.
             </p>
           </div>
 
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              How to store it
+              Storage &amp; Backup Hygiene
             </h3>
             <p className="leading-relaxed text-gray-400">
-              We recommend saving your Recovery Kit in multiple secure
-              locations—a password manager, an encrypted cloud drive, or even a
-              physical USB drive. Treat it with the same level of care you would
-              a bank locker key.
+              Because your Recovery Kit is protected by military-grade encryption, you can safely store
+              it on your personal cloud drive (Google Drive, iCloud, ProtonDrive), keep it on an air-gapped
+              USB drive, or archive it in your password manager.
             </p>
           </div>
 
           <div className="border-l-2 border-white bg-white/3 p-8">
             <h4 className="mb-4 font-mono text-xs font-bold tracking-widest text-white uppercase">
-              Use Case: Device Migration
+              Use Case: Cross-Device Migration in 10 Seconds
             </h4>
             <p className="text-sm leading-relaxed text-gray-400 italic">
-              "I'm upgrading to a new phone. How do I move my data?" Simply
-              generate a Recovery Kit on your old device, transfer the file to
-              your new device, and select 'Import Recovery Kit' during the
-              initial setup of the Temporal app.
+              &quot;I purchased a new flagship phone. How do I move 5 years of financial history?&quot;
+              Generate a Recovery Kit on your old device, transfer the `.zenkit` file via AirDrop, Bluetooth,
+              or local cable, and tap &apos;Import Recovery Kit&apos; on your new device. All accounts, lots, and
+              audited transactions restore instantaneously.
             </p>
           </div>
         </div>
@@ -75,30 +74,31 @@ export default function RecoveryDocs() {
             Technical Specs (25%)
           </div>
           <h2 className="mb-6 font-serif text-2xl text-white/90 italic">
-            Kit Structure
+            Cryptographic Recovery Specification
           </h2>
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                JSON Encapsulation
+                AES-256-GCM Authenticated Envelope
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                The kit is a structured JSON object containing your
-                `categories`, `accounts`, and basic configuration settings.
-                Currently, it serves as a lightweight "Setup Snapshot" rather
-                than a full transaction backup, which is handled via the
-                separate Data Export feature.
+                The payload contains a complete normalized relational dump of all 13 SQLite tables (transactions, accounts, holding_lots, categories, ai_chats, etc.). Ciphertext is sealed using AES-256 in Galois/Counter Mode (GCM) with a 128-bit authentication tag and a 96-bit cryptographically random IV. Tampered or corrupted backup files are rejected prior to database ingestion.
               </p>
             </div>
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Seedless Architecture
+                PBKDF2-SHA256 Key Derivation (600,000 Rounds)
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Unlike crypto wallets, we don't use 12-word seeds because we
-                don't derive addresses. The Recovery Kit simply re-initializes
-                your local SQLite environment with your preferred metadata and
-                structure.
+                Master encryption keys are derived from your user passphrase using PBKDF2 with HMAC-SHA256, a 32-byte secure salt, and 600,000 hashing rounds. This computationally heavy iteration count renders brute-force and dictionary attacks computationally infeasible on modern GPU clusters.
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                Universal Portability Specification
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                The `.zenkit` archive adheres to the Universal Database Schema documented in our architecture specification. It is cross-platform compatible across Android, iOS, Desktop (Tauri/Electron), and Web (Next.js OPFS WASM SQLite), ensuring zero vendor lock-in.
               </p>
             </div>
           </div>

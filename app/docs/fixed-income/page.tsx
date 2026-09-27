@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Fixed Income & FDs | Temporal Docs",
-  description: "Track fixed deposits and fixed-income instruments in Temporal, including maturity dates and interest accrual.",
+  description: "Track fixed deposits, PPF, and fixed-income instruments in Temporal: daily accrual compounding, maturity laddering, and fixed-point math.",
   openGraph: { images: ["/og/docs-fixed-income.png"] },
   twitter: { images: ["/og/docs-fixed-income.png"] },
 };
@@ -18,7 +18,7 @@ export default function FixedIncomeDocs() {
           Fixed Income (FD).
         </h1>
         <p className="font-mono text-sm leading-relaxed tracking-wider text-gray-400 uppercase">
-          Track your deposits, maturity dates, and compounding interest.
+          Daily compound accruals &middot; Maturity laddering &middot; PPF/EPF benchmarks
         </p>
       </div>
 
@@ -30,39 +30,32 @@ export default function FixedIncomeDocs() {
         <div className="space-y-12">
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              The Stability Anchor
+              The Fixed-Income Liquidity Anchor
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Fixed Deposits (FDs) and Bonds are the backbone of many
-              portfolios. Temporal lets you track interest rates, compounding
-              frequency, and{" "}
-              <strong className="font-semibold text-gray-200">
-                Maturity Dates
-              </strong>
-              . This ensures you never miss a renewal deadline.
+              Fixed Deposits (FDs), Public Provident Funds (PPF), and Employee Provident Funds (EPF) form
+              the capital-preservation core of financial planning. Temporal provides automated daily compound
+              interest accruals, tax withholding (TDS) projections, and renewal deadline alerts in a single view.
             </p>
           </div>
 
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Projected Maturity Value
+              Projected Maturity &amp; Cash Flow Runway
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Temporal automatically calculates the projected value of your
-              deposit at maturity based on the rates you provide. This helps you
-              plan for future big-ticket expenses with confidence.
+              Temporal computes the exact future maturity figure of your deposits based on contracted rates
+              and compounding frequencies. This enables accurate planning for major planned capital expenditures.
             </p>
           </div>
 
           <div className="border border-white bg-white/5 p-8">
             <h4 className="mb-4 font-mono text-xs font-bold tracking-widest text-white uppercase">
-              Use Case: Laddering FDs
+              Use Case: Systematic FD Laddering
             </h4>
             <p className="text-sm leading-relaxed text-gray-400 italic">
-              "I have 5 different FDs maturing at different times." By using the
-              Maturity Date view, you can 'ladder' your income, ensuring you
-              always have liquidity when you need it while maximizing interest
-              rates.
+              &quot;I hold multiple deposits maturing across staggered quarters to optimize reinvestment yield.&quot;
+              Temporal&apos;s Maturity Ladder console plots maturity dates chronologically, ensuring you maintain liquidity while capturing peak interest cycle returns.
             </p>
           </div>
         </div>
@@ -74,28 +67,31 @@ export default function FixedIncomeDocs() {
             Technical Specs (25%)
           </div>
           <h2 className="mb-6 font-serif text-2xl text-white/90 italic">
-            Compounding Logic
+            Compounding &amp; Interest Math
           </h2>
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Accumulation Algorithm
+                Daily Compound Accrual Engine
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Temporal supports Monthly, Quarterly, and Yearly compounding
-                models. We calculate the accumulated interest using the standard
-                compound interest formula, adjusted daily to give you a "Current
-                Value" estimate.
+                Temporal supports Monthly, Quarterly, Half-Yearly, and Cumulative compounding models. Accrued interest is computed using fixed-point integer cents/paise: A = Math.round(P &middot; (1 + r / n)^(n &middot; t)), providing real-time accrued valuation without manual entries.
               </p>
             </div>
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                TDS Deductions
+                Statutory PPF &amp; EPF Yield Benchmarks
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                The schema includes flags for TDS (Tax Deducted at Source),
-                allowing the system to subtract projected tax liabilities from
-                your net-of-tax maturity value for more realistic planning.
+                Specialized calculation engines track government provident funds. Models account for the statutory rule where deposits made on or before the 5th of each month earn interest for that entire month, compounding annually at notified rates.
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                TDS Tax Drag Modeling
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                The engine incorporates Tax Deducted at Source (TDS) flags, computing post-tax maturity proceeds to prevent overstated liquidity estimates.
               </p>
             </div>
           </div>

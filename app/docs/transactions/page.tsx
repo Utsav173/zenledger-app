@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "The Transaction Engine | Temporal Docs",
-  description: "How Temporal's transaction engine works: fast entry, AI-powered statement parsing, and high-performance history.",
+  description: "How Temporal's transaction engine works: Viterbi Trellis balance continuity solver, SpatialLattice KDE extraction, and fixed-point math.",
   openGraph: { images: ["/og/docs-transactions.png"] },
   twitter: { images: ["/og/docs-transactions.png"] },
 };
@@ -18,7 +18,7 @@ export default function TransactionDocs() {
           The Transaction Engine.
         </h1>
         <p className="font-mono text-sm leading-relaxed tracking-wider text-gray-400 uppercase">
-          Precision entry. Instant feedback. Total clarity.
+          Viterbi Trellis solver &middot; [MATH_LOCK] continuity &middot; Fixed-point precision
         </p>
       </div>
 
@@ -33,41 +33,39 @@ export default function TransactionDocs() {
               Expense vs Income vs Transfer
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Temporal handles three primary transaction types.{" "}
+              Temporal handles three primary transaction primitives.{" "}
               <strong className="font-semibold text-gray-200">Expenses</strong>{" "}
-              reduce your net worth,{" "}
+              reduce net worth,{" "}
               <strong className="font-semibold text-gray-200">Income</strong>{" "}
               increases it, and{" "}
               <strong className="font-semibold text-gray-200">Transfers</strong>{" "}
-              move money between your Vaults without affecting your total
-              wealth. Using these correctly ensures your analytics remain
-              accurate.
+              execute balanced double-entry sweeps between Vaults without altering overall
+              wealth. Enforcing the Transit Rail Peeling Invariant ensures transit protocols
+              (UPI, IMPS, NEFT) in merchant narrations are never misclassified as transfers.
             </p>
           </div>
 
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              AI-Powered Extraction
+              Deterministic AI Statement Discovery
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Manual entry is the bottleneck of financial clarity. Temporal
-              solves this with an{" "}
-              <strong className="font-semibold text-gray-200">AI-First</strong>{" "}
-              discovery engine. Simply upload a PDF of your bank statement, and
-              the system automatically identifies transactions, normalizes
-              merchant names, and suggests categories.
+              Manual entry is the primary failure mode of personal finance. Temporal couples
+              an on-device <strong className="font-semibold text-gray-200">SpatialLattice</strong> geometry parser
+              with the <strong className="font-semibold text-gray-200">ViterbiBalanceSolver</strong>. Upload a bank statement PDF
+              or scan a paper receipt: the system isolates transaction columns, validates balance continuity,
+              and locks verified rows into your ledger with 0% cloud exposure.
             </p>
           </div>
 
           <div className="border-l-2 border-white bg-white/3 p-8">
             <h4 className="mb-4 font-mono text-xs font-bold tracking-widest text-white uppercase">
-              Use Case: The Monthly Bulk Sync
+              Use Case: The Multi-Page Bulk Reconciliation
             </h4>
             <p className="text-sm leading-relaxed text-gray-400 italic">
-              "I have 200 transactions this month from three different banks."
-              Instead of typing them one-by-one, you can drop your PDFs into the
-              Discovery Pass. The AI will refine the "shattered" rows of the PDF
-              into a clean ledger, saving you hours of manual work.
+              &quot;I have 300 transactions spread across a 24-page bank statement with scrambled same-day ordering.&quot;
+              Instead of manually cross-checking balances, Temporal&apos;s Trellis solver calculates the exact forward and reverse
+              state trajectory. Verified rows receive the emerald [MATH_LOCK] badge, giving you audit-grade certainty in seconds.
             </p>
           </div>
         </div>
@@ -79,42 +77,39 @@ export default function TransactionDocs() {
             Technical Specs (25%)
           </div>
           <h2 className="mb-6 font-serif text-2xl text-white/90 italic">
-            Extraction Intelligence
+            Extraction &amp; Ledger Specifications
           </h2>
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Discovery & Refinement Model
+                Viterbi Trellis Balance Solver &amp; [MATH_LOCK]
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Temporal employs a two-stage extraction process. First, a
-                programmatic parser identifies potential transaction blocks in
-                the PDF. Second, the on-device Gemma LLM performs a "Refinement Pass" to
-                heal OCR errors and normalize chaotic merchant strings into
-                human-readable entities.
+                Solves balance continuity over candidate transaction sequences: Balance[t] = Balance[t-1] &plusmn; Amount[t] with an integer tolerance &epsilon; = 5 cents. Solves in both forward and reverse directions, picking the path with maximum verified rows (&ge; 90% confidence). Verified rows are stamped with immutable [MATH_LOCK] flags, preventing probabilistic model hallucination.
               </p>
             </div>
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Privacy-Preserving Inference
+                Fixed-Point Integer Scaling (Zero Float Drift)
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                By default, AI inference runs entirely on your device using the
-                bundled Gemma model — your PDF never leaves the phone. If you
-                opt into a cloud provider with your own API key, Temporal still
-                does not store your PDF or extracted data on any server; only
-                the raw text chunks required for extraction are processed, and
-                the structured result is returned directly to your device.
+                Temporal eliminates IEEE 754 binary floating-point errors by storing all fiat monetary values as 64-bit integers scaled by 100&times; (paise/cents). Quantities are scaled by 10,000&times; (4 decimal places). Consideration formula: amountCents = Math.round((scaledQuantity * pricePerUnitCents) / 10000).
               </p>
             </div>
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Client-Side UUIDs
+                Transit Rail Peeling Invariant
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                To prevent collisions and ensure offline reliability, every
-                transaction—whether manual or AI-generated—is assigned a Version
-                4 UUID upon creation.
+                Narration strings are processed by the InformationEntropyDecomposer. Transit protocol markers (UPI, IMPS, NEFT, BBPS, POS, Razorpay, NACH) and reference UTR hashes are peeled as transport metadata, preventing merchant transactions from contaminating the &apos;cat_transfer&apos; double-entry category.
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                Universal Delimiter Entropy Parser
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                For CSV statements, an RFC 4180 lexer calculates delimiter entropy across comma, semicolon, tab, and pipe characters to auto-detect delimiters. Indian number formatting (lakhs/crores) and accounting parentheses are parsed with dedicated lexers.
               </p>
             </div>
           </div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Wealth Tracking & Performance | Temporal Docs",
-  description: "Portfolio performance tracking in Temporal: returns, allocation insights, and net worth across all your investments.",
+  description: "Portfolio performance tracking in Temporal: Newton-Raphson XIRR solver, Herfindahl concentration index, and real-time asset telemetry.",
   openGraph: { images: ["/og/docs-investments.png"] },
   twitter: { images: ["/og/docs-investments.png"] },
 };
@@ -15,11 +15,10 @@ export default function InvestmentsDocs() {
           [03] Wealth Tracking
         </div>
         <h1 className="mb-8 font-serif text-5xl italic md:text-7xl">
-          Wealth Tracking & Performance.
+          Wealth Tracking &amp; Performance.
         </h1>
         <p className="font-mono text-sm leading-relaxed tracking-wider text-gray-400 uppercase">
-          Move beyond simple balance tracking. Understand the true velocity of
-          your investments.
+          Newton-Raphson XIRR &middot; Herfindahl concentration &middot; Pareto telemetry
         </p>
       </div>
 
@@ -31,48 +30,31 @@ export default function InvestmentsDocs() {
         <div className="space-y-12">
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Tracking Portfolio Growth
+              Multi-Asset Portfolio Telemetry
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Temporal aggregates different asset classes—Stocks, Mutual Funds,
-              Gold, and Fixed Income—into a unified portfolio view. This allows
-              you to see your{" "}
-              <strong className="font-semibold text-gray-200">
-                Allocated Distribution
-              </strong>{" "}
-              in real-time, helping you identify if you are over-exposed to a
-              particular risk.
+              Temporal aggregates diverse asset classes—Equities, AMFI Mutual Funds, Spot Bullion Gold, and Fixed Deposits—into a single mathematical dashboard.
+              Gain instant clarity into your actual capital allocation and portfolio beta without relying on multiple disjointed broker interfaces.
             </p>
           </div>
 
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Why XIRR vs Absolute Gain?
+              Why XIRR Over Simple Absolute Gain?
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Absolute gain tells you how much money you made. XIRR (Extended
-              Internal Rate of Return) tells you how{" "}
-              <em className="text-gray-300 italic">efficient</em> your capital
-              was over time, accounting for different entry dates. In Temporal,
-              we prioritize XIRR so you can compare your portfolio performance
-              directly against benchmarks like the FD rate or Index Funds.
+              Absolute percentage gains hide the drag of cash flow timing. Extended Internal Rate of Return (XIRR) computes the exact annualized velocity of your capital across recurring SIPs, variable lump sums, and partial profit withdrawals.
+              Temporal solves XIRR directly on your device CPU with zero data transmission.
             </p>
           </div>
 
           <div className="border-l-2 border-white bg-white/3 p-8">
             <h4 className="mb-4 font-mono text-xs font-bold tracking-widest text-white uppercase">
-              Use Case: The SIP Tracker
+              Use Case: The SIP Reality Check
             </h4>
             <p className="text-sm leading-relaxed text-gray-400 italic">
-              "I invest ₹10,000 every month into an ELSS fund. How do I know if
-              I'm actually beating inflation?" By logging each 'Lot' in
-              Temporal, the system automatically calculates the compound annual
-              growth rate of your systematic contributions. Combined with our{" "}
-              <strong className="font-semibold text-gray-200">
-                Watchlist
-              </strong>{" "}
-              feature, you can benchmark your SIPs against potential alternatives
-              in real-time.
+              &quot;I have invested in 8 different mutual funds and 15 stocks over 4 years. How do I know if I&apos;m truly beating the index net of drag?&quot;
+              Temporal&apos;s Newton-Raphson solver calculates exact annualized XIRR across every lot, while Herfindahl concentration telemetry alerts you if 80% of your gains depend on just two positions.
             </p>
           </div>
         </div>
@@ -84,29 +66,31 @@ export default function InvestmentsDocs() {
             Technical Specs (25%)
           </div>
           <h2 className="mb-6 font-serif text-2xl text-white/90 italic">
-            The Performance Engine
+            Mathematical Quant Telemetry
           </h2>
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                XIRR Algorithm
+                Newton-Raphson XIRR Engine (10⁻⁷ Convergence)
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Temporal implements the Newton-Raphson method to solve for the
-                discount rate that makes the net present value (NPV) of all
-                transaction 'lots' zero. This calculation is performed entirely
-                on your device's CPU, ensuring zero data leakage.
+                Solves for discount rate r such that NPV = &Sigma; [C_i / (1 + r)^((d_i - d_0) / 365)] = 0. Uses derivative f&apos;(r) iterations with strict boundary guards r &isin; [-0.99, 100.0] and a 10⁻⁷ convergence limit. Handles irregular cash flows, corporate dividends, and multi-year withdrawals accurately.
               </p>
             </div>
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                NAV Caching Strategy
+                Herfindahl-Hirschman Index (HHI) Concentration
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Real-time market data is fetched via the Mutual Fund API and
-                cached in the local `nav_cache` table. To respect API limits and
-                battery life, NAVs are refreshed once every 24 hours or manually
-                upon request.
+                Measures concentration risk across positions and sectors: HHI = &Sigma; s_i&sup2; (where s_i is percentage allocation). Alerts when HHI exceeds 2,500, indicating highly concentrated idiosyncratic risk.
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                Pareto 80/20 Distribution Analytics
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                Computes cumulative capital distribution to reveal whether 20% of your holdings account for 80% of your capital or volatility, facilitating institutional-grade rebalancing decisions.
               </p>
             </div>
           </div>

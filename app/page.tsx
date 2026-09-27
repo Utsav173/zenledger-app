@@ -8,6 +8,7 @@ import { MultiAssetPortfolioShowcase } from "@/components/MultiAssetPortfolioSho
 import { LedgerHorizonPreview } from "@/components/LedgerHorizonPreview";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { SystemArchitectureInteractive } from "@/components/SystemArchitectureInteractive";
+import { EcosystemRoadmap } from "@/components/EcosystemRoadmap";
 import { MobileStickyDownloadBar } from "@/components/MobileStickyDownloadBar";
 import { VideoLaunchShowcase } from "@/components/VideoLaunchShowcase";
 
@@ -374,6 +375,11 @@ export default function Home() {
       <SystemArchitectureInteractive />
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
+      {/*  ECOSYSTEM ROADMAP — 5 Sovereign Engineering Pillars (PRDs)           */}
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      <EcosystemRoadmap />
+
+      {/* ═══════════════════════════════════════════════════════════════════ */}
       {/*  PHILOSOPHY — Full-width statement section                        */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden border-b-2 border-white/20 py-32 scanlines">
@@ -417,7 +423,7 @@ export default function Home() {
               href="/queries"
               className="inline-flex items-center gap-3 border border-white/20 px-8 py-4 font-mono text-xs text-white hover:bg-white hover:text-black transition-all duration-300 tracking-widest uppercase"
             >
-              <span>EXPLORE ALL 60 SYSTEM QUERIES</span>
+              <span>EXPLORE ALL 77 SYSTEM QUERIES</span>
               <span>→</span>
             </Link>
           </div>

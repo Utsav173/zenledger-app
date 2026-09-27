@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Custom Categories | Temporal Docs",
-  description: "Create and manage custom transaction categories in Temporal to organize your spending exactly how you think about it.",
+  title: "Taxonomy & Cognitive Categorization | Temporal Docs",
+  description: "Learn how Temporal couples user-defined custom categories with on-device Naive Bayes MAP classification, Information Entropy token decomposition, and trigram fuzzy matching.",
   openGraph: { images: ["/og/docs-categories.png"] },
   twitter: { images: ["/og/docs-categories.png"] },
 };
@@ -12,13 +12,13 @@ export default function CategoriesDocs() {
     <article className="prose prose-invert prose-p:leading-loose prose-headings:tracking-tight max-w-none">
       <div className="mb-16">
         <div className="mb-4 font-mono text-xs tracking-widest text-gray-400 uppercase">
-          [01.2] Organization
+          [01.2] Organization & AI
         </div>
         <h1 className="mb-8 font-serif text-5xl italic md:text-7xl">
-          Custom Categories.
+          Custom Categories & Cognitive Mapping.
         </h1>
         <p className="font-mono text-sm leading-relaxed tracking-wider text-gray-400 uppercase">
-          Tailor the system to your life. No forced rigid structures.
+          Total taxonomy sovereignty backed by an on-device Multinomial Naive Bayes classifier.
         </p>
       </div>
 
@@ -30,72 +30,82 @@ export default function CategoriesDocs() {
         <div className="space-y-12">
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Define Your Own Rules
+              Sovereign Financial Taxonomy
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Standard finance apps give you generic categories like "Food" and
-              "Rent." Temporal allows you to delete these and create your own.
-              Want a category specifically for "Espresso" or "Cat Toys"? You can
-              create it with custom icons and colors.
+              Generic personal finance tools enforce rigid, opinionated categories that fail to mirror real life. Temporal provides complete taxonomic freedom: construct custom category hierarchies, customize visual tokens with bespoke hex palettes and icons, or archive obsolete categories without breaking historical spending audits.
             </p>
           </div>
 
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              The Power of Visual Cues
+              Self-Learning Auto-Categorization
             </h3>
             <p className="leading-relaxed text-gray-400">
-              By assigning distinct colors and icons to your categories, your
-              transaction list becomes a readable map of your lifestyle. You can
-              quickly see patterns—like a sea of red indicating high impulsive
-              spending on shopping.
+              When importing raw bank statements or scanning receipts, you shouldn't have to categorize hundreds of transactions by hand. As you classify transactions, Temporal learns your personalized allocation habits locally. The next time a statement contains a cryptic narration, Temporal classifies it automatically with mathematical confidence scoring.
             </p>
           </div>
 
-          <div className="border border-white bg-white/5 p-8">
+          <div className="border border-white/10 bg-black p-8">
             <h4 className="mb-4 font-mono text-xs font-bold tracking-widest text-white uppercase">
-              Use Case: Project Tracking
+              Use Case: Project & Capital Expenditure Segregation
             </h4>
             <p className="text-sm leading-relaxed text-gray-400 italic">
-              "I'm renovating my house and want to see only those costs." You
-              can create a temporary category called 'Renovation.' Once the
-              project is done, you can delete it or archive it—Temporal's
-              database will keep the transaction records while unlinking the
-              category.
+              "I am renovating an apartment and need to track distinct sub-categories for carpentry, electrical fixtures, and permits, but want to collapse them into a single report after completion." In Temporal, you can create dedicated project categories. When the renovation concludes, archiving the category preserves every transaction and receipt attachment with full historical fidelity.
             </p>
           </div>
         </div>
       </section>
 
       <section className="mb-10">
-        <div className="relative overflow-hidden border border-white/10 bg-[#1a1a1a] p-8">
+        <div className="relative overflow-hidden border border-white/10 bg-black p-8">
           <div className="absolute top-0 right-0 p-2 font-mono text-[8px] text-white/30 uppercase">
-            Technical Specs (25%)
+            Technical Architecture (25%)
           </div>
           <h2 className="mb-6 font-serif text-2xl text-white/90 italic">
-            Identity & Linkage
+            Cognitive Classification Subsystem
           </h2>
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Relational Integrity
+                `InformationEntropyDecomposer`: Rail & Token Peeling
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Categories are stored in the `categories` table. Every
-                transaction holds a `categoryId`. If a category is deleted, the
-                database is instructed to keep the transaction but set its
-                category reference to `null`, ensuring your total expense
-                records never disappear.
+                Raw bank narrations are plagued by high-entropy noise: transit markers (`UPI/`, `NEFT-`, `POS`), alphanumeric reference sequences, and payment gateway hashes. Temporal's `InformationEntropyDecomposer` calculates token entropy $H(X)$, strips transit rail noise, and isolates high-signal counterparty stems before classification begins.
               </p>
             </div>
+
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Default Seeding
+                `BayesianLearner`: Multinomial Naive Bayes MAP
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                On first launch, the app seeds 15 default categories into your
-                local SQLite db. These are marked with an `isDefault` flag,
-                allowing them to be available to every vault you create.
+                Classification is driven by an on-device Multinomial Naive Bayes engine with Laplace smoothing ($k=1$). Stored in the `ml_vocabulary` table, it computes Maximum A Posteriori (MAP) probabilities over token distributions:
+              </p>
+              <div className="mt-3 border border-white/10 bg-[#0a0a0a] p-4 font-mono text-[11px] text-gray-300">
+                P(C | w₁, ..., wₙ) ∝ P(C) · ∏ P(wᵢ | C)<br />
+                P(wᵢ | C) = (count(wᵢ, C) + 1) / (∑ count(w, C) + |V|)
+              </div>
+              <p className="mt-2 text-xs leading-relaxed text-gray-400">
+                Every manual user correction immediately updates the local vocabulary frequency matrix, delivering zero-latency personalization without cloud model fine-tuning.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                `CategoryMapper`: Trigram Fuzzy Similarity
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                For unseen tokens or initial unseeded vaults, `CategoryMapper` computes character-level trigram similarity (S<sub>trigram</sub> &ge; 0.65) across category keywords and counterparty aliases, ensuring accurate classification even in the presence of minor bank typos and truncated narrations.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                Referential Integrity & O(1) Memory Cache
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                Categories are loaded into an in-memory O(1) hash map (`CategoryContext`) during app launch. Foreign key relationships enforce `ON DELETE SET NULL` on `transactions.categoryId`, guaranteeing that deleting a custom category will never orphan, corrupt, or erase historical transaction ledgers.
               </p>
             </div>
           </div>

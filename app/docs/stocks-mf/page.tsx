@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Stocks & Mutual Funds | Temporal Docs",
-  description: "Track stocks and mutual funds in Temporal with holdings management and portfolio insights, fully offline.",
+  description: "Track stocks and mutual funds in Temporal: chronological FIFO lot depletion, corporate action split invariants, and keyless AMFI feeds.",
   openGraph: { images: ["/og/docs-stocks-mf.png"] },
   twitter: { images: ["/og/docs-stocks-mf.png"] },
 };
@@ -15,10 +15,10 @@ export default function StocksMfDocs() {
           [03.1] Market Assets
         </div>
         <h1 className="mb-8 font-serif text-5xl italic md:text-7xl">
-          Stocks & Mutual Funds.
+          Stocks &amp; Mutual Funds.
         </h1>
         <p className="font-mono text-sm leading-relaxed tracking-wider text-gray-400 uppercase">
-          Deep analytics for your equity and debt portfolios.
+          FIFO lot depletion &middot; Corporate action invariants &middot; Keyless market telemetry
         </p>
       </div>
 
@@ -30,38 +30,32 @@ export default function StocksMfDocs() {
         <div className="space-y-12">
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Unified Portfolio Management
+              Unified Equity &amp; Mutual Fund Management
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Temporal allows you to track both Stocks and Mutual Funds in a
-              single interface. By adding your 'Lots' (purchase history), the
-              app automatically handles price updates and computes your weighted
-              gains.
+              Temporal provides a unified ledger for both Indian equities (NSE/BSE) and 44,000+ AMFI Mutual Fund schemes.
+              Instead of relying on broker APIs that revoke authorization every 30 days, Temporal records individual
+              purchase tranches (&apos;Lots&apos;) locally, calculating realized capital gains and portfolio telemetry with zero external broker lock-in.
             </p>
           </div>
 
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Market Watchlists
+              Market Watchlists &amp; Sparklines
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Beyond tracking what you own, Temporal provides a high-density{" "}
-              <strong className="font-semibold text-gray-200">Watchlist</strong>{" "}
-              engine. Designed with "Financial Brutalism" in mind, it allows you
-              to monitor Indian Equities (NIFTY 50) and Mutual Funds with
-              zero-latency price updates and sparkline visualizations.
+              Beyond tracking what you own, Temporal provides a high-density Watchlist engine designed with Utilitarian Swiss Brutalism.
+              Monitor prospective equities and benchmark indices with sub-16ms sparklines and live price-delta indicators without cluttering your actual portfolio balance sheet.
             </p>
           </div>
 
           <div className="border border-white bg-white/5 p-8">
             <h4 className="mb-4 font-mono text-xs font-bold tracking-widest text-white uppercase">
-              Use Case: Market Sentiment
+              Use Case: Clean Corporate Action Accounting
             </h4>
             <p className="text-sm leading-relaxed text-gray-400 italic">
-              "I want to track the NIFTY Next 50 but I'm not ready to buy yet."
-              By adding symbols like `HDFCBANK.NS` to your watchlist, you can
-              keep a pulse on the market without cluttering your actual
-              portfolio.
+              &quot;My stock announced a 1:5 stock split followed by a 1:1 bonus issue. Consumer apps botched my cost basis and showed fake 400% returns.&quot;
+              Temporal enforces the Corporate Action Invariant: split and bonus factors adjust tranche quantities and unit prices proportionally, but your historical cost basis remains mathematically unaltered.
             </p>
           </div>
         </div>
@@ -73,40 +67,39 @@ export default function StocksMfDocs() {
             Technical Specs (25%)
           </div>
           <h2 className="mb-6 font-serif text-2xl text-white/90 italic">
-            Market Data Integration
+            Financial Engine Invariants
           </h2>
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Market Price Feed
+                Chronological FIFO Lot Matching
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Market quotes for NSE/BSE symbols are sourced through a
-                lightweight price-feed service covering 1-minute to 1-day
-                intervals — no brokerage login or user-side authentication
-                required. Quotes are cached locally so your portfolio view
-                stays fast and works with previously fetched data even offline.
+                When an asset lot is partially or fully liquidated, sell orders deplete unconsumed buy lots in strict chronological sequence (ORDER BY date ASC, _creationTime ASC). Realized short-term and long-term capital gains are computed tranche-by-tranche using fixed-point integer consideration arithmetic.
               </p>
             </div>
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                NAV Fetching Engine
+                Corporate Action Cost Basis Invariant (&Delta;Invested &equiv; 0)
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Mutual Fund NAVs are sourced via AMFI APIs. All data is stored
-                locally in the `nav_cache` table, utilizing a delayed-focus
-                loading strategy to ensure the UI remains flicker-free during
-                heavy data refreshes.
+                Corporate actions (stock split and bonus issues) scale remainingQuantity and pricePerUnit using adjustment factor F: Q&apos; = Math.round(Q &middot; F) and P&apos; = Math.round(P / F). Crucially, the totalInvested cost basis is never modified, preserving pristine records for capital gains tax filings.
               </p>
             </div>
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                XIRR Precision
+                Direct Keyless AMFI NAV Feed (44,000+ Schemes)
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                The XIRR calculation iterates until the NPV is less than 0.0001,
-                providing high-precision return metrics. All calculation logic
-                is contained within the `src/lib/investmentCalc.ts` module.
+                Mutual fund NAVs are ingested directly from the official AMFI master daily text feed. Schemes are indexed locally by Scheme Code and ISIN, bypassing broker APIs and rate-limited commercial aggregators.
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                Self-Healing NSE &harr; BSE Symbol Swapping
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                If an equity quote fails to resolve on one exchange due to trading halts or ticker symbol changes, the market proxy automatically performs reciprocal symbol swapping (e.g. RELIANCE.NS &harr; 500325.BO) to ensure uninterrupted portfolio tracking.
               </p>
             </div>
           </div>

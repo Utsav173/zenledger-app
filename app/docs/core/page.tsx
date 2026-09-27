@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Local-First Architecture | Temporal Docs",
-  description: "How Temporal's local-first architecture works: on-device SQLite storage, offline operation, and zero cloud dependencies.",
+  description: "How Temporal's local-first architecture works: on-device SQLite WAL storage, self-healing schema guard, fixed-point units, and zero cloud dependencies.",
   openGraph: { images: ["/og/docs-core.png"] },
   twitter: { images: ["/og/docs-core.png"] },
 };
@@ -18,7 +18,7 @@ export default function CoreDocs() {
           Local-First Architecture.
         </h1>
         <p className="font-mono text-sm leading-relaxed tracking-wider text-gray-400 uppercase">
-          Why we chose to build an app that doesn't live in the cloud.
+          SQLite WAL engine &middot; 13 relational schemas &middot; Self-healing integrity guard
         </p>
       </div>
 
@@ -30,36 +30,35 @@ export default function CoreDocs() {
         <div className="space-y-12">
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Zero Latency, Instant Feedback
+              Zero Latency, Instant Mechanical Feedback
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Most finance apps feel sluggish because every action requires a
-              round-trip to a database in Virginia or Mumbai. In Temporal, the
-              database is in your pocket. This results in an interface that
-              feels "mechanical" and responsive—no spinners, no loading states.
+              Most personal finance apps suffer from network latency because every tap requires
+              a round-trip to cloud servers in remote data centers. In Temporal, the database lives
+              directly on your device silicon. Coupled with @legendapp/list 60fps virtualization,
+              the interface responds instantaneously with zero loading skeletons or spinners.
             </p>
           </div>
 
           <div>
             <h3 className="mb-4 font-sans text-xl font-bold text-white">
-              Immunity to Service Outages
+              Absolute Immunity to Service Outages
             </h3>
             <p className="leading-relaxed text-gray-400">
-              If our company's servers go down, or if you lose your internet
-              connection, Temporal remains 100% functional. You can still track
-              expenses, view your portfolio, and analyze your wealth. You are
-              not dependent on us to manage your money.
+              Temporal has no backend user database that can suffer an outage, get acquired, or leak your data.
+              If third-party servers go down or you enter a subterranean vault with zero connectivity,
+              Temporal remains 100% operational. You retain uninterrupted sovereignty over your money.
             </p>
           </div>
 
           <div className="border border-white bg-white/5 p-8">
             <h4 className="mb-4 font-mono text-xs font-bold tracking-widest text-white uppercase">
-              The "Air-Gap" Philosophy
+              The Air-Gapped Sovereign Philosophy
             </h4>
             <p className="text-sm leading-relaxed text-gray-400 italic">
-              By keeping data offline, we eliminate entire classes of security
-              vulnerabilities like data breaches, man-in-the-middle attacks, and
-              cloud-side identity theft. Your phone is your fortress.
+              By keeping your financial ledger strictly on your local hardware boundary, we eliminate
+              entire vectors of systemic vulnerability: data broker leaks, third-party aggregator breaches
+              (no Plaid, no MX), and telemetry scraping. Your device is your sovereign financial vault.
             </p>
           </div>
         </div>
@@ -71,28 +70,31 @@ export default function CoreDocs() {
             Technical Specs (25%)
           </div>
           <h2 className="mb-6 font-serif text-2xl text-white/90 italic">
-            The SQLite Engine
+            The SQLite Core &amp; Mathematical Invariants
           </h2>
           <div className="space-y-6">
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Transactional Integrity
+                Write-Ahead Logging (WAL Mode) &amp; Foreign Keys
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                Temporal uses `expo-sqlite` to manage data. We wrap critical
-                operations (like investment lot creation) in SQL transactions to
-                ensure that the database never ends up in a partial state.
+                Temporal initializes `zenledger.db` with `PRAGMA journal_mode = 'wal'` and `PRAGMA synchronous = NORMAL`. This provides concurrency where background reads never block interactive write operations. Relational integrity is strictly enforced with `PRAGMA foreign_keys = ON`.
               </p>
             </div>
             <div>
               <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
-                Migration Strategy
+                Self-Healing Schema Guard (13 Relational Tables)
               </h4>
               <p className="text-xs leading-relaxed text-gray-400">
-                As we release new features, we use a incremental migration
-                system based on the `user_version` PRAGMA. This allows us to
-                safely evolve your local database schema without risk of data
-                loss or corruption.
+                On every application startup, a programmatic migration guard inspects column schemas across all 13 core tables (transactions, accounts, holding_lots, categories, ai_chats, etc.). Missing columns or tables are repaired automatically using non-destructive transactional DDL statements.
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-2 font-mono text-xs font-bold tracking-tighter text-[#aaaaaa] uppercase">
+                Fixed-Point Unit Scaling (Zero Float Drift)
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                To guarantee audit-grade arithmetic, all fiat currency amounts are scaled by 100&times; (integer paise/cents), and all asset quantities are scaled by 10,000&times; (4 decimal places). Calculations are performed using 64-bit integer math, eliminating IEEE 754 floating-point rounding errors.
               </p>
             </div>
           </div>

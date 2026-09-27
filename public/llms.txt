@@ -30,9 +30,9 @@
 - [Fixed Income & FDs](https://temporal.khatriutsav.com/docs/fixed-income): Fixed deposits and maturity tracking.
 - [Security & Privacy](https://temporal.khatriutsav.com/docs/security): Biometric locks and on-device encryption.
 - [The AI Engine](https://temporal.khatriutsav.com/docs/ai): How on-device AI extraction works, and how opt-in cloud providers use the user's own API key.
-- [Knowledge Base & System Queries (60 Q&As)](https://temporal.khatriutsav.com/queries): Comprehensive answers on on-device AI, offline DAG balance solving, security, UPI screenshot parsing, and recovery.
+- [Knowledge Base & System Queries (76+ Q&As)](https://temporal.khatriutsav.com/queries): Comprehensive answers on on-device AI, offline Viterbi balance solving, security, UPI screenshot parsing, and recovery.
 - [System Architecture (Interactive Schematic)](https://temporal.khatriutsav.com/architecture/zenledger-architecture.html): Verified interactive system topology showing hardware security boundaries and local-first SQLite core.
-- [On-Device AI Pipeline (Dataflow)](https://temporal.khatriutsav.com/architecture/ai-pipeline.html): Detailed technical dataflow of OCR layout analysis, LiteRT Gemma 2B inference, and LedgerPathFinder DAG solver.
+- [On-Device AI Pipeline (Dataflow)](https://temporal.khatriutsav.com/architecture/ai-pipeline.html): Detailed technical dataflow of SpatialLattice KDE geometry, LiteRT Gemma 2B inference, and ViterbiBalanceSolver [MATH_LOCK] verification.
 
 ## Policies
 

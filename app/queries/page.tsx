@@ -89,7 +89,7 @@ export default function QueriesPage() {
           </div>
         </div>
 
-        {/* Structured Data (Schema.org FAQPage for All 32 Items) */}
+        {/* Structured Data (Schema.org FAQPage) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

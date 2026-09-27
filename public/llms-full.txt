@@ -747,15 +747,27 @@ Cloud API keys are stored locally on your device only and are
 sent directly to the provider you chose. Temporal has no server
 that could see, store, or leak them.
 
-#### LedgerPathFinder & DAG Balance Continuity
+#### ViterbiBalanceSolver & [MATH_LOCK] Balance Continuity
 
-Raw bank statements often contain same-day scrambled entries or
-inconsistent sorting. Temporal's proprietary `LedgerPathFinder` builds
-a Directed Acyclic Graph (DAG) of candidate rows and solves the
-Weighted Longest Path Dynamic Programming problem in O(N^2) time.
-It auto-detects forward vs reverse chronological ordering and validates
-the fundamental financial invariant: Closing Balance = Opening Balance ± sum(delta)
-before any transaction is committed to the local SQLite database.
+Raw bank statements frequently suffer from scrambled rows, omitted intermediate balances, and fees. Temporal's `ViterbiBalanceSolver` implements Trellis Dynamic Programming and branch-and-bound subset-sum Diophantine solvers to enforce the core balance continuity invariant: `Balance[t] = Balance[t-1] ± Amount[t]` in integer paise/cents. When mathematical continuity is proven across multi-hop transactions, rows receive an immutable `[MATH_LOCK]` stamp, completely immunizing the financial ledger against LLM hallucinations, float drift, or accidental mutation before any commit to the local SQLite database.
+
+#### SpatialLattice 1D Gaussian KDE Column Discovery
+
+Rather than relying on brittle regex patterns that break with layout variations, Temporal's `SpatialLattice` analyzes PDF visual vector streams using a 1D Gaussian Kernel Density Estimation (KDE, σ = 10pt). Column centers and gutter boundaries are computed dynamically without bank templates, while multi-page Redundant Spatial Information (RSI) lattice snapping aligns drifted columns across 50+ page bank statements.
+
+#### InformationEntropyDecomposer & Transit Rail Peeling
+
+Temporal isolates true counterparty names from transaction noise using Shannon token entropy H(X). Transit protocol markers (`UPI`, `IMPS`, `NEFT`, `BBPS`, `POS`, `Razorpay`, `NACH`) are peeled as transport rails, strictly preventing merchant transactions from being misclassified as self-transfers. Clean entity fingerprints are continuously learned locally via an on-device `BayesianLearner` (Multinomial Naive Bayes MAP) backed by an encrypted SQLite token matrix.
+
+#### Fixed-Point Integer Scaling & Financial Invariants
+
+Temporal enforces strict integer scaling across all portfolios to eliminate IEEE 754 floating-point rounding drift:
+- Fiat currencies (amounts/prices): Scaled 100× as integer cents/paise.
+- Asset quantities: Scaled 10,000× as integer units (4 decimal places).
+- Consideration formula: `amountCents = Math.round((scaledQuantity * pricePerUnitCents) / 10000)`.
+- Chronological FIFO Lot Matching: Buy lots deplete chronologically (`ORDER BY date ASC, _creationTime ASC`).
+- Corporate Action Invariant: Stock splits and bonus issues scale remaining quantities and unit prices by adjustment factor F, but MUST NEVER alter total invested capital (cost basis: ΔInvested ≡ 0).
+- Newton-Raphson XIRR Engine: Converges to 10⁻⁷ convergence limit with [-0.99, 100.0] boundary guards.
 
 ## System Schematics & Verified Intermediate Representation
 

@@ -9,6 +9,7 @@ import { LedgerHorizonPreview } from "@/components/LedgerHorizonPreview";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { SystemArchitectureInteractive } from "@/components/SystemArchitectureInteractive";
 import { MobileStickyDownloadBar } from "@/components/MobileStickyDownloadBar";
+import { VideoLaunchShowcase } from "@/components/VideoLaunchShowcase";
 
 export const metadata: Metadata = {
   title: "Temporal | AI-Powered Financial Intelligence Ecosystem",
@@ -22,14 +23,14 @@ export const metadata: Metadata = {
     "secure portfolio manager",
     "on-device AI",
     "Gemma LLM finance",
-    "Laya decision engine",
-    "System 1 financial model",
+    "Viterbi Trellis solver",
+    "SpatialLattice KDE",
     "sub-35ms categorization",
     "Ledger Horizon",
     "deterministic financial OS",
     "LiteRT on-device LLM",
     "air-gapped bank statement parser",
-    "LedgerPathFinder DAG solver",
+    "Viterbi Trellis MATH_LOCK",
     "AMFI mutual fund tracker offline",
     "cognitive vector search",
   ],
@@ -43,7 +44,7 @@ const softwareSchema = {
   name: "Temporal",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Android",
-  softwareVersion: "2.5",
+  softwareVersion: "2.17",
   downloadUrl: "https://temporal.khatriutsav.com/download",
   offers: {
     "@type": "Offer",
@@ -51,15 +52,15 @@ const softwareSchema = {
     priceCurrency: "INR",
   },
   description:
-    "A high-performance offline financial operating system and investment portfolio tracker with dual on-device AI intelligence (LiteRT Gemma 2B + Laya System 1 Decision Engine) and zero cloud data leaks.",
+    "A high-performance offline financial operating system and investment portfolio tracker with dual on-device AI intelligence (LiteRT Gemma 2B + Viterbi Trellis & SpatialLattice System 1) and zero cloud data leaks.",
   featureList: [
     "Offline double-entry ledger with encrypted SQLite vaults",
     "On-device AI statement scanning (Gemma 2B LLM via LiteRT) for PDF, CSV, XLS, TXT",
-    "System 1 Laya Decision Model for sub-35ms transaction auto-categorization and column detection",
+    "System 1 SpatialLattice KDE & Viterbi Trellis solver for deterministic transaction balance verification",
     "On-device Camera Receipt OCR & Automated Transaction Entry",
     "Atomic Conversational Agent for instant text-based transaction creation",
     "Cognitive TF-IDF Semantic Search across transaction histories",
-    "Deterministic LedgerPathFinder DAG Dynamic Programming balance alignment",
+    "Deterministic Viterbi Trellis Dynamic Programming & Diophantine balance alignment with [MATH_LOCK]",
     "Stocks, AMFI mutual funds, gold bullion, and fixed deposit tracking with live telemetry",
     "XIRR and CAGR portfolio performance with Horizon projections and cash chromatography",
     "Biometric security with hardware KeyStore encryption",
@@ -78,42 +79,57 @@ const FAQ_ITEMS = [
   {
     question: "Is my financial data or bank statement text sent to an AI server?",
     answer:
-      "No. Temporal runs an on-device AI pipeline (LiteRT + Gemma LLM). All optical character recognition (OCR), multi-format bank statement parsing (PDF, CSV, Excel, TXT), and natural language processing happen directly on your device's NPU/CPU. Your financial data never touches remote servers. Cloud AI providers are strictly opt-in — you supply your own API key.",
+      "No. Temporal runs an entirely air-gapped, on-device AI pipeline (LiteRT + Gemma LLM on NPU/CPU). All optical character recognition (OCR), multi-format bank statement parsing (PDF, CSV, Excel, TXT), and natural language processing happen directly on your physical device. Your financial data never touches remote servers. Cloud AI providers are strictly opt-in via private BYOK keys.",
+  },
+  {
+    question: "How does the ViterbiBalanceSolver prevent hallucinations and duplicate statement rows?",
+    answer:
+      "Temporal uses a Trellis Dynamic Programming and branch-and-bound subset-sum Diophantine solver that enforces balance continuity: Balance[t] = Balance[t-1] ± Amount[t] in integer paise/cents. When mathematical continuity is proven across multi-hop transactions, rows receive an immutable [MATH_LOCK] badge, eliminating hallucinations and duplicate entries without relying on probabilistic LLM guessing.",
+  },
+  {
+    question: "Why does Temporal use integer fixed-point math instead of floating point numbers?",
+    answer:
+      "IEEE 754 floating-point numbers create rounding drift in financial ledgers. Temporal enforces strict Fixed-Point Unit Scaling: fiat amounts are scaled 100× as 64-bit integer paise/cents, and asset quantities are scaled 10,000× as integer units (4 decimal places), ensuring exact penny-level consideration math across all holdings.",
   },
   {
     question: "What types of statements and receipts can Temporal import?",
     answer:
-      "Temporal supports direct camera receipt scanning (OCR) as well as multi-page bank, credit card, and broker statements in PDF (with in-memory password unlock), CSV, XLS, XLSX, TXT, and JSON. The local engine maps columns and normalizes balances with zero cloud parsing.",
+      "Temporal supports camera receipt scanning (OCR) as well as multi-page bank, credit card, and broker statements in PDF (with in-memory password unlock), CSV, XLS, XLSX, TXT, and JSON. SpatialLattice 1D Gaussian KDE discovers column gutters dynamically without brittle regex.",
+  },
+  {
+    question: "How does FIFO lot matching preserve cost basis during stock splits and bonus issues?",
+    answer:
+      "Temporal enforces the Corporate Action Invariant: stock splits and bonus issues adjust remainingQuantity and pricePerUnit using adjustment factor F, but MUST NEVER alter totalInvested (cost basis). Chronological FIFO lot depletion ensures capital gains are calculated accurately for tax compliance.",
   },
   {
     question: "How does Temporal track Stocks, Mutual Funds, and Gold offline?",
     answer:
-      "Temporal stores your complete investment registry in encrypted local SQLite tables. When online, it fetches live market telemetry from AMFI (for 44,000+ mutual fund NAVs), Yahoo Finance (for global equities), and spot bullion feeds to compute real-time XIRR, CAGR, and portfolio beta.",
+      "Temporal stores your complete investment registry in encrypted local SQLite tables. When online, it fetches direct keyless telemetry from AMFI (for 44,000+ mutual fund NAVs), Yahoo Finance (for global equities), and PAXG Spot Bullion feeds to compute real-time Newton-Raphson XIRR (10⁻⁷ convergence), CAGR, and HHI concentration.",
   },
   {
     question: "How does it handle large datasets?",
     answer:
-      "The app employs an offline-first SQLite repository pattern combined with high-performance list virtualization (@legendapp/list). It is engineered to handle decades of transaction history with instantaneous load times and zero scroll stutter.",
+      "The app employs an offline-first SQLite WAL repository pattern combined with high-performance list virtualization (@legendapp/list). It is engineered to handle decades of transaction history (100,000+ rows) with sub-16ms frame times and instantaneous search.",
   },
   {
     question: "What happens if I lose my phone?",
     answer:
-      "Since we don't store your data on our servers, you are in control of your backups. Temporal provides an encrypted Data Export feature and recovery kit, allowing you to restore your entire financial history on a new device instantly.",
+      "Since we store zero data on remote servers, your Recovery Kit (.zenkit) is your master backup. Sealed with client-side AES-256-GCM encryption and PBKDF2-SHA256 (600,000 rounds), you can restore your complete financial ledger and investment lots on a new device in seconds.",
   },
   {
     question: "How much does Temporal cost?",
     answer:
-      "Temporal is free to start with up to 500 ledger entries. The PRO upgrade is a one-time ₹49 lifetime purchase — no subscription, no recurring fees, no account required.",
+      "Temporal is free to start with up to 500 ledger entries. The PRO upgrade is a one-time ₹49 lifetime purchase — zero subscriptions, zero recurring fees, zero account required, and zero DRM heartbeats.",
   },
   {
     question: "Does Temporal need an internet connection?",
     answer:
-      "No. Temporal is fully offline. Transactions, portfolio tracking, statement simplifier, atomic chat, and AI-powered scanning run locally on your device, so the app works in flight mode or areas with zero connectivity.",
+      "No. Temporal is 100% offline-first. Transactions, portfolio tracking, statement simplifier, atomic chat, and AI-powered scanning run locally on your device, operating flawlessly in flight mode or on de-Googled custom ROMs.",
   },
   {
     question: "Which platforms does Temporal support?",
     answer:
-      "Temporal is currently available for Android as a direct APK install. It is designed for phones with 4GB+ RAM for on-device AI; older devices can still use all tracking features and optionally configure cloud AI with their own private API key.",
+      "Temporal is available for Android as a standalone APK. It is optimized for devices with 4GB+ RAM for local LiteRT on-device AI; older devices can run all core tracking and System 1 symbolic solvers with zero lag, and optionally configure cloud AI keys.",
   },
 ];
 
@@ -218,6 +234,10 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
+      {/*  LAUNCH VIDEO SHOWCASE - Deterministic Engineering in Motion         */}
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      <VideoLaunchShowcase />
+
       {/*  SYSTEM_INTELLIGENCE - Luxe Brutalism Editorial                      */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="relative py-20 md:py-32 overflow-hidden bg-[#050505] border-y border-white/10">
@@ -292,10 +312,10 @@ export default function Home() {
                   </span>
                 </div>
                 <h3 className="text-xl font-serif italic text-white mb-2">
-                  Laya Decision Engine
+                  Viterbi Trellis & Lattice
                 </h3>
                 <p className="text-gray-400 text-xs font-mono leading-relaxed">
-                  Quantized 185 MB non-autoregressive encoder for instantaneous statement column classification and bank rail tagging without hallucinations.
+                  1D Gaussian KDE column discovery and Trellis Dynamic Programming Diophantine solver stamping [MATH_LOCK] on verified statement balances.
                 </p>
               </div>
             </div>

@@ -21,6 +21,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://temporal.khatriutsav.com"),
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com",
+  },
   title: "Temporal | AI-Powered Financial Intelligence Ecosystem",
   description:
     "Master your net worth with Temporal. A privacy-focused, local-first personal finance app powered by on-device AI (Gemma LLM). Zero cloud dependencies, 100% data sovereignty.",

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/data",
+  },
   title: "Data Export & Portability | Temporal Docs",
   description: "Universal data portability and exports in Temporal: RFC 4180 CSV lexer, delimiter entropy detection, and universal SQLite schema.",
   openGraph: { images: ["/og/docs-data.png"] },

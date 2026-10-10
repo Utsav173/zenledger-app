@@ -1,6 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/manifesto",
+  },
   title: "The Temporal Manifesto | Data Sovereignty",
   description: "Our philosophy on financial intelligence, privacy, and local-first architecture.",
   openGraph: { images: ["/og/manifesto.png"] },

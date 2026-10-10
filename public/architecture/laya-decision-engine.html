@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenLedger · Autonomous Decision Engine & Dispatch Matrix</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #090a0f;
+      --color-surface: #11131a;
+      --color-ink:     #f4f5f8;
+      --color-muted:   #8a90a2;
+      --color-soft:    #5e6578;
+      --color-rule:    rgba(255, 255, 255, 0.08);
+      --color-accent:  #a78bfa; /* Violet focal for Cognitive Routing */
+      --color-emerald: #10b981;
+      --color-blue:    #00b2ff;
+      --font-sans:     'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+
+    /* Custom Ultra-Thin Dark Scrollbars */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090a0f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a78bfa;
+    }
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.15) #090a0f;
+    }
+
+    html, body {
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-sans);
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1.25rem 1rem;
+    }
+
+    .frame {
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .header {
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--color-rule);
+      padding-bottom: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.25rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 2vw + 0.8rem, 1.9rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+    }
+
+    .subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-muted);
+      margin-top: 0.25rem;
+    }
+
+    .badge-bar {
+      display: flex;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--color-soft);
+    }
+
+    .badge {
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--color-rule);
+      border-radius: 4px;
+      background: var(--color-surface);
+    }
+
+    .svg-container {
+      width: 100%;
+      overflow-x: auto;
+      background: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    svg {
+      width: 100%;
+      min-width: 960px;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="header">
+      <div>
+        <p class="eyebrow">COGNITIVE ARCHITECTURE // DECISION ENGINE</p>
+        <h1>Autonomous Decision Engine & Sub-5ms Dispatch</h1>
+        <p class="subtitle">System 1 Autonomous Laya Engine, 9 Task Domains, Bayesian MAP & Multi-Tier Model Manager</p>
+      </div>
+      <div class="badge-bar">
+        <span class="badge">SUB_5MS_DISPATCH</span>
+        <span class="badge">9_TASK_DOMAINS</span>
+        <span class="badge">HYBRID_ROUTING</span>
+      </div>
+    </div>
+
+    <div class="svg-container">
+      <svg viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="decision-title decision-desc">
+        <title id="decision-title">ZenLedger Laya Autonomous Decision Engine Architecture</title>
+        <desc id="decision-desc">Architecture diagram of the Laya Decision Engine showing task routing, domain heuristics, model manager, and SQL execution sandbox.</desc>
+
+        <defs>
+          <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.75" fill="rgba(255,255,255,0.06)"/>
+          </pattern>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#8a90a2"/>
+          </marker>
+          <marker id="arrow-focal" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#a78bfa"/>
+          </marker>
+          <marker id="arrow-emerald" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#10b981"/>
+          </marker>
+        </defs>
+
+        <!-- Canvas Background -->
+        <rect width="100%" height="100%" fill="#0d0e14"/>
+        <rect width="100%" height="100%" fill="url(#grid)"/>
+
+        <!-- ZONE 1: Intent & Prompt Input (Left) -->
+        <rect x="36" y="44" width="200" height="384" rx="8"
+              fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <rect x="52" y="38" width="136" height="14" rx="2" fill="#0d0e14"/>
+        <text x="56" y="48" fill="#5e6578" font-size="8" font-family="'Geist Mono', monospace" font-weight="600" letter-spacing="0.14em">01 · INTENT STREAM</text>
+
+        <!-- ZONE 2: Laya Decision Core (Center - Focal) -->
+        <rect x="256" y="44" width="376" height="384" rx="8"
+              fill="rgba(167,139,250,0.02)" stroke="rgba(167,139,250,0.25)" stroke-width="1"/>
+        <rect x="272" y="38" width="184" height="14" rx="2" fill="#0d0e14"/>
+        <text x="276" y="48" fill="#a78bfa" font-size="8" font-family="'Geist Mono', monospace" font-weight="600" letter-spacing="0.14em">02 · LAYA DECISION CORE</text>
+
+        <!-- ZONE 3: Execution Runtimes & Persistence (Right) -->
+        <rect x="652" y="44" width="272" height="384" rx="8"
+              fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <rect x="668" y="38" width="180" height="14" rx="2" fill="#0d0e14"/>
+        <text x="672" y="48" fill="#5e6578" font-size="8" font-family="'Geist Mono', monospace" font-weight="600" letter-spacing="0.14em">03 · MULTI-TIER EXECUTION</text>
+
+        <!-- CONNECTORS -->
+        <!-- Chat Prompt -> Domain Classifier -->
+        <line x1="212" y1="116" x2="276" y2="116" stroke="#8a90a2" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <!-- Narration Stream -> Domain Classifier -->
+        <path d="M 212,250 H 244 Q 252,250 252,240 V 136 Q 252,126 260,126 H 276" fill="none" stroke="#8a90a2" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+        <!-- Domain Classifier to Focal Dispatcher -->
+        <line x1="420" y1="156" x2="420" y2="204" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrow-focal)"/>
+
+        <!-- Fast Route: Dispatcher -> Sub-5ms Autonomous Tool Path -->
+        <path d="M 564,244 H 672" fill="none" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrow-emerald)"/>
+
+        <!-- Complex Route: Dispatcher -> LiteRT Gemma 2B -->
+        <path d="M 564,224 H 608 Q 616,224 616,136 Q 616,126 624,126 H 672" fill="none" stroke="#8a90a2" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+        <!-- Cloud Fallback Route: Dispatcher -> OpenRouter -->
+        <path d="M 564,264 H 608 Q 616,264 616,352 Q 616,362 624,362 H 672" fill="none" stroke="#8a90a2" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+        <!-- Sub-5ms Tool Path -> SQLite WAL -->
+        <line x1="784" y1="280" x2="784" y2="320" stroke="#10b981" stroke-width="1.2" marker-end="url(#arrow-emerald)"/>
+
+        <!-- NODES IN ZONE 1: Intent Stream -->
+        <g id="node-chat-input">
+          <rect x="56" y="84" width="156" height="64" rx="6" fill="#151722" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+          <text x="68" y="108" fill="#f4f5f8" font-size="11" font-weight="600" font-family="'Geist', sans-serif">Conversational Chat</text>
+          <text x="68" y="124" fill="#8a90a2" font-size="8.5" font-family="'Geist Mono', monospace">User Query / Voice</text>
+          <text x="68" y="137" fill="#5e6578" font-size="8" font-family="'Geist Mono', monospace">Natural financial intent</text>
+        </g>
+
+        <g id="node-narration-stream">
+          <rect x="56" y="218" width="156" height="64" rx="6" fill="#151722" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+          <text x="68" y="242" fill="#f4f5f8" font-size="11" font-weight="600" font-family="'Geist', sans-serif">Bank Raw Narrations</text>
+          <text x="68" y="258" fill="#8a90a2" font-size="8.5" font-family="'Geist Mono', monospace">Statement Row Tokens</text>
+          <text x="68" y="271" fill="#5e6578" font-size="8" font-family="'Geist Mono', monospace">UPI / POS / NEFT strings</text>
+        </g>
+
+        <!-- NODES IN ZONE 2: Laya Decision Core -->
+        <g id="node-domain-classifier">
+          <rect x="276" y="84" width="288" height="72" rx="6" fill="#151722" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+          <text x="290" y="108" fill="#f4f5f8" font-size="11" font-weight="600" font-family="'Geist', sans-serif">9-Domain Intent Classifier</text>
+          <text x="290" y="124" fill="#8a90a2" font-size="8.5" font-family="'Geist Mono', monospace">Ledger, Analytics, Budget, Cron, Portfolio, Rule</text>
+          <text x="290" y="138" fill="#5e6578" font-size="8" font-family="'Geist Mono', monospace">Shannon H(X) Entropy + Trigram Matcher</text>
+        </g>
+
+        <!-- FOCAL NODE: Laya Decision Engine -->
+        <g id="node-laya-dispatcher">
+          <rect x="276" y="204" width="288" height="90" rx="6" fill="rgba(167,139,250,0.06)" stroke="#a78bfa" stroke-width="1.5"/>
+          <text x="290" y="232" fill="#ffffff" font-size="12" font-weight="600" font-family="'Geist', sans-serif">Laya Decision Engine</text>
+          <text x="290" y="248" fill="#a78bfa" font-size="9" font-family="'Geist Mono', monospace">Autonomous Confidence Router (τ = 0.85)</text>
+          <text x="290" y="262" fill="#8a90a2" font-size="8.5" font-family="'Geist Mono', monospace">BayesianLearner MAP Distribution</text>
+          <text x="290" y="276" fill="#5e6578" font-size="7.5" font-family="'Geist Mono', monospace">Sub-5ms Execution Guard (Zero Network)</text>
+        </g>
+
+        <g id="node-heuristics-registry">
+          <rect x="276" y="324" width="288" height="64" rx="6" fill="#151722" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <text x="290" y="348" fill="#f4f5f8" font-size="10.5" font-weight="600" font-family="'Geist', sans-serif">Domain Heuristic Registry</text>
+          <text x="290" y="364" fill="#8a90a2" font-size="8.5" font-family="'Geist Mono', monospace">Indian & Global Financial Taxonomy Rules</text>
+          <text x="290" y="377" fill="#5e6578" font-size="7.5" font-family="'Geist Mono', monospace">Zero Hallucination Deterministic Boost</text>
+        </g>
+
+        <!-- NODES IN ZONE 3: Execution Runtimes -->
+        <g id="node-litert-execution">
+          <rect x="672" y="84" width="224" height="64" rx="6" fill="#151722" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+          <text x="686" y="108" fill="#f4f5f8" font-size="11" font-weight="600" font-family="'Geist', sans-serif">LiteRT Gemma 2B (On-Device)</text>
+          <text x="686" y="124" fill="#8a90a2" font-size="8.5" font-family="'Geist Mono', monospace">Complex Ambiguous Reasoning</text>
+          <text x="686" y="137" fill="#5e6578" font-size="8" font-family="'Geist Mono', monospace">INT4 Quantized CPU/NPU</text>
+        </g>
+
+        <g id="node-sub5ms-tool">
+          <rect x="672" y="204" width="224" height="76" rx="6" fill="rgba(16,185,129,0.06)" stroke="#10b981" stroke-width="1.4"/>
+          <text x="686" y="230" fill="#ffffff" font-size="11.5" font-weight="600" font-family="'Geist', sans-serif">Sub-5ms Autonomous Execution</text>
+          <text x="686" y="246" fill="#10b981" font-size="9" font-family="'Geist Mono', monospace">Direct SQL & Tool Invocation</text>
+          <text x="686" y="260" fill="#8a90a2" font-size="8" font-family="'Geist Mono', monospace">Zero LLM latency · 100% Deterministic</text>
+        </g>
+
+        <g id="node-openrouter-fallback">
+          <rect x="672" y="324" width="224" height="64" rx="6" fill="#151722" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="686" y="348" fill="#f4f5f8" font-size="10.5" font-weight="600" font-family="'Geist', sans-serif">Cloud Router (Opt-In Fallback)</text>
+          <text x="686" y="364" fill="#8a90a2" font-size="8.5" font-family="'Geist Mono', monospace">OpenRouter / Gemini 3.7 Flash</text>
+          <text x="686" y="377" fill="#5e6578" font-size="7.5" font-family="'Geist Mono', monospace">Jitter retry pool for cloud routing</text>
+        </g>
+
+        <!-- FOOTER ANNOTATIONS -->
+        <text x="36" y="456" fill="#5e6578" font-size="8.5" font-family="'Geist Mono', monospace">ZenLedger Laya Engine v2.4 · diagram-design spec · 4px grid · 1px hairlines · 0 JS runtimes</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

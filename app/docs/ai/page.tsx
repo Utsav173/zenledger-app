@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/ai",
+  },
   title: "The AI Engine | Temporal Docs",
   description: "How Temporal's cognitive AI works: on-device dual-system architecture combining System 1 Viterbi symbolic solvers with System 2 LiteRT Gemma neural models.",
   openGraph: { images: ["/og/docs-ai.png"] },

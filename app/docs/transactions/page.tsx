@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/transactions",
+  },
   title: "The Transaction Engine | Temporal Docs",
   description: "How Temporal's transaction engine works: Viterbi Trellis balance continuity solver, SpatialLattice KDE extraction, and fixed-point math.",
   openGraph: { images: ["/og/docs-transactions.png"] },

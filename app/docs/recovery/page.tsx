@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/recovery",
+  },
   title: "The Recovery Kit | Temporal Docs",
   description: "Restore your complete financial history on a new device using Temporal's encrypted AES-256-GCM Recovery Kit backup envelope.",
   openGraph: { images: ["/og/docs-recovery.png"] },

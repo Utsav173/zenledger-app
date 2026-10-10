@@ -2,6 +2,9 @@ import { JsonLd } from "@/components/SEO/JsonLd";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/terms",
+  },
   title: "Terms & Conditions | Temporal",
   description:
     "Terms and conditions for utilizing the Temporal application surface.",

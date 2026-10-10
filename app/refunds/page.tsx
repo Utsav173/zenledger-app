@@ -2,6 +2,9 @@ import { JsonLd } from "@/components/SEO/JsonLd";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/refunds",
+  },
   title: "Refund Policy | Temporal",
   description: "Temporal PRO refund policy conditions.",
   openGraph: { images: ["/og/default.png"] },

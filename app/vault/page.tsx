@@ -2,6 +2,9 @@ import { JsonLd } from "@/components/SEO/JsonLd";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/vault",
+  },
   title: "Secure Vault | Temporal",
   description:
     "Biometric and application-level security features within Temporal.",

@@ -3,6 +3,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/manual",
+  },
   title: "Temporal Operational Manual // Field Engineering Handbook",
   description:
     "Official operational manual for Temporal: hands-on guide to air-gapped vault management, precision numpad logging, Viterbi statement discovery, multi-asset wealth engines, and zero-knowledge cryptographic recovery.",

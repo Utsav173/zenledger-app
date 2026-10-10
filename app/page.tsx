@@ -13,6 +13,9 @@ import { MobileStickyDownloadBar } from "@/components/MobileStickyDownloadBar";
 import { VideoLaunchShowcase } from "@/components/VideoLaunchShowcase";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com",
+  },
   title: "Temporal | AI-Powered Financial Intelligence Ecosystem",
   description:
     "Master your net worth with Temporal. A privacy-focused, local-first personal finance app powered by on-device AI (Gemma LLM). Track Stocks, Mutual Funds, and Hard Assets securely and offline.",

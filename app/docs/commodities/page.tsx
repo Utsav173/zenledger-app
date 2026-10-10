@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/commodities",
+  },
   title: "Gold & Commodities Tracking | Temporal Docs",
   description: "Track physical bullion, digital gold, and sovereign bonds in Temporal with live spot pricing, karat purity adjustments, and making charge cost basis invariants.",
   openGraph: { images: ["/og/docs-commodities.png"] },

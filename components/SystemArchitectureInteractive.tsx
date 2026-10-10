@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-type SchematicMode = "topology" | "ai_pipeline" | "spec";
+type SchematicMode = "topology" | "ai_pipeline" | "laya_engine" | "spec";
 
 export function SystemArchitectureInteractive() {
   const [activeTab, setActiveTab] = useState<SchematicMode>("topology");
@@ -10,6 +10,8 @@ export function SystemArchitectureInteractive() {
   const currentIframeSrc =
     activeTab === "ai_pipeline"
       ? "/architecture/ai-pipeline.html"
+      : activeTab === "laya_engine"
+      ? "/architecture/laya-decision-engine.html"
       : "/architecture/zenledger-architecture.html";
 
   return (
@@ -28,15 +30,15 @@ export function SystemArchitectureInteractive() {
         {/* Header Title & Switcher */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 sm:mb-12 gap-6 pb-6 border-b border-white/10">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 font-mono text-[9px] sm:text-[10px] tracking-[0.35em] text-[#00b2ff] font-bold uppercase mb-3 px-2.5 py-1 border border-[#00b2ff]/30 bg-[#00b2ff]/5">
-              <span className="h-1.5 w-1.5 bg-[#00b2ff] animate-pulse" />
-              COGNITIVE_TOPOLOGY // VERIFIED_IR_V2.17
+            <div className="inline-flex items-center gap-2 font-mono text-[9px] sm:text-[10px] tracking-[0.25em] text-[#00b2ff] font-bold uppercase mb-3 px-2.5 py-1 border border-[#00b2ff]/30 bg-[#00b2ff]/5">
+              <span className="h-1.5 w-1.5 bg-[#00b2ff]" />
+              SYSTEM ARCHITECTURE // SPECIFICATION
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif italic text-white tracking-tight leading-none">
-              Dual-System Cognitive Topology.
+              Local-First System Architecture.
             </h2>
             <p className="font-mono text-[11px] sm:text-xs text-gray-400 uppercase tracking-widest mt-3 leading-relaxed">
-              Air-Gapped Local SQLite WAL &middot; System 1 Viterbi Trellis Solver &middot; System 2 LiteRT Neural Core
+              Air-Gapped Local SQLite WAL &middot; On-Device LiteRT Extraction &middot; Sub-5ms Autonomous Decision Engine
             </p>
           </div>
 
@@ -50,7 +52,7 @@ export function SystemArchitectureInteractive() {
                   : "text-gray-400 hover:text-white hover:bg-white/5 active:bg-white/10"
               }`}
             >
-              [01. CORE_TOPOLOGY]
+              [01. TOPOLOGY]
             </button>
             <button
               onClick={() => setActiveTab("ai_pipeline")}
@@ -60,7 +62,17 @@ export function SystemArchitectureInteractive() {
                   : "text-gray-400 hover:text-white hover:bg-white/5 active:bg-white/10"
               }`}
             >
-              [02. AI_PIPELINE]
+              [02. INGESTION]
+            </button>
+            <button
+              onClick={() => setActiveTab("laya_engine")}
+              className={`px-3 py-2.5 min-h-[44px] flex-1 sm:flex-initial font-mono text-[10px] sm:text-[11px] tracking-wider uppercase transition-all whitespace-nowrap text-center ${
+                activeTab === "laya_engine"
+                  ? "bg-white text-black font-bold"
+                  : "text-gray-400 hover:text-white hover:bg-white/5 active:bg-white/10"
+              }`}
+            >
+              [03. DECISION_ENGINE]
             </button>
             <button
               onClick={() => setActiveTab("spec")}
@@ -70,7 +82,7 @@ export function SystemArchitectureInteractive() {
                   : "text-gray-400 hover:text-white hover:bg-white/5 active:bg-white/10"
               }`}
             >
-              [03. SPEC_IR]
+              [04. SPEC_IR]
             </button>
             <a
               href={currentIframeSrc}
@@ -92,13 +104,15 @@ export function SystemArchitectureInteractive() {
             <div className="flex items-center gap-3 sm:gap-4">
               <span className="text-white font-bold tracking-widest">
                 {activeTab === "ai_pipeline"
-                  ? "TEMPORAL_COGNITIVE_PIPELINE_V2.17"
-                  : "TEMPORAL_FOS_CORE_TOPOLOGY_V2.17"}
+                  ? "ZENLEDGER_INGESTION_PIPELINE"
+                  : activeTab === "laya_engine"
+                  ? "LAYA_AUTONOMOUS_DECISION_ENGINE"
+                  : "ZENLEDGER_CORE_ARCHITECTURE"}
               </span>
-              <span className="text-emerald-400 hidden xs:inline">[ ARCHIFY: 9/9 CHECKS VERIFIED ]</span>
+              <span className="text-emerald-400 hidden xs:inline">[ VECTOR SVG · ZERO RUNTIME JS ]</span>
             </div>
             <div className="flex items-center gap-3 sm:gap-4 text-[8px] sm:text-[9px] text-gray-500">
-              <span>CANVAS: #000000</span>
+              <span>CANVAS: #090A0F</span>
               <span className="hidden sm:inline">GRID: 4PX</span>
               <span className="text-[#00b2ff]">INVARIANTS: 13/13 LOCKED</span>
             </div>
@@ -111,15 +125,15 @@ export function SystemArchitectureInteractive() {
                 key={activeTab}
                 src={currentIframeSrc}
                 className="w-full h-full border-none"
-                title="Temporal System Architecture Interactive Diagram"
+                title="ZenLedger System Architecture Diagram"
               />
             </div>
           ) : (
-            <div className="p-4 sm:p-6 h-[520px] sm:h-[620px] md:h-[720px] overflow-auto font-mono text-xs text-gray-300 bg-[#050505]">
+            <div className="p-4 sm:p-6 h-[520px] sm:h-[620px] md:h-[720px] overflow-auto font-mono text-xs text-gray-300 bg-[#050505] [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.15)_#050505]">
               <pre className="text-emerald-400/90 leading-relaxed whitespace-pre-wrap">
 {`{
-  "system": "Temporal Financial Operating System (FOS)",
-  "version": "2.17.0",
+  "system": "ZenLedger Operating System",
+  "version": "3.0.0",
   "security_architecture": {
     "boundary": "100% Air-Gapped Local Hardware Sandbox",
     "cryptography": "AES-256-GCM Backup Envelope with PBKDF2-SHA256 (600,000 iterations)",
@@ -132,34 +146,27 @@ export function SystemArchitectureInteractive() {
     "fiat_precision": "Fixed-Point 100x Integer Paise/Cents (Zero IEEE 754 Float Drift)",
     "asset_precision": "Fixed-Point 10,000x Integer Units (4 Decimal Places)"
   },
-  "system_1_deterministic_core": {
-    "spatial_geometry": "SpatialLattice 2D Anisotropic Proximity Graph + 1D Gaussian KDE",
-    "layout_rectifier": "LayoutAnalyzer Baseline Leading & Multi-Page RSI Lattice",
+  "statement_ingestion_pipeline": {
+    "spatial_geometry": "SpatialLattice 2D Proximity Graph + 1D Gaussian KDE Column Discovery",
     "trellis_solver": "ViterbiBalanceSolver (Balance[t] = Balance[t-1] ± Amount[t])",
-    "diophantine_engine": "Combinatorial Branch-and-Bound Subset-Sum Solver",
     "invariant_protection": "[MATH_LOCK] Stamped Immutable Rows (No LLM Mutation)",
-    "entropy_decomposer": "Shannon Entropy H(X) Counterparty Isolator",
-    "transit_peeler": "Automatic Stripping of UPI / IMPS / NEFT / BBPS / Razorpay Protocols"
+    "entropy_filter": "Shannon Entropy H(X) Transit Protocol Peeler"
   },
-  "system_2_neural_subsystem": {
+  "neural_subsystem": {
     "local_runtime": "Google LiteRT (react-native-litert-lm)",
     "quantized_models": ["Gemma 2B INT4", "Gemma 3 1B", "Qwen 2.5 1.5B"],
-    "execution_hardware": "Neural Processing Unit (NPU) / Quantized CPU",
-    "continuous_learning": "BayesianLearner Multinomial Naive Bayes MAP (SQLite Matrix)",
-    "counterparty_cache": "MerchantMemoryGraph Asymptotic Confidence Scaling",
-    "cloud_fallback": "OpenRouter / Gemini 3.7 Flash with Jitter Retry Pool (Opt-in Only)"
+    "execution_hardware": "On-Device NPU / Quantized CPU",
+    "counterparty_cache": "MerchantMemoryGraph Trigram Fuzzy Normalizer"
   },
   "financial_quant_engines": {
     "lot_depletion": "Strict Chronological FIFO (ORDER BY date ASC, _creationTime ASC)",
     "corporate_actions": "Split & Bonus Factor F (RemainingQty * F, Price / F, ΔInvested ≡ 0)",
     "xirr_engine": "Newton-Raphson Solver with 10^-7 Convergence Limit & [-0.99, 100.0] Guards",
-    "telemetry_feeds": ["Direct AMFI NAV (44,000+ Schemes)", "Cloudflare Worker Yahoo Proxy", "PAXG Spot Gold"]
+    "market_feeds": ["Direct AMFI NAV (44,000+ Schemes)", "Cloudflare Worker Yahoo Proxy", "PAXG Spot Gold"]
   },
   "client_runtime": {
     "stack": "Expo SDK 55 + React 19 + React Native 0.83.2",
-    "virtualization": "@legendapp/list 60fps Native Scroller",
-    "haptics": "expo-haptics Heavy Industrial Switches",
-    "styling": "Utilitarian Financial Swiss Brutalism (0px Radius, Monolithic Borders)"
+    "styling": "Utilitarian Financial Editorial (Clean Tokens, 1px Hairlines)"
   }
 }`}
               </pre>
@@ -169,8 +176,8 @@ export function SystemArchitectureInteractive() {
           {/* Bottom Footnote Bar */}
           <div className="border-t border-white/10 px-3 sm:px-4 py-2.5 sm:py-3 bg-black flex flex-col sm:flex-row items-center justify-between font-mono text-[8px] sm:text-[9px] text-gray-500 uppercase tracking-widest gap-2">
             <div className="flex items-center gap-2 text-center sm:text-left">
-              <span className="text-white">PROVENANCE:</span>
-              <span>Compiled via Archify v2.17 deterministic intermediate representation</span>
+              <span className="text-white">STANDARDS:</span>
+              <span>Self-contained SVG vector · 4px coordinate grid · 0 external JS dependencies</span>
             </div>
             <div className="flex items-center gap-3">
               <span className="text-[#00b2ff]">[ VITERBI TRELLIS LOCKED ]</span>

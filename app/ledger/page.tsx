@@ -2,6 +2,9 @@ import { JsonLd } from "@/components/SEO/JsonLd";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/ledger",
+  },
   title: "Ledger Engine | Temporal",
   description:
     "Understanding the underlying double-entry SQLite database of Temporal.",

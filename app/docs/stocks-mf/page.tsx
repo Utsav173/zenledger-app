@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/stocks-mf",
+  },
   title: "Stocks & Mutual Funds | Temporal Docs",
   description: "Track stocks and mutual funds in Temporal: chronological FIFO lot depletion, corporate action split invariants, and keyless AMFI feeds.",
   openGraph: { images: ["/og/docs-stocks-mf.png"] },

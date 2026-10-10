@@ -4,6 +4,9 @@ import { KNOWLEDGE_BASE_QUERIES } from "@/components/data/knowledgeBaseQueries";
 import { KnowledgeBaseSearch } from "@/components/KnowledgeBaseSearch";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/queries",
+  },
   title: "Knowledge Base & System Queries | Temporal Financial OS",
   description:
     "Comprehensive answers to all user questions regarding on-device AI statement scanning, biometric security, balance continuity DAG solving, portfolio returns, UPI screenshots, and recovery kits in Temporal.",

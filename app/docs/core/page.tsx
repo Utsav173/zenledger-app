@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/core",
+  },
   title: "Local-First Architecture | Temporal Docs",
   description: "How Temporal's local-first architecture works: on-device SQLite WAL storage, self-healing schema guard, fixed-point units, and zero cloud dependencies.",
   openGraph: { images: ["/og/docs-core.png"] },

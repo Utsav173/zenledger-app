@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/investments",
+  },
   title: "Wealth Tracking & Performance | Temporal Docs",
   description: "Portfolio performance tracking in Temporal: Newton-Raphson XIRR solver, Herfindahl concentration index, and real-time asset telemetry.",
   openGraph: { images: ["/og/docs-investments.png"] },

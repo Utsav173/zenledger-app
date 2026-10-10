@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/categories",
+  },
   title: "Taxonomy & Cognitive Categorization | Temporal Docs",
   description: "Learn how Temporal couples user-defined custom categories with on-device Naive Bayes MAP classification, Information Entropy token decomposition, and trigram fuzzy matching.",
   openGraph: { images: ["/og/docs-categories.png"] },

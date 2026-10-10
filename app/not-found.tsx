@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "404: Not Found | Temporal",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 import Link from "next/link";
 
 export default function NotFound() {

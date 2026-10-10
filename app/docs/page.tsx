@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs",
+  },
   title: "Documentation & System Architecture | Temporal",
   description: "Official Temporal technical documentation: local-first SQLite WAL architecture, dual-system cognitive ingestion, Viterbi balance verification, FIFO investment math, and zero-knowledge cryptographic recovery.",
   openGraph: { images: ["/og/docs.png"] },

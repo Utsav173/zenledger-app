@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/security",
+  },
   title: "Security & Privacy | Temporal Docs",
   description: "Temporal's security model: hardware Secure Enclave biometric locks, PBKDF2-SHA256 derivation, and air-gapped zero-network isolation.",
   openGraph: { images: ["/og/docs-security.png"] },

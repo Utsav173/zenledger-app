@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/fixed-income",
+  },
   title: "Fixed Income & FDs | Temporal Docs",
   description: "Track fixed deposits, PPF, and fixed-income instruments in Temporal: daily accrual compounding, maturity laddering, and fixed-point math.",
   openGraph: { images: ["/og/docs-fixed-income.png"] },

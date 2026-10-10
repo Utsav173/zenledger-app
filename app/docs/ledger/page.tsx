@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://temporal.khatriutsav.com/docs/ledger",
+  },
   title: "Vaults & The Double-Entry Ledger | Temporal Docs",
   description: "Explore Temporal's multi-vault architecture and double-entry transaction engine: atomic self-sweeps, transit rail peeling, SQLite WAL mode, and 13-table schema integrity.",
   openGraph: { images: ["/og/docs-ledger.png"] },

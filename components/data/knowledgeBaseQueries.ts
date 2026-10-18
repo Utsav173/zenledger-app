@@ -135,9 +135,9 @@ export const KNOWLEDGE_BASE_QUERIES: FAQQuery[] = [
     id: "ai-16",
     category: "AI & Statement Extraction",
     badge: "DOMAIN SUBAGENTS",
-    question: "How does ZenLedger's modular Domain Subagent architecture operate?",
+    question: "How does Temporal's modular Domain Subagent architecture operate?",
     answer:
-      "Rather than a single monolithic prompt, ZenLedger routes queries to 4 specialized domain subagents: LedgerSubagent (reconciliation, queries, journal balance), InvestmentSubagent (XIRR, FIFO lots, corporate actions), PlanningBudgetSubagent (burn rate velocity, envelope allocations), and AutomationTelemetrySubagent (watchdog rules, cron scheduling). Each subagent is equipped only with strict, typed tools to guarantee high speed and zero hallucination."
+      "Rather than a single monolithic prompt, Temporal routes queries to 4 specialized domain subagents: LedgerSubagent (reconciliation, queries, journal balance), InvestmentSubagent (XIRR, FIFO lots, corporate actions), PlanningBudgetSubagent (burn rate velocity, envelope allocations), and AutomationTelemetrySubagent (watchdog rules, cron scheduling). Each subagent is equipped only with strict, typed tools to guarantee high speed and zero hallucination."
   },
   {
     id: "ai-17",
@@ -145,7 +145,7 @@ export const KNOWLEDGE_BASE_QUERIES: FAQQuery[] = [
     badge: "3D VISUAL STAGE",
     question: "What is the Generative Visualization Grammar and 3D Vector Stage?",
     answer:
-      "ZenLedger parses AI analytical responses through a declarative 7-primitive visual schema (metrics grid, flow Sankey, horizon trajectory, radar risk, calendar heatmap, comparison bar, and 3D vector space). Charts and interactive geometry render deterministically on device silicon without external WebViews or server-side canvas generation."
+      "Temporal parses AI analytical responses through a declarative 7-primitive visual schema (metrics grid, flow Sankey, horizon trajectory, radar risk, calendar heatmap, comparison bar, and 3D vector space). Charts and interactive geometry render deterministically on device silicon without external WebViews or server-side canvas generation."
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -441,9 +441,9 @@ export const KNOWLEDGE_BASE_QUERIES: FAQQuery[] = [
     id: "inv-13",
     category: "Portfolio, Investments & Horizon Math",
     badge: "DEMERGER ALIAS HEALING",
-    question: "How does ZenLedger handle stock demergers and corporate symbol migrations (e.g. TATAMOTORS)?",
+    question: "How does Temporal handle stock demergers and corporate symbol migrations (e.g. TATAMOTORS)?",
     answer:
-      "ZenLedger features automatic symbol alias resolution for corporate restructurings and demergers. When fetching equity quotes, if an exchange symbol has changed (e.g., TATAMOTORS demerger to TMPV.NS/TMPV.BO), the engine seamlessly queries the updated symbol and permanently migrates the holding in local SQLite, preventing 404 feed failures."
+      "Temporal features automatic symbol alias resolution for corporate restructurings and demergers. When fetching equity quotes, if an exchange symbol has changed (e.g., TATAMOTORS demerger to TMPV.NS/TMPV.BO), the engine seamlessly queries the updated symbol and permanently migrates the holding in local SQLite, preventing 404 feed failures."
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -461,9 +461,9 @@ export const KNOWLEDGE_BASE_QUERIES: FAQQuery[] = [
     id: "auto-02",
     category: "Automation, Watchdogs & Local Cron",
     badge: "ACTIONABLE NOTIFICATIONS",
-    question: "What interactive actions can I take directly from ZenLedger notifications?",
+    question: "What interactive actions can I take directly from Temporal notifications?",
     answer:
-      "ZenLedger notifications feature lock-screen interactive categories including 'Explain with AI' (instant generative insight into what triggered the alert), 'View Breakdown' (deep-links directly to the relevant ledger or account vault), and 'Snooze 15m' for reminder deferral."
+      "Temporal notifications feature lock-screen interactive categories including 'Explain with AI' (instant generative insight into what triggered the alert), 'View Breakdown' (deep-links directly to the relevant ledger or account vault), and 'Snooze 15m' for reminder deferral."
   },
   {
     id: "auto-03",
@@ -487,12 +487,12 @@ export const KNOWLEDGE_BASE_QUERIES: FAQQuery[] = [
     badge: "ZERO UNSOLICITED RULES",
     question: "Are automation rules or scheduled notifications seeded without my permission?",
     answer:
-      "No. ZenLedger strictly honors 100% user sovereignty. Automation rules and scheduled cron jobs are never created behind your back or automatically re-seeded without explicit user intent. You maintain total control over your notification triggers and active watchdog routines."
+      "No. Temporal strictly honors 100% user sovereignty. Automation rules and scheduled cron jobs are never created behind your back or automatically re-seeded without explicit user intent. You maintain total control over your notification triggers and active watchdog routines."
   },
   {
     id: "auto-06",
     category: "Automation, Watchdogs & Local Cron",
-    question: "How does ZenLedger enforce quiet hours for autonomous notifications?",
+    question: "How does Temporal enforce quiet hours for autonomous notifications?",
     answer:
       "The cron daemon respects a configurable quiet hours window (e.g., 22:00 to 08:30). Any low or medium priority notifications triggered overnight are automatically queued and deferred until the morning audit window, ensuring your sleep is never disrupted."
   },
@@ -679,16 +679,16 @@ export const KNOWLEDGE_BASE_QUERIES: FAQQuery[] = [
     id: "edge-08",
     category: "Edge Cases, Multi-Asset & Troubleshooting",
     badge: "STANDALONE APK",
-    question: "Can I run ZenLedger on rooted Android devices or custom AOSP ROMs without Google Play Services?",
+    question: "Can I run Temporal on rooted Android devices or custom AOSP ROMs without Google Play Services?",
     answer:
-      "Yes. ZenLedger does not depend on proprietary Google Play Services frameworks. Both SQLite storage and LiteRT local neural inference execute self-contained within the application binary, allowing flawless operation on de-Googled ROMs (GrapheneOS, CalyxOS, LineageOS)."
+      "Yes. Temporal does not depend on proprietary Google Play Services frameworks. Both SQLite storage and LiteRT local neural inference execute self-contained within the application binary, allowing flawless operation on de-Googled ROMs (GrapheneOS, CalyxOS, LineageOS)."
   },
   {
     id: "edge-09",
     category: "Edge Cases, Multi-Asset & Troubleshooting",
     badge: "ACTIVE 2026 ROADMAP",
-    question: "Is ZenLedger actively maintained and updated in 2026?",
+    question: "Is Temporal (ZenLedger project) actively maintained and updated in 2026?",
     answer:
-      "Yes, absolutely. ZenLedger is under heavy, continuous active production development in 2026. Recent production releases have deployed the 4 specialized domain subagents, the sovereign LocalCronDaemon with exact hardware alarms, the reactive watchdog rule engine, and enhanced market feeds. Releases are published regularly with complete open documentation and verified zero-cloud invariants."
+      "Yes, absolutely. Temporal is under heavy, continuous active production development in 2026 under the ZenLedger project. Recent production releases have deployed the 4 specialized domain subagents, the sovereign LocalCronDaemon with exact hardware alarms, the reactive watchdog rule engine, and enhanced market feeds. Releases are published regularly with complete open documentation and verified zero-cloud invariants."
   }
 ];

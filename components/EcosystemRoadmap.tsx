@@ -109,7 +109,7 @@ export function EcosystemRoadmap() {
             The Sovereign Ecosystem Architecture.
           </h2>
           <p className="mt-6 max-w-3xl font-mono text-sm leading-relaxed text-gray-400">
-            ZenLedger is not a disposable one-shot AI prototype. It is an evolving, air-gapped financial operating system built upon strict mathematical invariants, local-first SQLite WAL storage, and zero-knowledge cryptography. Explore the 5 core technical pillars shipped in production for complete personal financial sovereignty.
+            Temporal (developed under the ZenLedger project) is not a disposable one-shot AI prototype. It is an evolving, air-gapped financial operating system built upon strict mathematical invariants, local-first SQLite WAL storage, and zero-knowledge cryptography. Explore the 5 core technical pillars shipped in production for complete personal financial sovereignty.
           </p>
 
           {/* Tri-Pillar Navigation Matrix Quick Links */}

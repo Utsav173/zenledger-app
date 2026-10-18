@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "ZenLedger",
+  name: "Temporal",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Android",
   softwareVersion: "3.2.0",
@@ -56,7 +56,7 @@ const softwareSchema = {
     priceCurrency: "INR",
   },
   description:
-    "A sovereign offline financial operating system and investment portfolio tracker with 4 specialized domain AI subagents, exact hardware alarm cron engine, reactive automation watchdogs, and zero cloud data leaks.",
+    "Temporal (by ZenLedger) — A sovereign offline financial operating system and investment portfolio tracker with 4 specialized domain AI subagents, exact hardware alarm cron engine, reactive automation watchdogs, and zero cloud data leaks.",
   featureList: [
     "Offline double-entry ledger with encrypted SQLite vaults (WAL mode)",
     "4 Domain Subagents (Ledger, Investment, Planning, Automation) for zero-hallucination execution",
@@ -179,7 +179,7 @@ export default function Home() {
             className="mb-8 animate-fade-in font-mono text-[10px] tracking-[0.3em] text-gray-400 uppercase leading-relaxed md:leading-normal max-w-sm md:max-w-none"
             style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}
           >
-            [ SYSTEM: ZENLEDGER v3.2 ] · [ ENGINE: TEMPORAL DUAL-AI ] · [ STATUS: ACTIVE PRODUCTION 2026 ]
+            [ APP: TEMPORAL v3.2 ] · [ PROJECT: ZENLEDGER ] · [ STATUS: ACTIVE PRODUCTION 2026 ]
           </div>
 
           {/* Headline */}

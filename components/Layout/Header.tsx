@@ -174,7 +174,7 @@ export default function Header() {
               <span>[ ENCRYPTION: HARDWARE AES-256 ]</span>
               <span>[ ENGINE: ON-DEVICE LITERT + GEMMA ]</span>
               <span className="text-gray-600">
-                TEMPORAL FOS v2.5 · 100% AIR-GAPPED
+                TEMPORAL FOS v3.2 · 100% AIR-GAPPED
               </span>
             </div>
           </nav>

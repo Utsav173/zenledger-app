@@ -40,7 +40,7 @@ export default function LedgerPage() {
         <section className="mb-32 relative">
           <div className="inline-flex items-center gap-3 px-3 py-1 border border-emerald-500/30 bg-emerald-500/5 mb-8 accent-shimmer relative overflow-hidden">
              <div className="h-1 w-1 rounded-full bg-emerald-500 animate-pulse" />
-             <span className="text-[10px] tracking-[0.4em] text-emerald-500 font-bold uppercase relative z-10">ENGINE_SPEC_v2.5</span>
+             <span className="text-[10px] tracking-[0.4em] text-emerald-500 font-bold uppercase relative z-10">ENGINE_SPEC_v3.2</span>
           </div>
           <h1 className="mb-12 font-serif text-fluid-h1 italic tracking-tighter leading-[0.85] text-white">
             The Ledger

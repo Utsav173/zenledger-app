@@ -222,7 +222,7 @@ export default function Home() {
               href="https://github.com/Utsav173/zenledger-app/raw/main/public/download/app-release.apk"
               className="btn btn-primary group relative overflow-hidden px-8 py-4 text-sm w-full sm:w-auto min-h-[48px] text-center"
             >
-              <span className="relative z-10">→ DOWNLOAD APK (v2.5)</span>
+              <span className="relative z-10">→ DOWNLOAD APK (v3.2)</span>
             </a>
             <Link href="/docs" className="btn btn-outline px-8 py-4 text-sm w-full sm:w-auto min-h-[48px] text-center">
               VIEW ARCHITECTURE

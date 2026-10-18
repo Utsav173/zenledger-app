@@ -5,6 +5,7 @@ export interface FAQQuery {
     | "Privacy, Encryption & Hardware Security"
     | "Double-Entry Ledger & DAG Engine"
     | "Portfolio, Investments & Horizon Math"
+    | "Automation, Watchdogs & Local Cron"
     | "Data Portability, Recovery & Exports"
     | "Licensing, Payments & Transparency"
     | "Edge Cases, Multi-Asset & Troubleshooting";
@@ -129,6 +130,22 @@ export const KNOWLEDGE_BASE_QUERIES: FAQQuery[] = [
     question: "How does continuous Bayesian learning work on-device without cloud training?",
     answer:
       "Whenever you manually assign or correct a transaction category, BayesianLearner updates an encrypted SQLite vocabulary token frequency matrix. It calculates Maximum A Posteriori (MAP) log-likelihood probabilities across narration tokens, continuously adapting to your personalized spending habits without retraining a neural network."
+  },
+  {
+    id: "ai-16",
+    category: "AI & Statement Extraction",
+    badge: "DOMAIN SUBAGENTS",
+    question: "How does ZenLedger's modular Domain Subagent architecture operate?",
+    answer:
+      "Rather than a single monolithic prompt, ZenLedger routes queries to 4 specialized domain subagents: LedgerSubagent (reconciliation, queries, journal balance), InvestmentSubagent (XIRR, FIFO lots, corporate actions), PlanningBudgetSubagent (burn rate velocity, envelope allocations), and AutomationTelemetrySubagent (watchdog rules, cron scheduling). Each subagent is equipped only with strict, typed tools to guarantee high speed and zero hallucination."
+  },
+  {
+    id: "ai-17",
+    category: "AI & Statement Extraction",
+    badge: "3D VISUAL STAGE",
+    question: "What is the Generative Visualization Grammar and 3D Vector Stage?",
+    answer:
+      "ZenLedger parses AI analytical responses through a declarative 7-primitive visual schema (metrics grid, flow Sankey, horizon trajectory, radar risk, calendar heatmap, comparison bar, and 3D vector space). Charts and interactive geometry render deterministically on device silicon without external WebViews or server-side canvas generation."
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -420,9 +437,68 @@ export const KNOWLEDGE_BASE_QUERIES: FAQQuery[] = [
     answer:
       "Temporal connects directly to the Association of Mutual Funds in India (AMFI) keyless daily NAV master feed. Over 44,000+ mutual fund schemes are indexed locally by ISIN and Scheme Code, bypassing commercial broker paywalls and third-party rate limits."
   },
+  {
+    id: "inv-13",
+    category: "Portfolio, Investments & Horizon Math",
+    badge: "DEMERGER ALIAS HEALING",
+    question: "How does ZenLedger handle stock demergers and corporate symbol migrations (e.g. TATAMOTORS)?",
+    answer:
+      "ZenLedger features automatic symbol alias resolution for corporate restructurings and demergers. When fetching equity quotes, if an exchange symbol has changed (e.g., TATAMOTORS demerger to TMPV.NS/TMPV.BO), the engine seamlessly queries the updated symbol and permanently migrates the holding in local SQLite, preventing 404 feed failures."
+  },
 
   // ─────────────────────────────────────────────────────────────────────────────
-  // 5. Data Portability, Recovery & Exports (Refined + Expanded)
+  // 5. Automation, Watchdogs & Local Cron (Active Shipped Production)
+  // ─────────────────────────────────────────────────────────────────────────────
+  {
+    id: "auto-01",
+    category: "Automation, Watchdogs & Local Cron",
+    badge: "EXACT HARDWARE ALARMS",
+    question: "How does the Sovereign LocalCronDaemon work without draining battery or using cloud push servers?",
+    answer:
+      "LocalCronDaemon schedules cron jobs directly into operating system hardware alarms via Android's SCHEDULE_EXACT_ALARM and native alarms. Operating on an adaptive event-driven wakeup cycle, it consumes 0% battery while dormant and requires zero remote push notification servers (FCM/APNs), maintaining full privacy and reliability."
+  },
+  {
+    id: "auto-02",
+    category: "Automation, Watchdogs & Local Cron",
+    badge: "ACTIONABLE NOTIFICATIONS",
+    question: "What interactive actions can I take directly from ZenLedger notifications?",
+    answer:
+      "ZenLedger notifications feature lock-screen interactive categories including 'Explain with AI' (instant generative insight into what triggered the alert), 'View Breakdown' (deep-links directly to the relevant ledger or account vault), and 'Snooze 15m' for reminder deferral."
+  },
+  {
+    id: "auto-03",
+    category: "Automation, Watchdogs & Local Cron",
+    badge: "DYNAMIC SQL TELEMETRY",
+    question: "How does the NotificationCurator compile live telemetry into notifications?",
+    answer:
+      "When a scheduled job fires, NotificationCurator executes dynamic parameterized SQL queries across your local SQLite vault (e.g., month-to-date category totals, current net worth, due recurring bills). A robust token pre-pass sanitizes template placeholders, preventing duplicated currency symbols (such as ₹₹) or percent signs (%%)."
+  },
+  {
+    id: "auto-04",
+    category: "Automation, Watchdogs & Local Cron",
+    badge: "BOOLEAN AST ENGINE",
+    question: "How do Autonomous Reactive Automation Rules work upon new transactions?",
+    answer:
+      "The RuleEvaluator compiles deterministic Boolean AST conditions (AND, OR, NOT, regex, amount thresholds) over every newly inserted transaction. Pre-pass transforms automatically sanitize categories, merchants, and tags, while post-pass actions can trigger automated actions like CREATE_TRANSACTION for cashback/discounts or SWEEP_TRANSFER."
+  },
+  {
+    id: "auto-05",
+    category: "Automation, Watchdogs & Local Cron",
+    badge: "ZERO UNSOLICITED RULES",
+    question: "Are automation rules or scheduled notifications seeded without my permission?",
+    answer:
+      "No. ZenLedger strictly honors 100% user sovereignty. Automation rules and scheduled cron jobs are never created behind your back or automatically re-seeded without explicit user intent. You maintain total control over your notification triggers and active watchdog routines."
+  },
+  {
+    id: "auto-06",
+    category: "Automation, Watchdogs & Local Cron",
+    question: "How does ZenLedger enforce quiet hours for autonomous notifications?",
+    answer:
+      "The cron daemon respects a configurable quiet hours window (e.g., 22:00 to 08:30). Any low or medium priority notifications triggered overnight are automatically queued and deferred until the morning audit window, ensuring your sleep is never disrupted."
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // 6. Data Portability, Recovery & Exports (Refined + Expanded)
   // ─────────────────────────────────────────────────────────────────────────────
   {
     id: "rec-01",
@@ -603,8 +679,16 @@ export const KNOWLEDGE_BASE_QUERIES: FAQQuery[] = [
     id: "edge-08",
     category: "Edge Cases, Multi-Asset & Troubleshooting",
     badge: "STANDALONE APK",
-    question: "Can I run Temporal on rooted Android devices or custom AOSP ROMs without Google Play Services?",
+    question: "Can I run ZenLedger on rooted Android devices or custom AOSP ROMs without Google Play Services?",
     answer:
-      "Yes. Temporal does not depend on proprietary Google Play Services frameworks. Both SQLite storage and LiteRT local neural inference execute self-contained within the application binary, allowing flawless operation on de-Googled ROMs (GrapheneOS, CalyxOS, LineageOS)."
+      "Yes. ZenLedger does not depend on proprietary Google Play Services frameworks. Both SQLite storage and LiteRT local neural inference execute self-contained within the application binary, allowing flawless operation on de-Googled ROMs (GrapheneOS, CalyxOS, LineageOS)."
+  },
+  {
+    id: "edge-09",
+    category: "Edge Cases, Multi-Asset & Troubleshooting",
+    badge: "ACTIVE 2026 ROADMAP",
+    question: "Is ZenLedger actively maintained and updated in 2026?",
+    answer:
+      "Yes, absolutely. ZenLedger is under heavy, continuous active production development in 2026. Recent production releases have deployed the 4 specialized domain subagents, the sovereign LocalCronDaemon with exact hardware alarms, the reactive watchdog rule engine, and enhanced market feeds. Releases are published regularly with complete open documentation and verified zero-cloud invariants."
   }
 ];

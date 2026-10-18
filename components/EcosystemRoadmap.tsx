@@ -5,7 +5,7 @@ const ROADMAP_PILLARS = [
     code: "PRD_06",
     tag: "ZERO-KNOWLEDGE RECOVERY",
     title: "Cryptographic Vault & P2P Air-Gap Sync",
-    badge: "SPECIFIED // P2P_LAN",
+    badge: "SHIPPED // LIVE IN APP",
     badgeColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
     description:
       "Universal .temporal cryptographic envelope sealed with AES-256-GCM and PBKDF2-SHA256 (600,000 rounds). Enables direct peer-to-peer LAN sync via local mDNS/TLS sockets, animated camera-to-screen QR streams, and user-owned private WebDAV storage. Zero centralized backup servers.",
@@ -20,7 +20,7 @@ const ROADMAP_PILLARS = [
     code: "PRD_07",
     tag: "AUTONOMOUS TIME DAEMON",
     title: "Sovereign Local Cron & Notification Engine",
-    badge: "ZERO_CLOUD_PUSH",
+    badge: "SHIPPED // EXACT ALARMS",
     badgeColor: "text-sky-400 border-sky-500/30 bg-sky-500/10",
     description:
       "A 100% on-device cron engine scheduled directly into operating system hardware alarms via expo-notifications. Eliminates third-party push telemetry (FCM/APNs) while delivering proactive alerts for bill dues (T-3/T-1), Fixed Deposit maturities, SIP trade dates, and weekly audits.",
@@ -35,7 +35,7 @@ const ROADMAP_PILLARS = [
     code: "PRD_08",
     tag: "CAPITAL ALLOCATION",
     title: "Sovereign Envelope & Velocity Budgeting",
-    badge: "BURN_RATE_TELEMETRY",
+    badge: "SHIPPED // LIVE IN APP",
     badgeColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
     description:
       "Forward-looking zero-based capital allocation engine coupled with real-time spending burn rate evaluation. Features a 4-state Overheat State Machine (Optimal, Balanced, Warning, Breach) and an automatic month-to-month surplus/deficit rollover accumulator.",
@@ -50,7 +50,7 @@ const ROADMAP_PILLARS = [
     code: "PRD_09",
     tag: "DETERMINISTIC PIPELINE",
     title: "Automation Rules & Recurring Cashflow Engine",
-    badge: "BOOLEAN_AST // ZERO_AI",
+    badge: "SHIPPED // BOOLEAN AST",
     badgeColor: "text-purple-400 border-purple-500/30 bg-purple-500/10",
     description:
       "Deterministic Boolean AST and regex rule execution engine for automated transaction enrichment, custom tax-deductible tagging, and auto-splitting. Couples with a Virtual Pending Cashflow Queue that projects future recurring debits without polluting verified historical ledgers.",
@@ -65,7 +65,7 @@ const ROADMAP_PILLARS = [
     code: "PRD_10",
     tag: "STREAMLINED INGESTION",
     title: "Hot-Folder Watcher & Keystore Password Vault",
-    badge: "BACKGROUND_QUEUE",
+    badge: "SHIPPED // LIVE IN APP",
     badgeColor: "text-rose-400 border-rose-500/30 bg-rose-500/10",
     description:
       "Automated filesystem hot-folder watcher for Documents/Temporal/Drop/. Ingests multi-statement PDF and CSV batches in parallel. Bank-specific password formulas (PAN + DOB) stored encrypted in hardware SecureStore unlock statements automatically with zero manual prompts.",
@@ -98,18 +98,18 @@ export function EcosystemRoadmap() {
         <div className="mb-16 md:mb-20">
           <div className="mb-4 flex flex-wrap items-center gap-3">
             <span className="font-mono text-xs font-bold tracking-[0.3em] text-emerald-400 uppercase">
-              [ ARCHITECTURAL BLUEPRINT // 2026-2027 ]
+              [ PRODUCTION ACTIVE // SHIPPED 2026 ]
             </span>
             <span className="border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[10px] text-gray-400">
-              5_SOVEREIGN_PILLARS
+              5_SOVEREIGN_PILLARS_LIVE
             </span>
           </div>
 
           <h2 className="font-serif text-4xl italic text-white sm:text-5xl md:text-6xl">
-            The Sovereign Ecosystem Roadmap.
+            The Sovereign Ecosystem Architecture.
           </h2>
           <p className="mt-6 max-w-3xl font-mono text-sm leading-relaxed text-gray-400">
-            Temporal is not a disposable one-shot AI prototype. It is an evolving, air-gapped financial operating system built upon strict mathematical invariants, local-first SQLite WAL storage, and zero-knowledge cryptography. Explore the 5 technical specifications currently engineering the next frontier of personal financial autonomy.
+            ZenLedger is not a disposable one-shot AI prototype. It is an evolving, air-gapped financial operating system built upon strict mathematical invariants, local-first SQLite WAL storage, and zero-knowledge cryptography. Explore the 5 core technical pillars shipped in production for complete personal financial sovereignty.
           </p>
 
           {/* Tri-Pillar Navigation Matrix Quick Links */}
@@ -130,7 +130,7 @@ export function EcosystemRoadmap() {
               href="/queries"
               className="border border-white/20 bg-white/5 px-4 py-2 text-white transition-colors hover:border-white hover:bg-white hover:text-black"
             >
-              KNOWLEDGE BASE (77 Q&As) →
+              KNOWLEDGE BASE (87+ Q&As) →
             </Link>
           </div>
         </div>

@@ -14,6 +14,7 @@ const CATEGORIES = [
   "Privacy, Encryption & Hardware Security",
   "Double-Entry Ledger & DAG Engine",
   "Portfolio, Investments & Horizon Math",
+  "Automation, Watchdogs & Local Cron",
   "Data Portability, Recovery & Exports",
   "Licensing, Payments & Transparency",
   "Edge Cases, Multi-Asset & Troubleshooting"

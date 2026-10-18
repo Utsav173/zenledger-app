@@ -45,10 +45,10 @@ export const metadata: Metadata = {
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Temporal",
+  name: "ZenLedger",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Android",
-  softwareVersion: "2.17",
+  softwareVersion: "3.2.0",
   downloadUrl: "https://temporal.khatriutsav.com/download",
   offers: {
     "@type": "Offer",
@@ -56,17 +56,20 @@ const softwareSchema = {
     priceCurrency: "INR",
   },
   description:
-    "A high-performance offline financial operating system and investment portfolio tracker with dual on-device AI intelligence (LiteRT Gemma 2B + Viterbi Trellis & SpatialLattice System 1) and zero cloud data leaks.",
+    "A sovereign offline financial operating system and investment portfolio tracker with 4 specialized domain AI subagents, exact hardware alarm cron engine, reactive automation watchdogs, and zero cloud data leaks.",
   featureList: [
-    "Offline double-entry ledger with encrypted SQLite vaults",
+    "Offline double-entry ledger with encrypted SQLite vaults (WAL mode)",
+    "4 Domain Subagents (Ledger, Investment, Planning, Automation) for zero-hallucination execution",
     "On-device AI statement scanning (Gemma 2B LLM via LiteRT) for PDF, CSV, XLS, TXT",
     "System 1 SpatialLattice KDE & Viterbi Trellis solver for deterministic transaction balance verification",
+    "Autonomous Reactive Automation Watchdogs & RuleEvaluator (Boolean AST, cashback, sweeps)",
+    "Sovereign LocalCronDaemon with Android 14+ exact hardware alarms and interactive notifications",
     "On-device Camera Receipt OCR & Automated Transaction Entry",
-    "Atomic Conversational Agent for instant text-based transaction creation",
     "Cognitive TF-IDF Semantic Search across transaction histories",
     "Deterministic Viterbi Trellis Dynamic Programming & Diophantine balance alignment with [MATH_LOCK]",
-    "Stocks, AMFI mutual funds, gold bullion, and fixed deposit tracking with live telemetry",
+    "Stocks, AMFI mutual funds, gold bullion, and fixed deposit tracking with live telemetry & demerger healing",
     "XIRR and CAGR portfolio performance with Horizon projections and cash chromatography",
+    "Generative Visualization Grammar with 7 declarative schemas and 3D vector space",
     "Biometric security with hardware KeyStore encryption",
     "Encrypted data export — 100% air-gapped by default, zero account requirement",
   ],
@@ -75,7 +78,7 @@ const softwareSchema = {
 const STATS = [
   { value: "0%", label: "Cloud Exposure" },
   { value: "60fps", label: "Scroll Performance" },
-  { value: "On-Device", label: "AI Processing" },
+  { value: "4 Agents", label: "Domain Subagents" },
   { value: "SQLite", label: "Local Database" },
 ];
 
@@ -83,32 +86,42 @@ const FAQ_ITEMS = [
   {
     question: "Is my financial data or bank statement text sent to an AI server?",
     answer:
-      "No. Temporal runs an entirely air-gapped, on-device AI pipeline (LiteRT + Gemma LLM on NPU/CPU). All optical character recognition (OCR), multi-format bank statement parsing (PDF, CSV, Excel, TXT), and natural language processing happen directly on your physical device. Your financial data never touches remote servers. Cloud AI providers are strictly opt-in via private BYOK keys.",
+      "No. ZenLedger runs an entirely air-gapped, on-device AI pipeline (LiteRT + Gemma LLM on NPU/CPU). All optical character recognition (OCR), multi-format bank statement parsing (PDF, CSV, Excel, TXT), and natural language processing happen directly on your physical device. Your financial data never touches remote servers. Cloud AI providers are strictly opt-in via private BYOK keys.",
+  },
+  {
+    question: "How do ZenLedger's 4 Specialized Domain Subagents prevent hallucinations?",
+    answer:
+      "Instead of an unfocused monolithic prompt, ZenLedger splits cognitive workload into 4 focused subagents: LedgerSubagent (reconciliation & balances), InvestmentSubagent (XIRR, FIFO lot matching, corporate demergers), PlanningBudgetSubagent (burn rate velocity & envelope budgets), and AutomationTelemetrySubagent (watchdog rules & hardware cron). Each operates strictly through typed SQLite queries and mathematical validation.",
+  },
+  {
+    question: "How does the LocalCronDaemon deliver reminders without background battery drain or cloud push?",
+    answer:
+      "LocalCronDaemon schedules triggers directly into operating system hardware alarms via Android's SCHEDULE_EXACT_ALARM. It sleeps at 0% CPU until the exact alarm fires, compiles live SQL telemetry via NotificationCurator with symbol sanitization, and offers lock-screen actions like 'Explain with AI' and 'View Breakdown' without sending a single byte to remote push networks (FCM/APNs).",
   },
   {
     question: "How does the ViterbiBalanceSolver prevent hallucinations and duplicate statement rows?",
     answer:
-      "Temporal uses a Trellis Dynamic Programming and branch-and-bound subset-sum Diophantine solver that enforces balance continuity: Balance[t] = Balance[t-1] ± Amount[t] in integer paise/cents. When mathematical continuity is proven across multi-hop transactions, rows receive an immutable [MATH_LOCK] badge, eliminating hallucinations and duplicate entries without relying on probabilistic LLM guessing.",
+      "ZenLedger uses a Trellis Dynamic Programming and branch-and-bound subset-sum Diophantine solver that enforces balance continuity: Balance[t] = Balance[t-1] ± Amount[t] in integer paise/cents. When mathematical continuity is proven across multi-hop transactions, rows receive an immutable [MATH_LOCK] badge, eliminating hallucinations and duplicate entries without relying on probabilistic LLM guessing.",
   },
   {
-    question: "Why does Temporal use integer fixed-point math instead of floating point numbers?",
+    question: "Why does ZenLedger use integer fixed-point math instead of floating point numbers?",
     answer:
-      "IEEE 754 floating-point numbers create rounding drift in financial ledgers. Temporal enforces strict Fixed-Point Unit Scaling: fiat amounts are scaled 100× as 64-bit integer paise/cents, and asset quantities are scaled 10,000× as integer units (4 decimal places), ensuring exact penny-level consideration math across all holdings.",
+      "IEEE 754 floating-point numbers create rounding drift in financial ledgers. ZenLedger enforces strict Fixed-Point Unit Scaling: fiat amounts are scaled 100× as 64-bit integer paise/cents, and asset quantities are scaled 10,000× as integer units (4 decimal places), ensuring exact penny-level consideration math across all holdings.",
   },
   {
-    question: "What types of statements and receipts can Temporal import?",
+    question: "What types of statements and receipts can ZenLedger import?",
     answer:
-      "Temporal supports camera receipt scanning (OCR) as well as multi-page bank, credit card, and broker statements in PDF (with in-memory password unlock), CSV, XLS, XLSX, TXT, and JSON. SpatialLattice 1D Gaussian KDE discovers column gutters dynamically without brittle regex.",
+      "ZenLedger supports camera receipt scanning (OCR) as well as multi-page bank, credit card, and broker statements in PDF (with in-memory password unlock), CSV, XLS, XLSX, TXT, and JSON. SpatialLattice 1D Gaussian KDE discovers column gutters dynamically without brittle regex.",
   },
   {
     question: "How does FIFO lot matching preserve cost basis during stock splits and bonus issues?",
     answer:
-      "Temporal enforces the Corporate Action Invariant: stock splits and bonus issues adjust remainingQuantity and pricePerUnit using adjustment factor F, but MUST NEVER alter totalInvested (cost basis). Chronological FIFO lot depletion ensures capital gains are calculated accurately for tax compliance.",
+      "ZenLedger enforces the Corporate Action Invariant: stock splits and bonus issues adjust remainingQuantity and pricePerUnit using adjustment factor F, but MUST NEVER alter totalInvested (cost basis). Chronological FIFO lot depletion ensures capital gains are calculated accurately for tax compliance.",
   },
   {
-    question: "How does Temporal track Stocks, Mutual Funds, and Gold offline?",
+    question: "How does ZenLedger track Stocks, Mutual Funds, and Gold offline?",
     answer:
-      "Temporal stores your complete investment registry in encrypted local SQLite tables. When online, it fetches direct keyless telemetry from AMFI (for 44,000+ mutual fund NAVs), Yahoo Finance (for global equities), and PAXG Spot Bullion feeds to compute real-time Newton-Raphson XIRR (10⁻⁷ convergence), CAGR, and HHI concentration.",
+      "ZenLedger stores your complete investment registry in encrypted local SQLite tables. When online, it fetches direct keyless telemetry from AMFI (for 44,000+ mutual fund NAVs), Yahoo Finance (with automatic demerger alias healing, e.g. TATAMOTORS -> TMPV.NS), and PAXG Spot Bullion feeds to compute real-time Newton-Raphson XIRR (10⁻⁷ convergence), CAGR, and HHI concentration.",
   },
   {
     question: "How does it handle large datasets?",
@@ -121,19 +134,19 @@ const FAQ_ITEMS = [
       "Since we store zero data on remote servers, your Recovery Kit (.zenkit) is your master backup. Sealed with client-side AES-256-GCM encryption and PBKDF2-SHA256 (600,000 rounds), you can restore your complete financial ledger and investment lots on a new device in seconds.",
   },
   {
-    question: "How much does Temporal cost?",
+    question: "How much does ZenLedger cost?",
     answer:
-      "Temporal is free to start with up to 500 ledger entries. The PRO upgrade is a one-time ₹49 lifetime purchase — zero subscriptions, zero recurring fees, zero account required, and zero DRM heartbeats.",
+      "ZenLedger is free to start with up to 500 ledger entries. The PRO upgrade is a one-time ₹49 lifetime purchase — zero subscriptions, zero recurring fees, zero account required, and zero DRM heartbeats.",
   },
   {
-    question: "Does Temporal need an internet connection?",
+    question: "Does ZenLedger need an internet connection?",
     answer:
-      "No. Temporal is 100% offline-first. Transactions, portfolio tracking, statement simplifier, atomic chat, and AI-powered scanning run locally on your device, operating flawlessly in flight mode or on de-Googled custom ROMs.",
+      "No. ZenLedger is 100% offline-first. Transactions, portfolio tracking, statement simplifier, atomic chat, subagents, and AI-powered scanning run locally on your device, operating flawlessly in flight mode or on de-Googled custom ROMs.",
   },
   {
-    question: "Which platforms does Temporal support?",
+    question: "Is ZenLedger actively maintained in 2026?",
     answer:
-      "Temporal is available for Android as a standalone APK. It is optimized for devices with 4GB+ RAM for local LiteRT on-device AI; older devices can run all core tracking and System 1 symbolic solvers with zero lag, and optionally configure cloud AI keys.",
+      "Yes. ZenLedger is in active production development with regular releases throughout 2026, delivering exact hardware alarm cron scheduling, reactive rule automation, domain subagents, and hardened local-first telemetry.",
   },
 ];
 
@@ -166,7 +179,7 @@ export default function Home() {
             className="mb-8 animate-fade-in font-mono text-[10px] tracking-[0.3em] text-gray-400 uppercase leading-relaxed md:leading-normal max-w-sm md:max-w-none"
             style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}
           >
-            [ SYSTEM: TEMPORAL v2.5 ] · [ PIPELINE: GEMMA + LAYA DUAL-AI ] · [ MODE: OFFLINE ]
+            [ SYSTEM: ZENLEDGER v3.2 ] · [ ENGINE: TEMPORAL DUAL-AI ] · [ STATUS: ACTIVE PRODUCTION 2026 ]
           </div>
 
           {/* Headline */}

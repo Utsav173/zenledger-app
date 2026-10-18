@@ -8,7 +8,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="mb-4 font-mono text-sm font-bold tracking-widest text-white uppercase">
-              TEMPORAL
+              ZENLEDGER
             </div>
             <p className="max-w-xs font-sans text-xs leading-relaxed text-gray-500">
               Utilitarian tools for personal financial sovereignty. Developed
